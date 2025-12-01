@@ -26,10 +26,10 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: "Nuclear Taskforce Tracker",
       images: [
         {
-          url: "/icon.svg",
-          width: 400,
-          height: 400,
-          alt: "Nuclear Taskforce Tracker Logo",
+          url: "/api/og",
+          width: 1200,
+          height: 630,
+          alt: "Nuclear Taskforce Tracker - Dashboard Overview",
         },
       ],
     },
@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: "Nuclear Taskforce Tracker",
       description: `Tracking ${counts.total} nuclear regulatory recommendations. ${counts.completed} completed.`,
-      images: ["/icon.svg"],
+      images: ["/api/og"],
     },
     alternates: {
       canonical: "/",

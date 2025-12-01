@@ -26,20 +26,20 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
       status: 'on_track' as OverallStatus,
     },
     {
-      label: 'Off Track',
-      value: counts.off_track,
-      icon: AlertCircle,
-      color: 'text-deep-red',
-      bgColor: 'bg-deep-red/10',
-      status: 'off_track' as OverallStatus,
-    },
-    {
       label: 'Completed',
       value: counts.completed,
       icon: CheckCircle,
       color: 'text-dark-green',
       bgColor: 'bg-neon-green/20',
       status: 'completed' as OverallStatus,
+    },
+    {
+      label: 'Off Track',
+      value: counts.off_track,
+      icon: AlertCircle,
+      color: 'text-deep-red',
+      bgColor: 'bg-deep-red/10',
+      status: 'off_track' as OverallStatus,
     },
   ];
 

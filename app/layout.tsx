@@ -21,8 +21,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+// Get the base URL for metadata - use production URL by default, localhost in dev
+function getBaseUrl(): string {
+  // In development, use localhost
+  if (process.env.NODE_ENV === 'development') {
+    return process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  }
+  // In production, use the actual domain
+  return process.env.NEXT_PUBLIC_SITE_URL || 'https://nuclear.britishprogress.org';
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://nuclear-taskforce-tracker.vercel.app'),
+  metadataBase: new URL(getBaseUrl()),
   title: "Nuclear Taskforce Tracker | Centre for British Progress",
   description: "Tracking government progress on the UK Nuclear Regulatory Taskforce's 47 recommendations for regulatory reform. An independent monitoring initiative by the Centre for British Progress.",
   keywords: ["nuclear", "regulation", "UK", "taskforce", "energy", "policy", "government", "nuclear regulation", "regulatory reform"],
