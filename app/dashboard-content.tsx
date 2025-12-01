@@ -296,12 +296,12 @@ export function DashboardContent({
               </div>
             ) : (
               <div className="space-y-4">
-                {filteredChapters.map((chapter, index) => (
+                {filteredChapters.map((chapter) => (
                   <ChapterSection
                     key={chapter.id}
                     chapter={chapter}
                     recommendations={chapter.recommendations}
-                    defaultOpen={index < 2} // First two chapters open by default
+                    defaultOpen={true}
                   />
                 ))}
               </div>

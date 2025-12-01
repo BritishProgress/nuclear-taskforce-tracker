@@ -34,14 +34,14 @@ export function RecommendationCard({
       <Link href={`/recommendation/${recommendation.id}`}>
         <Card 
           className={cn(
-            'group cursor-pointer transition-all duration-200 hover:shadow-md hover:border-primary/30 hover:-translate-y-0.5',
+            'group cursor-pointer transition-all duration-200 hover:shadow-md hover:border-primary/30 hover:-translate-y-0.5 h-full flex flex-col',
             className
           )}
           style={style}
         >
-          <CardContent className="p-4">
+          <CardContent className="px-4 py-3 flex flex-col flex-1">
             {/* Header */}
-            <div className="flex items-start justify-between gap-2 mb-2">
+            <div className="flex items-start justify-between gap-2 mb-1.5">
               <span className="font-mono text-sm font-bold text-primary">
                 {recommendation.code}
               </span>
@@ -54,12 +54,12 @@ export function RecommendationCard({
             </div>
 
             {/* Title */}
-            <h3 className="font-semibold text-sm leading-tight mb-1.5 line-clamp-2 group-hover:text-primary transition-colors">
+            <h3 className="font-semibold text-sm leading-tight mb-1.5 line-clamp-2 group-hover:text-primary transition-colors flex-1">
               {recommendation.titles.short}
             </h3>
 
             {/* Footer */}
-            <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
+            <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground mt-auto">
               <div className="flex-1 min-w-0">
                 <OwnershipTag 
                   owner={recommendation.ownership.primary_owner} 

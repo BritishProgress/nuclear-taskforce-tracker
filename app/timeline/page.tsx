@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
+import { Disclaimer } from '@/components/shared';
 import { TimelineClient } from './timeline-client';
 import { getTimelineItems } from '@/lib/data';
 import { Clock } from 'lucide-react';
@@ -79,6 +80,11 @@ export default async function TimelinePage() {
               </div>
             )}
           </div>
+        </section>
+
+        {/* Disclaimer */}
+        <section className="container py-8">
+          <Disclaimer />
         </section>
       </main>
 

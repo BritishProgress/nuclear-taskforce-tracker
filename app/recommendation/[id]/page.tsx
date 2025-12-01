@@ -7,6 +7,7 @@ import { StatusBadge } from '@/components/shared/status-badge';
 import { OwnershipList } from '@/components/shared/ownership-tag';
 import { DeadlineIndicator } from '@/components/shared/deadline-indicator';
 import { FormattedText } from '@/components/shared/formatted-text';
+import { Disclaimer } from '@/components/shared';
 import { TimelineSection } from './timeline-section';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -378,6 +379,11 @@ export default async function RecommendationPage({ params }: PageProps) {
 
             </div>
           </div>
+        </section>
+
+        {/* Disclaimer */}
+        <section className="container py-8">
+          <Disclaimer />
         </section>
       </main>
 

@@ -5,7 +5,7 @@ import { OverallStatus, Chapter, FilterState } from '@/lib/types';
 import { OVERALL_STATUS_LABELS } from '@/lib/constants';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, X, Filter } from 'lucide-react';
+import { Search, X, Filter, ChevronDown } from 'lucide-react';
 
 interface FilterControlsProps {
   filters: FilterState;
@@ -69,73 +69,85 @@ export function FilterControls({
         </span>
 
         {/* Status filter */}
-        <select
-          value={filters.status}
-          onChange={(e) =>
-            onFilterChange({
-              ...filters,
-              status: e.target.value as OverallStatus | 'all',
-            })
-          }
-          className={cn(
-            'px-3 py-1.5 text-sm rounded-full border bg-card cursor-pointer transition-colors',
-            filters.status !== 'all'
-              ? 'border-primary bg-primary/10 text-primary font-medium'
-              : 'border-border text-foreground hover:border-primary/50'
-          )}
-        >
-          <option value="all">All Status</option>
-          {Object.entries(OVERALL_STATUS_LABELS).map(([value, label]) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
+        <div className="relative inline-block">
+          <select
+            value={filters.status}
+            onChange={(e) =>
+              onFilterChange({
+                ...filters,
+                status: e.target.value as OverallStatus | 'all',
+              })
+            }
+            className={cn(
+              'appearance-none px-4 py-2 pr-8 text-sm rounded-md border bg-card cursor-pointer transition-all',
+              'hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+              filters.status !== 'all'
+                ? 'border-primary bg-primary/10 text-primary font-medium'
+                : 'border-border text-foreground'
+            )}
+          >
+            <option value="all">All Status</option>
+            {Object.entries(OVERALL_STATUS_LABELS).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+        </div>
 
         {/* Chapter filter */}
-        <select
-          value={filters.chapter}
-          onChange={(e) =>
-            onFilterChange({
-              ...filters,
-              chapter: e.target.value === 'all' ? 'all' : parseInt(e.target.value),
-            })
-          }
-          className={cn(
-            'px-3 py-1.5 text-sm rounded-full border bg-card cursor-pointer transition-colors',
-            filters.chapter !== 'all'
-              ? 'border-primary bg-primary/10 text-primary font-medium'
-              : 'border-border text-foreground hover:border-primary/50'
-          )}
-        >
-          <option value="all">All Chapters</option>
-          {chapters.map((chapter) => (
-            <option key={chapter.id} value={chapter.id}>
-              Ch. {chapter.id}: {chapter.title}
-            </option>
-          ))}
-        </select>
+        <div className="relative inline-block">
+          <select
+            value={filters.chapter}
+            onChange={(e) =>
+              onFilterChange({
+                ...filters,
+                chapter: e.target.value === 'all' ? 'all' : parseInt(e.target.value),
+              })
+            }
+            className={cn(
+              'appearance-none px-4 py-2 pr-8 text-sm rounded-md border bg-card cursor-pointer transition-all',
+              'hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+              filters.chapter !== 'all'
+                ? 'border-primary bg-primary/10 text-primary font-medium'
+                : 'border-border text-foreground'
+            )}
+          >
+            <option value="all">All Chapters</option>
+            {chapters.map((chapter) => (
+              <option key={chapter.id} value={chapter.id}>
+                Ch. {chapter.id}: {chapter.title}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+        </div>
 
         {/* Owner filter */}
-        <select
-          value={filters.owner}
-          onChange={(e) =>
-            onFilterChange({ ...filters, owner: e.target.value })
-          }
-          className={cn(
-            'px-3 py-1.5 text-sm rounded-full border bg-card cursor-pointer transition-colors',
-            filters.owner !== 'all'
-              ? 'border-primary bg-primary/10 text-primary font-medium'
-              : 'border-border text-foreground hover:border-primary/50'
-          )}
-        >
-          <option value="all">All Owners</option>
-          {owners.map((owner) => (
-            <option key={owner} value={owner}>
-              {owner}
-            </option>
-          ))}
-        </select>
+        <div className="relative inline-block">
+          <select
+            value={filters.owner}
+            onChange={(e) =>
+              onFilterChange({ ...filters, owner: e.target.value })
+            }
+            className={cn(
+              'appearance-none px-4 py-2 pr-8 text-sm rounded-md border bg-card cursor-pointer transition-all',
+              'hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+              filters.owner !== 'all'
+                ? 'border-primary bg-primary/10 text-primary font-medium'
+                : 'border-border text-foreground'
+            )}
+          >
+            <option value="all">All Owners</option>
+            {owners.map((owner) => (
+              <option key={owner} value={owner}>
+                {owner}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+        </div>
 
         {/* Active tag filter */}
         {filters.tag && (

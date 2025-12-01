@@ -145,7 +145,7 @@ export function FormattedText({ text, className = '' }: FormattedTextProps) {
           case 'paragraph':
             return (
               <p key={index} className="text-foreground leading-relaxed">
-                {block.items[0]}
+                {block.items[0] as string}
               </p>
             );
           
@@ -159,7 +159,7 @@ export function FormattedText({ text, className = '' }: FormattedTextProps) {
           case 'letter-list':
             return (
               <ol key={index} className="list-[lower-alpha] pl-6 space-y-2 text-foreground">
-                {block.items.map((item, itemIndex) => (
+                {(block.items as string[]).map((item, itemIndex) => (
                   <li key={itemIndex} className="leading-relaxed">
                     {item}
                   </li>

@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { StatusCounts, OverallStatus } from '@/lib/types';
+import { Disclaimer } from '@/components/shared';
 import { 
   AlertCircle, 
   CheckCircle,
@@ -188,29 +189,7 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
         </div>
 
         {/* Disclaimer */}
-        <div className="text-center max-w-2xl mx-auto mt-4">
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            This is AI-generated content based on the{' '}
-            <a
-              href="https://www.gov.uk/government/publications/nuclear-regulatory-taskforce"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              Nuclear Regulatory Taskforce report
-            </a>
-            . We have worked hard to ensure this is accurate but please{' '}
-            <a
-              href="https://britishprogress.org/contact"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              report any errors
-            </a>
-            .
-          </p>
-        </div>
+        <Disclaimer />
       </div>
     </div>
   );
