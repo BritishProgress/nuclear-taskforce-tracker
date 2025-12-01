@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/footer';
 import { StatusBadge } from '@/components/shared/status-badge';
 import { OwnershipList } from '@/components/shared/ownership-tag';
 import { DeadlineIndicator } from '@/components/shared/deadline-indicator';
-import { Timeline } from '@/components/shared/timeline-event';
+import { TimelineSection } from './timeline-section';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getRecommendationById, getRecommendations } from '@/lib/data';
@@ -56,10 +56,15 @@ export default async function RecommendationPage({ params }: PageProps) {
 
   const chapterColors = getChapterColors(recommendation.chapter.number);
   
-  // Prepare updates for timeline
-  const timelineUpdates = (recommendation.updates || [])
-    .map((update) => ({ update, recommendation }))
-    .sort((a, b) => new Date(b.update.date).getTime() - new Date(a.update.date).getTime());
+  // Prepare updates for timeline (only updates, not deadlines, since deadline is shown in sidebar)
+  const timelineItems = (recommendation.updates || [])
+    .map((update) => ({
+      type: 'update' as const,
+      date: update.date,
+      update,
+      recommendation,
+    }))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -148,8 +153,8 @@ export default async function RecommendationPage({ params }: PageProps) {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {timelineUpdates.length > 0 ? (
-                    <Timeline updates={timelineUpdates} showRecommendations={false} />
+                  {timelineItems.length > 0 ? (
+                    <TimelineSection items={timelineItems} />
                   ) : (
                     <div className="text-center py-8 text-muted-foreground">
                       <p>No updates recorded yet.</p>
@@ -166,7 +171,7 @@ export default async function RecommendationPage({ params }: PageProps) {
             <div className="space-y-6">
               {/* Ownership */}
               <Card>
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-2">
                   <CardTitle className="flex items-center gap-2 text-base">
                     <Users className="h-4 w-4 text-primary" />
                     Ownership
@@ -208,7 +213,7 @@ export default async function RecommendationPage({ params }: PageProps) {
 
               {/* Deadline */}
               <Card>
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-2">
                   <CardTitle className="flex items-center gap-2 text-base">
                     <Calendar className="h-4 w-4 text-primary" />
                     Delivery Timeline
@@ -235,7 +240,7 @@ export default async function RecommendationPage({ params }: PageProps) {
 
               {/* Scope */}
               <Card>
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-2">
                   <CardTitle className="flex items-center gap-2 text-base">
                     <Target className="h-4 w-4 text-primary" />
                     Scope
@@ -270,7 +275,7 @@ export default async function RecommendationPage({ params }: PageProps) {
               {/* Implementation Type */}
               {recommendation.implementation_type && recommendation.implementation_type.length > 0 && (
                 <Card>
-                  <CardHeader className="pb-3">
+                  <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <Building className="h-4 w-4 text-primary" />
                       Implementation Type
@@ -292,7 +297,7 @@ export default async function RecommendationPage({ params }: PageProps) {
               {recommendation.dependencies && 
                (recommendation.dependencies.depends_on?.length || recommendation.dependencies.enables?.length) && (
                 <Card>
-                  <CardHeader className="pb-3">
+                  <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
                       <Link2 className="h-4 w-4 text-primary" />
                       Dependencies
@@ -334,7 +339,7 @@ export default async function RecommendationPage({ params }: PageProps) {
               {/* Notes */}
               {recommendation.notes && (
                 <Card>
-                  <CardHeader className="pb-3">
+                  <CardHeader className="pb-2">
                     <CardTitle className="text-base">Analyst Notes</CardTitle>
                   </CardHeader>
                   <CardContent>

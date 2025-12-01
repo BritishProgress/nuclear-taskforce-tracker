@@ -1,7 +1,7 @@
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import { Timeline } from '@/components/shared/timeline-event';
-import { getAllUpdates } from '@/lib/data';
+import { TimelineClient } from './timeline-client';
+import { getTimelineItems } from '@/lib/data';
 import { Clock } from 'lucide-react';
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default async function TimelinePage() {
-  const updates = await getAllUpdates();
+  const timelineItems = await getTimelineItems(true);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -25,12 +25,12 @@ export default async function TimelinePage() {
                 <Clock className="h-6 w-6 text-primary" />
               </div>
               <h1 className="font-display text-3xl md:text-4xl font-bold text-dark-green">
-                Update Timeline
+                Timeline
               </h1>
             </div>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Track all developments, announcements, and status changes across the 
-              nuclear regulatory taskforce recommendations.
+              Track all developments, announcements, status changes, and upcoming deadlines 
+              across the nuclear regulatory taskforce recommendations.
             </p>
           </div>
         </section>
@@ -38,12 +38,12 @@ export default async function TimelinePage() {
         {/* Timeline Content */}
         <section className="container py-8">
           <div className="max-w-3xl">
-            {updates.length > 0 ? (
-              <Timeline updates={updates} showRecommendations={true} />
+            {timelineItems.length > 0 ? (
+              <TimelineClient items={timelineItems} />
             ) : (
               <div className="text-center py-16 text-muted-foreground">
                 <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p className="text-lg">No updates recorded yet.</p>
+                <p className="text-lg">No timeline items recorded yet.</p>
                 <p className="text-sm mt-2">
                   Check back as the government responds to taskforce recommendations.
                 </p>

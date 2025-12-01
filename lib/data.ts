@@ -10,6 +10,7 @@ import {
   UpcomingDeadline,
   RecentUpdate,
   ChapterWithRecommendations,
+  TimelineItem,
 } from './types';
 
 // Re-export date utilities for convenience (these are also in date-utils.ts for client use)
@@ -224,6 +225,60 @@ export async function getAllUpdates(): Promise<RecentUpdate[]> {
   
   return updates.sort((a, b) => 
     new Date(b.update.date).getTime() - new Date(a.update.date).getTime()
+  );
+}
+
+export async function getTimelineItems(includeFutureDeadlines: boolean = true): Promise<TimelineItem[]> {
+  const data = await loadTaskforceData();
+  const items: TimelineItem[] = [];
+  
+  // Add all updates
+  for (const rec of data.recommendations) {
+    if (rec.updates) {
+      for (const update of rec.updates) {
+        items.push({
+          type: 'update',
+          date: update.date,
+          update,
+          recommendation: rec,
+        });
+      }
+    }
+  }
+  
+  // Add all deadlines
+  if (includeFutureDeadlines) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    for (const rec of data.recommendations) {
+      // Only include deadlines for non-completed/abandoned recommendations
+      if (rec.overall_status.status !== 'completed' && rec.overall_status.status !== 'abandoned') {
+        const targetDate = rec.delivery_timeline.revised_target_date || rec.delivery_timeline.target_date;
+        if (targetDate) {
+          const targetDateObj = new Date(targetDate);
+          const diffTime = targetDateObj.getTime() - today.getTime();
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          
+          items.push({
+            type: 'deadline',
+            date: targetDate,
+            recommendation: rec,
+            deadline: {
+              targetDate: rec.delivery_timeline.target_date,
+              revisedDate: rec.delivery_timeline.revised_target_date,
+              daysUntil: diffDays,
+              isOverdue: diffDays < 0,
+            },
+          });
+        }
+      }
+    }
+  }
+  
+  // Sort by date (soonest first - ascending order)
+  return items.sort((a, b) => 
+    new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 }
 

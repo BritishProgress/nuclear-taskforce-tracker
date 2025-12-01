@@ -22,9 +22,9 @@
 
   /* Semantic Status Colors */
   --color-status-not-started: var(--color-charcoal);
-  --color-status-on-track: var(--color-neon-green);
+  --color-status-on-track: var(--color-dark-green);
   --color-status-off-track: var(--color-deep-red);
-  --color-status-completed: var(--color-dark-green);
+  --color-status-completed: var(--color-neon-green);
   --color-status-abandoned: var(--color-light-red);
   --color-status-info: var(--color-light-blue);
   --color-status-progress: var(--color-orange);
@@ -167,8 +167,8 @@
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
   
   @media (min-width: 640px) {
@@ -209,13 +209,13 @@
     @apply bg-charcoal/10 text-charcoal border-charcoal/20;
   }
   .status-on-track {
-    @apply bg-neon-green/20 text-dark-green border-neon-green/40;
+    @apply bg-dark-green/10 text-dark-green border-dark-green/30;
   }
   .status-off-track {
     @apply bg-deep-red/10 text-deep-red border-deep-red/30;
   }
   .status-completed {
-    @apply bg-dark-green/10 text-dark-green border-dark-green/30;
+    @apply bg-neon-green/20 text-dark-green border-neon-green/40;
   }
   .status-abandoned {
     @apply bg-light-red/30 text-deep-red border-light-red/50;

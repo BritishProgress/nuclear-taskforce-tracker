@@ -41,7 +41,7 @@ export function Footer({ className }: FooterProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm text-beige/80 hover:text-beige transition-colors"
                 >
-                  Official Taskforce Report
+                  Read the full report
                   <ExternalLink size={12} />
                 </a>
               </li>

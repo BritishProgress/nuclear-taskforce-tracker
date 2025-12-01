@@ -160,10 +160,24 @@ export interface RecentUpdate {
   recommendation: Recommendation;
 }
 
+export interface TimelineItem {
+  type: 'update' | 'deadline';
+  date: string;
+  update?: Update;
+  recommendation: Recommendation;
+  deadline?: {
+    targetDate: string;
+    revisedDate?: string | null;
+    daysUntil: number;
+    isOverdue: boolean;
+  };
+}
+
 // UI State Types
 export interface FilterState {
   status: OverallStatus | 'all';
   chapter: number | 'all';
   owner: string | 'all';
   search: string;
+  tag?: string;
 }

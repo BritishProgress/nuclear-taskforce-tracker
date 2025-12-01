@@ -22,7 +22,8 @@ export function DeadlineIndicator({
   const effectiveDate = revisedDate || targetDate;
   const days = daysUntil(effectiveDate);
   const status = getDeadlineStatus(effectiveDate);
-  const isRevised = !!revisedDate;
+  // Only show as revised if there's a revised date AND it's different from the original
+  const isRevised = !!revisedDate && revisedDate !== targetDate;
 
   const statusConfig = {
     overdue: {

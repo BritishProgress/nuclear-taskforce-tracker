@@ -4,7 +4,6 @@
 
 status_scales:
   overall_status:
-    - not_started
     - on_track
     - off_track
     - completed
@@ -139,7 +138,7 @@ recommendations:
       depends_on: [1]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response. Requires primary legislation."
@@ -188,7 +187,7 @@ recommendations:
       depends_on: [1]
       enables: [2]
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -238,7 +237,7 @@ recommendations:
       depends_on: [1]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -289,7 +288,7 @@ recommendations:
       depends_on: [1]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -342,7 +341,7 @@ recommendations:
       depends_on: [1]
       enables: [7, 8]
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -394,7 +393,7 @@ recommendations:
       depends_on: [6]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -457,7 +456,7 @@ recommendations:
       depends_on: [6]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -505,7 +504,7 @@ recommendations:
       depends_on: [6]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -551,7 +550,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -608,7 +607,7 @@ recommendations:
       depends_on: []
       enables: [12]
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -654,7 +653,7 @@ recommendations:
       depends_on: [11]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -712,7 +711,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -770,7 +769,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -816,7 +815,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -870,7 +869,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -918,7 +917,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -967,7 +966,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1008,7 +1007,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1060,7 +1059,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1103,7 +1102,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1149,7 +1148,7 @@ recommendations:
       depends_on: []
       enables: [23]
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1204,7 +1203,7 @@ recommendations:
       depends_on: [22]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1252,7 +1251,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1298,7 +1297,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1342,7 +1341,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1385,7 +1384,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1433,7 +1432,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1475,7 +1474,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1519,7 +1518,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1567,7 +1566,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1614,7 +1613,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1662,7 +1661,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1715,7 +1714,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1766,7 +1765,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1810,7 +1809,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1862,7 +1861,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1914,7 +1913,7 @@ recommendations:
       depends_on: [1]
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -1966,7 +1965,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -2014,7 +2013,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -2063,7 +2062,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -2118,7 +2117,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -2173,7 +2172,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -2222,7 +2221,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -2271,7 +2270,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -2318,7 +2317,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
@@ -2361,7 +2360,7 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "not_started"
+      status: "on_track"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."

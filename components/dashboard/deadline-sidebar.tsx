@@ -25,7 +25,7 @@ export function DeadlineSidebar({
     <div className={cn('space-y-6', className)}>
       {/* Upcoming Deadlines */}
       <Card>
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-base">
             <Calendar className="h-4 w-4 text-primary" />
             Upcoming Deadlines
@@ -92,7 +92,7 @@ export function DeadlineSidebar({
 
       {/* Recent Updates */}
       <Card>
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-base">
             <Bell className="h-4 w-4 text-primary" />
             Recent Updates

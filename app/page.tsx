@@ -28,7 +28,7 @@ export default async function HomePage() {
       
       <main className="flex-1">
         <Suspense fallback={<DashboardSkeleton />}>
-          <DashboardContent
+          <DashboardContentWrapper
             counts={counts}
             chaptersWithRecs={chaptersWithRecs}
             deadlines={deadlines}
@@ -41,6 +41,14 @@ export default async function HomePage() {
 
       <Footer />
     </div>
+  );
+}
+
+function DashboardContentWrapper(props: Parameters<typeof DashboardContent>[0]) {
+  return (
+    <Suspense fallback={<DashboardSkeleton />}>
+      <DashboardContent {...props} />
+    </Suspense>
   );
 }
 

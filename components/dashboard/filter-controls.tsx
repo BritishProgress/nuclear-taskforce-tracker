@@ -34,6 +34,7 @@ export function FilterControls({
       chapter: 'all',
       owner: 'all',
       search: '',
+      tag: undefined,
     });
   };
 
@@ -135,6 +136,19 @@ export function FilterControls({
             </option>
           ))}
         </select>
+
+        {/* Active tag filter */}
+        {filters.tag && (
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full border border-primary bg-primary/10 text-primary font-medium">
+            <span>Tag: #{filters.tag}</span>
+            <button
+              onClick={() => onFilterChange({ ...filters, tag: undefined })}
+              className="hover:text-primary/70"
+            >
+              <X size={14} />
+            </button>
+          </div>
+        )}
 
         {/* Clear filters */}
         {hasActiveFilters && (

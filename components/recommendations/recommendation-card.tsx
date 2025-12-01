@@ -54,7 +54,7 @@ export function RecommendationCard({
             </div>
 
             {/* Title */}
-            <h3 className="font-semibold text-sm leading-tight mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+            <h3 className="font-semibold text-sm leading-tight mb-1.5 line-clamp-2 group-hover:text-primary transition-colors">
               {recommendation.titles.short}
             </h3>
 
@@ -115,7 +115,7 @@ export function RecommendationCard({
           </div>
 
           {/* Title */}
-          <h3 className="font-semibold text-base leading-snug mb-2 group-hover:text-primary transition-colors">
+          <h3 className="font-semibold text-base leading-snug mb-1.5 group-hover:text-primary transition-colors">
             {recommendation.titles.short}
           </h3>
 

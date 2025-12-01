@@ -1,14 +1,17 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Atom, Github, ExternalLink } from 'lucide-react';
+import { Atom, ExternalLink, Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 interface HeaderProps {
   className?: string;
 }
 
 export function Header({ className }: HeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <header
       className={cn(
@@ -27,8 +30,8 @@ export function Header({ className }: HeaderProps) {
           </span>
         </Link>
 
-        {/* Navigation */}
-        <nav className="flex items-center gap-6">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6">
           <Link
             href="/"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
@@ -47,11 +50,52 @@ export function Header({ className }: HeaderProps) {
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
-            Report
+            Read the full report
             <ExternalLink size={12} />
           </a>
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 text-foreground/80 hover:text-foreground transition-colors"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
+
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <nav className="md:hidden border-t bg-background">
+          <div className="container py-4 space-y-3">
+            <Link
+              href="/"
+              className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Dashboard
+            </Link>
+            <Link
+              href="/timeline"
+              className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Timeline
+            </Link>
+            <a
+              href="https://www.gov.uk/government/publications/nuclear-regulatory-taskforce"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Read the full report
+              <ExternalLink size={12} />
+            </a>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
