@@ -1,0 +1,60 @@
+import { Header } from '@/components/layout/header';
+import { Footer } from '@/components/layout/footer';
+import { Timeline } from '@/components/shared/timeline-event';
+import { getAllUpdates } from '@/lib/data';
+import { Clock } from 'lucide-react';
+
+export const metadata = {
+  title: 'Timeline | Nuclear Taskforce Tracker',
+  description: 'All updates and developments on nuclear regulatory taskforce recommendations',
+};
+
+export default async function TimelinePage() {
+  const updates = await getAllUpdates();
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="bg-gradient-to-b from-beige to-background py-12">
+          <div className="container">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Clock className="h-6 w-6 text-primary" />
+              </div>
+              <h1 className="font-display text-3xl md:text-4xl font-bold text-dark-green">
+                Update Timeline
+              </h1>
+            </div>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              Track all developments, announcements, and status changes across the 
+              nuclear regulatory taskforce recommendations.
+            </p>
+          </div>
+        </section>
+
+        {/* Timeline Content */}
+        <section className="container py-8">
+          <div className="max-w-3xl">
+            {updates.length > 0 ? (
+              <Timeline updates={updates} showRecommendations={true} />
+            ) : (
+              <div className="text-center py-16 text-muted-foreground">
+                <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                <p className="text-lg">No updates recorded yet.</p>
+                <p className="text-sm mt-2">
+                  Check back as the government responds to taskforce recommendations.
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+

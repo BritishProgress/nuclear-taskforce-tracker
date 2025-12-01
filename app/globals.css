@@ -1,26 +1,285 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/* ========================================
+   NUCLEAR TASKFORCE TRACKER - BRAND THEME
+   Centre for British Progress
+   ======================================== */
 
 @theme inline {
+  /* Brand Colors */
+  --color-beige: #FDF9E9;
+  --color-neon-green: #81F494;
+  --color-dark-green: #0B4938;
+  --color-light-blue: #80B7F4;
+  --color-dark-blue: #093D77;
+  --color-charcoal: #283131;
+  --color-orange: #FE9F1C;
+  --color-light-red: #FAC2C2;
+  --color-deep-red: #B3063E;
+
+  /* Semantic Status Colors */
+  --color-status-not-started: var(--color-charcoal);
+  --color-status-on-track: var(--color-neon-green);
+  --color-status-off-track: var(--color-deep-red);
+  --color-status-completed: var(--color-dark-green);
+  --color-status-abandoned: var(--color-light-red);
+  --color-status-info: var(--color-light-blue);
+  --color-status-progress: var(--color-orange);
+  --color-status-risk: var(--color-light-red);
+  --color-status-blocked: var(--color-dark-blue);
+
+  /* Theme Variables */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-jetbrains);
+
+  /* shadcn mappings */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  
+  /* Light theme - Beige-based */
+  --background: #FDF9E9;
+  --foreground: #283131;
+  --card: #FFFFFF;
+  --card-foreground: #283131;
+  --popover: #FFFFFF;
+  --popover-foreground: #283131;
+  --primary: #0B4938;
+  --primary-foreground: #FDF9E9;
+  --secondary: #F5F0E0;
+  --secondary-foreground: #0B4938;
+  --muted: #F5F0E0;
+  --muted-foreground: #5A6363;
+  --accent: #81F494;
+  --accent-foreground: #0B4938;
+  --destructive: #B3063E;
+  --border: #E5DFD0;
+  --input: #E5DFD0;
+  --ring: #0B4938;
+  
+  /* Chart colors using brand palette */
+  --chart-1: #81F494;
+  --chart-2: #80B7F4;
+  --chart-3: #FE9F1C;
+  --chart-4: #0B4938;
+  --chart-5: #B3063E;
+  
+  /* Sidebar */
+  --sidebar: #0B4938;
+  --sidebar-foreground: #FDF9E9;
+  --sidebar-primary: #81F494;
+  --sidebar-primary-foreground: #0B4938;
+  --sidebar-accent: #0D5A47;
+  --sidebar-accent-foreground: #FDF9E9;
+  --sidebar-border: #0D5A47;
+  --sidebar-ring: #81F494;
+}
+
+.dark {
+  --background: #1A1F1F;
+  --foreground: #FDF9E9;
+  --card: #232929;
+  --card-foreground: #FDF9E9;
+  --popover: #232929;
+  --popover-foreground: #FDF9E9;
+  --primary: #81F494;
+  --primary-foreground: #0B4938;
+  --secondary: #2D3535;
+  --secondary-foreground: #FDF9E9;
+  --muted: #2D3535;
+  --muted-foreground: #A0A8A8;
+  --accent: #0B4938;
+  --accent-foreground: #81F494;
+  --destructive: #E84A76;
+  --border: #3A4242;
+  --input: #3A4242;
+  --ring: #81F494;
+  
+  /* Chart colors - brighter for dark mode */
+  --chart-1: #81F494;
+  --chart-2: #80B7F4;
+  --chart-3: #FE9F1C;
+  --chart-4: #A8F9B8;
+  --chart-5: #FAC2C2;
+  
+  /* Sidebar */
+  --sidebar: #141818;
+  --sidebar-foreground: #FDF9E9;
+  --sidebar-primary: #81F494;
+  --sidebar-primary-foreground: #0B4938;
+  --sidebar-accent: #232929;
+  --sidebar-accent-foreground: #FDF9E9;
+  --sidebar-border: #2D3535;
+  --sidebar-ring: #81F494;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Container - centered with max-width */
+  .container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Status badge utilities */
+@layer utilities {
+  .status-not-started {
+    @apply bg-charcoal/10 text-charcoal border-charcoal/20;
+  }
+  .status-on-track {
+    @apply bg-neon-green/20 text-dark-green border-neon-green/40;
+  }
+  .status-off-track {
+    @apply bg-deep-red/10 text-deep-red border-deep-red/30;
+  }
+  .status-completed {
+    @apply bg-dark-green/10 text-dark-green border-dark-green/30;
+  }
+  .status-abandoned {
+    @apply bg-light-red/30 text-deep-red border-light-red/50;
+  }
+  .status-info {
+    @apply bg-light-blue/20 text-dark-blue border-light-blue/40;
+  }
+  .status-progress {
+    @apply bg-orange/20 text-orange border-orange/40;
+  }
+  .status-risk {
+    @apply bg-light-red/30 text-deep-red border-light-red/50;
+  }
+  .status-blocked {
+    @apply bg-dark-blue/10 text-dark-blue border-dark-blue/30;
+  }
 }
+
+/* Animation utilities */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+/* Stagger delays for list animations */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
