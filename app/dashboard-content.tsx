@@ -169,14 +169,14 @@ export function DashboardContent({
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-beige to-background py-8 md:py-16">
+      <section className="bg-gradient-to-b from-beige to-background pt-8 md:pt-16 pb-4 md:pb-6">
         <div className="container">
           <HeroStats counts={counts} onStatusClick={handleStatusClick} />
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="container py-6 md:py-8">
+      <section className="container pt-2 md:pt-4 pb-6 md:pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Main Column */}
           <div className="lg:col-span-9 space-y-6">

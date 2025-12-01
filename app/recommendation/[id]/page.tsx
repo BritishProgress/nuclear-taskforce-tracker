@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/layout/header';
@@ -32,17 +33,57 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const recommendation = await getRecommendationById(parseInt(id));
   
   if (!recommendation) {
-    return { title: 'Recommendation Not Found' };
+    return { 
+      title: 'Recommendation Not Found | Nuclear Taskforce Tracker',
+      description: 'The requested recommendation could not be found.',
+    };
   }
+
+  const statusLabel = recommendation.overall_status.status === 'completed' ? 'Completed' :
+                     recommendation.overall_status.status === 'on_track' ? 'On Track' :
+                     recommendation.overall_status.status === 'off_track' ? 'Off Track' :
+                     'Not Started';
 
   return {
     title: `${recommendation.code}: ${recommendation.titles.short} | Nuclear Taskforce Tracker`,
-    description: recommendation.titles.long,
+    description: `${recommendation.titles.long}. Status: ${statusLabel}. Chapter ${recommendation.chapter.number}: ${recommendation.chapter.title}.`,
+    keywords: [
+      recommendation.code,
+      'nuclear regulation',
+      'UK nuclear',
+      recommendation.chapter.title,
+      statusLabel.toLowerCase(),
+      ...(recommendation.scope.sectors || []),
+    ],
+    openGraph: {
+      title: `${recommendation.code}: ${recommendation.titles.short}`,
+      description: recommendation.titles.long,
+      type: "article",
+      url: `/recommendation/${recommendation.id}`,
+      siteName: "Nuclear Taskforce Tracker",
+      images: [
+        {
+          url: "/icon.svg",
+          width: 400,
+          height: 400,
+          alt: `${recommendation.code} - ${recommendation.titles.short}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary",
+      title: `${recommendation.code}: ${recommendation.titles.short}`,
+      description: recommendation.titles.long,
+      images: ["/icon.svg"],
+    },
+    alternates: {
+      canonical: `/recommendation/${recommendation.id}`,
+    },
   };
 }
 

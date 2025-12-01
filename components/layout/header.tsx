@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Atom, ExternalLink, Menu, X } from 'lucide-react';
+import { ExternalLink, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -22,9 +22,11 @@ export function Header({ className }: HeaderProps) {
       <div className="container flex h-14 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-display font-bold text-lg">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-dark-green text-beige">
-            <Atom size={18} />
-          </div>
+          <img 
+            src="/icon.svg" 
+            alt="Nuclear Taskforce" 
+            className="w-8 h-8"
+          />
           <span className="hidden sm:inline text-dark-green">
             Nuclear Taskforce Tracker
           </span>

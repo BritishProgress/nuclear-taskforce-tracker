@@ -47,7 +47,7 @@ export function Footer({ className }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="https://www.centreforbritishprogress.org"
+                  href="https://britishprogress.org"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm text-beige/80 hover:text-beige transition-colors"

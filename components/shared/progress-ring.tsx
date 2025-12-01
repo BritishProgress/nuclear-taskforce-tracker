@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils';
 
 interface ProgressRingProps {
   completed: number;
+  onTrack?: number;
+  offTrack?: number;
   total: number;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showLabel?: boolean;
@@ -13,13 +15,18 @@ interface ProgressRingProps {
 
 export function ProgressRing({
   completed,
+  onTrack = 0,
+  offTrack = 0,
   total,
   size = 'md',
   showLabel = true,
   strokeWidth,
   className,
 }: ProgressRingProps) {
-  const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
+  const completedPercentage = total === 0 ? 0 : (completed / total) * 100;
+  const onTrackPercentage = total === 0 ? 0 : (onTrack / total) * 100;
+  const offTrackPercentage = total === 0 ? 0 : (offTrack / total) * 100;
+  const completedDisplay = Math.round(completedPercentage);
   
   const sizeConfig = {
     sm: { dimension: 48, defaultStroke: 4, fontSize: 'text-xs' },
@@ -32,7 +39,11 @@ export function ProgressRing({
   const actualStrokeWidth = strokeWidth || config.defaultStroke;
   const radius = (config.dimension - actualStrokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  
+  // Calculate dash lengths for each segment
+  const completedDash = (completedPercentage / 100) * circumference;
+  const onTrackDash = (onTrackPercentage / 100) * circumference;
+  const offTrackDash = (offTrackPercentage / 100) * circumference;
 
   return (
     <div className={cn('relative inline-flex items-center justify-center', className)}>
@@ -51,19 +62,51 @@ export function ProgressRing({
           strokeWidth={actualStrokeWidth}
           className="text-muted"
         />
-        {/* Progress circle */}
-        <circle
-          cx={config.dimension / 2}
-          cy={config.dimension / 2}
-          r={radius}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={actualStrokeWidth}
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          className="text-neon-green transition-all duration-500 ease-out"
-        />
+        {/* Completed segment */}
+        {completed > 0 && (
+          <circle
+            cx={config.dimension / 2}
+            cy={config.dimension / 2}
+            r={radius}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={actualStrokeWidth}
+            strokeDasharray={`${completedDash} ${circumference}`}
+            strokeDashoffset={0}
+            strokeLinecap="butt"
+            className="text-neon-green transition-all duration-500 ease-out"
+          />
+        )}
+        {/* On Track segment */}
+        {onTrack > 0 && (
+          <circle
+            cx={config.dimension / 2}
+            cy={config.dimension / 2}
+            r={radius}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={actualStrokeWidth}
+            strokeDasharray={`${onTrackDash} ${circumference}`}
+            strokeDashoffset={-completedDash}
+            strokeLinecap="butt"
+            className="text-dark-green/30 transition-all duration-500 ease-out"
+          />
+        )}
+        {/* Off Track segment */}
+        {offTrack > 0 && (
+          <circle
+            cx={config.dimension / 2}
+            cy={config.dimension / 2}
+            r={radius}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={actualStrokeWidth}
+            strokeDasharray={`${offTrackDash} ${circumference}`}
+            strokeDashoffset={-(completedDash + onTrackDash)}
+            strokeLinecap="butt"
+            className="text-deep-red/30 transition-all duration-500 ease-out"
+          />
+        )}
       </svg>
       {showLabel && (
         <span
@@ -72,7 +115,7 @@ export function ProgressRing({
             config.fontSize
           )}
         >
-          {percentage}%
+          {completedDisplay}%
         </span>
       )}
     </div>

@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { DashboardContent } from './dashboard-content';
@@ -10,6 +11,39 @@ import {
   getUniqueOwners,
   getChapters,
 } from '@/lib/data';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const counts = await getStatusCounts();
+  
+  return {
+    title: "Nuclear Taskforce Tracker | Centre for British Progress",
+    description: `Tracking government progress on ${counts.total} recommendations from the UK Nuclear Regulatory Taskforce. ${counts.completed} completed, ${counts.on_track} on track, ${counts.off_track} off track.`,
+    openGraph: {
+      title: "Nuclear Taskforce Tracker | Centre for British Progress",
+      description: `Tracking government progress on ${counts.total} recommendations from the UK Nuclear Regulatory Taskforce. ${counts.completed} completed, ${counts.on_track} on track, ${counts.off_track} off track.`,
+      type: "website",
+      url: "/",
+      siteName: "Nuclear Taskforce Tracker",
+      images: [
+        {
+          url: "/icon.svg",
+          width: 400,
+          height: 400,
+          alt: "Nuclear Taskforce Tracker Logo",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Nuclear Taskforce Tracker",
+      description: `Tracking ${counts.total} nuclear regulatory recommendations. ${counts.completed} completed.`,
+      images: ["/icon.svg"],
+    },
+    alternates: {
+      canonical: "/",
+    },
+  };
+}
 
 export default async function HomePage() {
   // Fetch all data server-side
