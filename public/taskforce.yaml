@@ -662,12 +662,12 @@ recommendations:
       short: "Modular Low-Carbon Acceleration Zones"
       long: "Allow the development of Modular Low-Carbon Acceleration Zones"
     text: |
-      MHCLG should legislate to allow the development of "Modular Low-Carbon Acceleration Zones" and utilise the approach for existing nuclear defence sites and GBE-N sites where multiple reactors are, or could be, proposed. A proposed outline would be as follows:
-      a) Assessment and Zone Creation: The promoter, developer, or government must carry out a Strategic Environmental Assessment (SEA) for areas chosen for new nuclear projects.
-      b) Plan: After the assessment and a period for public feedback, the Secretary of State will create a plan for the zone with rules to reduce environmental harm and developer contributions.
-      c) Approval: The Secretary of State can only approve the plan if it clearly improves overall environmental outcomes.
+      MHCLG should legislate to allow the development of “Modular Low-Carbon Acceleration Zones” and utilise the approach for existing nuclear defence sites and GBE-N sites where multiple reactors are, or could be, proposed. The approach taken in Germany (noted above) in relation to wind development is useful. An approach like this could be beneficial in England. A proposed outline would be as follows:
+      a) Assessment and Zone Creation: The promoter, developer, or government must carry out a Strategic Environmental Assessment (SEA) for areas chosen for new nuclear projects. This assessment, based on the maximum parameters, will highlight which parts of the area could be most affected by development. This defines a ‘zone’.
+      b) Plan: After the assessment and a period for public feedback, the Secretary of State will create a plan for the zone. This plan will set rules to reduce environmental harm, such as keeping development away from sensitive sites or limiting building heights. It will also decide how much developers must pay to make up for any remaining environmental impacts. Natural England will use this money for conservation or improvement projects in the area.
+      c) Approval: The Secretary of State can only approve the plan if it clearly improves overall environmental outcomes, considering the benefits of nuclear power for Net Zero and climate change.
       d) Developer Contributions: Developers must pay a fee based on either the size of the development zone or the amount of energy the project will produce.
-      e) Simplified Assessment Requirements: After designation, developers no longer need to produce individual EIAs and HRAs for developments in the zone.
+      e) Simplified Assessments Requirements: After the Secretary of State successfully designates a plan, developers no longer need to produce individual Environmental Impact Assessments and Habitats Regulations Assessments (if Recommendation 12) is not accepted) for any developments brought forward in the zone. Instead, individual projects must just be compliant with the plan and pay any required environmental contributions as their project progresses.
       f) Sensitive Sites Excluded: This system does not apply to development directly in highly sensitive areas like ancient woodlands, National Parks, or National Landscapes.
       g) Planning Acceptance: If a plan exists, any negative impacts from development are considered acceptable for planning purposes, unless there are highly exceptional circumstances.
     scope:
@@ -757,7 +757,7 @@ recommendations:
 
       The NDA should make available any environmental survey and data assessment to potential developers who could utilise their sites.
 
-      The EIA Regulations and the Habitats Regulations should be amended so that developers are required to publish high-level cost estimates of the assessment process and any mitigations that are reasonably capable of costing more than £500,000. Where such mitigation is reported, the decision-maker must decide whether the mitigation is proportionate and explain why the mitigation does not discourage development coming forward in the future.
+      The EIA Regulations and the Habitats Regulations should be amended so that developers are required to publish high-level cost estimates of the assessment process and any mitigations that are reasonably capable of costing more than £500,000. Where such mitigation is reported, the decisionmaker must decide whether the mitigation is proportionate and explain why the mitigation does not discourage development coming forward in the future. This will help to improve transparency about the cost of mitigations and help assess their proportionality.
     scope:
       sectors: ["civil"]
       domains:
@@ -931,13 +931,13 @@ recommendations:
       long: "Amend the cost cap for judicial reviews and limit legal challenges to NSIPs"
     text: |
       Following consultation with the Lord Chancellor, enact the following changes to the operation of the existing cost caps:
-      a) Where the court determines, in any part of the proceedings, that there has been a "misuse of judicial review", there should be an automatic removal of the costs protection.
-      b) The cost cap is raised to take account of inflation since 2013 and linked to inflation going forward. Courts should set higher caps where there is misuse of process.
-      c) The cost cap be cascaded, being doubled for each stage of a challenge.
-      d) Where crowd funding is utilised, the cap should be set at 70% of total funds raised.
-      e) The costs cap for the decision-maker being challenged should always be set at a level which is at least 5 times the claimant's cap.
-
-      The principle of a 'single bite of the cherry', and the above measures, should be extended beyond just NSIPs to nuclear site licensing and permitting decisions.
+      a) Where the court determines, in any part of the proceedings, that there has been a "misuse of judicial review", there should be an automatic removal of the costs protection. This should be coupled with a requirement that the counsel and solicitors certify, as part of a claim, that the grounds have a more likely than not chance of success.
+      b) The cost cap is raised to take account of inflation since 2013 and linked to inflation going forward. Courts should, in addition, be issued guidance which encourages them to set higher caps, or maximally utilise their discretion, where there is a misuse of the process or where it is clear the intent is to delay development.
+      c) The cost cap be cascaded, being doubled for each stage of a challenge (e.g. from £10,000 at the first instance to £20,000 at the Court of Appeal).
+      d) Where crowd funding is utilised, the cap should be set at 70% of total funds raised (e.g. £70,000 if a campaigning group has raised £100,000 for a legal action). We consider that 70% represents a figure which balances access to justice, and the need for nuclear development without delay.
+      e) The costs cap for the decision-maker being challenged should always be set at a level which is at least 5 times the claimant’s cap in order to balance the relationship between a challenger and the decision-maker.
+      If necessary, prior to the enactment of the above, amend the Aarhus Convention under Article 14 of the Convention which endorse the principle of the measures above. If the principle of these measures is not endorsed, the UK should dispute any findings against it. Ongoing membership to the Convention is a matter for the UK Government.
+      The principle of a ‘single bite of the cherry’, and the above measures, should be extended beyond just NSIPs to nuclear site licensing and permitting decisions. If claimants lose on an issue relating to the DCO, they should not be able to appeal to the Court of Appeal.
     scope:
       sectors: ["civil"]
       domains:
@@ -1061,11 +1061,11 @@ recommendations:
       short: "Proportionality in decommissioning permitting"
       long: "Create proportionality in permitting for decommissioning activities"
     text: |
-      a) DEFRA to amend the Environmental Permitting Regulations to create an exemption for stockpiling materials on an existing nuclear site subject to generic conditions.
-      b) DESNZ legislates for "constrained discretion" in the context of decommissioning activities. A single lead regulator should be designated to make decisions.
-      c) Nuclear Reactors (Environmental Impact Assessment for Decommissioning) Regulations be amended to avoid the need for duplicative assessments.
-      d) Going forward, there should only be a requirement to comply with guidance that existed at the outset of an assessment unless otherwise exceptionally specified.
-      e) MHCLG should amend the GPDO to include Permitted Development Rights granted to the NDA equivalent to powers granted to statutory undertakers.
+      a) DEFRA to amend the Environmental Permitting (England and Wales) Regulations 2016 (EPRs) to create an exemption for stockpiling materials on an existing nuclear site subject to generic conditions. This should be agreed between the NDA, and the Secretary of State. This system should be in place by end of December 2026.
+      b) DESNZ legislates for “constrained discretion” in the context of decommissioning activities (covering the EPRs, CDM and other legislation). Should there be a circumstance in which an activity concerns multiple regulators, a single lead regulator should be designated to make a decision. Using their constrained discretion, a lead regulator should be able to grant approvals where inconsistencies across regulations apply, taking into account overarching outcomes.
+      c) Nuclear Reactors (Environmental Impact Assessment for Decommissioning) Regulations be amended to avoid the need for duplicative assessments. Government must legislate to ensure there is no more than one Environmental Impact Assessment. In tandem, the Government should seek an amendment to the Aarhus Convention to ensure that there can be no finding against the UK in respect of this change.
+      d) Going forward, there should only be a requirement to comply with guidance that existed at the outset of an assessment unless otherwise exceptionally specified. More specifically, the EA should not require the application of an updated GRA for LLWRs in relation to the ESC prepared for the GRA and that a proportionate and enabling approach is taken to reviewing updates to the ESC.
+      e) MHCLG should amend the Town and Country Planning (General Permitted Development) (England) Order 2015 to include Permitted Development Rights which are granted to the NDA. These rights should be equivalent to powers granted to statutory undertakers.
     scope:
       sectors: ["civil"]
       domains:
@@ -1155,13 +1155,18 @@ recommendations:
       long: "Update guidance from MHCLG to streamline the Development Consent Order (DCO) regime"
     text: |
       MHCLG should issue guidance that:
-      a) Requires consideration of project importance when deciding on acceptance;
-      b) Secures the benefits of removing statutory consultation; and
-      c) Encourages continuous improvement in examination timescales and proportionality.
-
-      Statutory guidance should establish strong presumptions for pre-examination periods, affirm validation-only acceptance tests, establish precedent-based approaches, and provide for costs liability where interested parties raise matters with no new substance.
-
-      MHCLG should update the Planning Inspectorate's Framework Document to reflect the above.
+        a) Requires consideration of project importance when deciding on acceptance;
+        b) Secures the benefits of removing statutory consultation; and
+        c) Encourages continuous improvement in examination timescales and proportionality.
+      Statutory guidance should:
+        a) Expressly confirm that consultation and engagement should not be assessed during the acceptance phase; the scope and approach to consultation should be left to the developer’s discretion. There should be no obligation to provide a draft EIA as part of consultation. Guidance may recognise the benefits of consultation but it should not create an expectation that it must always occur;
+        b) Establish a strong presumption that pre-examination periods are expected to finish in under four months. For projects designated as critical national priorities, rejection at the acceptance stage should only occur if there is strong evidence that any deficiencies identified at the application submission stage cannot be remedied within that presumptive pre-examination period;
+        c) Affirm the test on whether an application is accepted for examination should simply be a validation exercise, whereby the Inspectorate should consider whether the required application documents have been submitted. The test on whether those application documents are "satisfactory" must require fundamental issues with the application documents;
+        d) Establish that where a project is designated as a critical national priority, a decision on whether to refuse an application for development consent at the acceptance stage can only be made by the Secretary of State of the relevant department. Where the Planning Inspectorate suggests a project should be refused, it must communicate the basis of its conclusions to the applicant, providing a reasonable period for the applicant to respond. That information alone should be provided to the relevant Secretary of State who will take a decision on whether to refuse the application;
+        e) Affirm there must be compelling evidence to re-examine an issue or approach where that particular issue or approach has a precedent in a previous DCO application and that has been approved by the Secretary of State;
+        f) Establish the examination period should be shorter if a technology has previously been consented unless there are significant issues. The examining authority should seek approval from the relevant Secretary of State where an examination is proposed to be longer than the same technology as compared to the shortest precedent;
+        g) Provide that an interested party should be liable for costs where it raises the same matter, with no new substance (excluding signposting).
+      MHCLG should update the Planning Inspectorate’s Framework Document to reflect the above.
     scope:
       sectors: ["civil"]
       domains:
@@ -1540,11 +1545,9 @@ recommendations:
       short: "Proportionate OPZs and DEPZs"
       long: "Define proportionate Outline Planning Zones and Detailed Emergency Planning Zones under REPPIR19"
     text: |
-      ONR and UKHSA should be asked to calculate revised default Outline Planning Zones (OPZs) for reactors of differing types and sizes, based on best scientific information. These would not prevent developers from proposing smaller OPZs if warranted. This should, in turn, be used to amend the default distances in Schedule 5 of REPPIR19.
+      ONR and UKHSA should be asked to calculate revised default Outline Planning Zones (OPZs) for reactors of differing types and sizes, based on best scientific information. These would not prevent developers from proposing smaller OPZs if warranted. This should, in turn, be used to amend the default distances in Schedule 5 of REPPIR19. Regulations should further be amended that distances in excess of the new defaults cannot be imposed without the consent of the Secretary of State or Commission (if established).
 
-      Regulations should further be amended that distances in excess of the new defaults cannot be imposed without the consent of the Secretary of State or Commission (if established).
-
-      Government should amend the regulations to allow for an appeals process to the Secretary of State or the Commission (if established) in the event of local authority determinations on DEPZs which are disputed. In addition, regulation 8 of REPPIR19 should be amended to impose a fixed time limit of 12 weeks for determination.
+      Government should amend the regulations to allow for an appeals process to the Secretary of State or the Commission (if established) in the event of local authority determinations on DEPZs which are disputed. In addition, regulation 8 of REPPIR19 should be amended to impose a fixed time limit of 12 weeks for determination and only allow re-determination with the consent of the ONR, or the Commission (if established).
     scope:
       sectors: ["civil"]
       domains:
@@ -1910,12 +1913,15 @@ recommendations:
       long: "Develop and fund a joint Government and Regulator International Strategy and Action Plan"
     text: |
       Government and Regulators should develop an international regulatory strategy and delivery plan with clear timelines and deliverables with the aim to:
-      - Accelerate the assessment of new reactor designs with the expectation that decisions of acceptability of design will be given within two years and subsequent licensing within one year through maximising joint reviews and leveraging of existing regulatory reviews;
-      - Enhance engagement with international bodies and take a leading role in nuclear regulatory standardisation and harmonisation.
+
+      - Accelerate the assessment of new reactor designs with the expectation that decisions of acceptability of design will be given within two years and subsequent licensing within one year through;
+        − Maximising the ability to undertake joint reviews on new designs with other trusted international regulators; and
+        - Maximising the leveraging of existing regulatory reviews approved by other trusted national regulators; and regulators; and
+      - Enhance engagement with international bodies and take a leading role in nuclear regulatory standardisation and harmonisation for the benefit of the UK and global deployment of new nuclear power.
 
       Government should provide dedicated funding to regulators to enable them to implement these ambitious international engagement strategies.
 
-      Government should make a direction under the Energy Act 2013 to the ONR that it should maximise the leverage of existing regulatory reviews approved by other trusted national regulators.
+      Government should make a direction under the Energy Act 2013 to the ONR that it should maximise the leverage of existing regulatory reviews approved by other trusted national regulators. This should establish that the ONR is justified in relying on the approvals from states where there are formal working arrangements, such as Memoranda of Understanding. The direction should establish a strong presumption, without prejudice to regulatory independence, that regulatory attention is focused on national or site-specific risks or issues.
     scope:
       sectors: ["civil"]
       domains:
@@ -1959,13 +1965,13 @@ recommendations:
       short: "Risk-based export licensing"
       long: "Ensure risk-based proportionality in export licences"
     text: |
-      The duration of export licences containing nuclear-related items should be increased to five years as standard, and consideration given to increasing this to ten years. There should be an adoption of a risk-based, proportionate approach to the level of information required as part of any application and record-keeping.
+      The duration of export licences containing nuclear-related items should be increased to five years as standard, and consideration given to increasing this to ten years. There should be an adoption of a risk-based, proportionate approach to the level of information required as part of any application and record-keeping. This could mirror the risk-based approach adopted under the Money Laundering, Terrorist Financing and Transfer of Funds Regulations 2017. The overall aim of this should be to operate on a more generic basis, based on the actual risks involved.
 
-      Applications for exports of the same items to any entity which has previously been granted an export licence should be decided within 28 days.
+      Applications for exports of the same items to any entity which has previously been granted an export licence should be decided within 28 days. If amendments to the Export Control Order 2008 are needed to give effect to these recommendations, that should be considered at the earliest opportunity.
 
       The ONR and EA should be granted ten year open licences which cover their regulatory activities in relation to its functions in collaborating with regulators.
 
-      The Export Controls Joint Unit (ECJU) should establish a dedicated point of contact for nuclear companies and government teams involved in strategic nuclear export licensing.
+      The Export Controls Joint Unit (ECJU) should establish a dedicated point of contact for nuclear companies and government teams involved in strategic nuclear export licensing. This resource should have the capability to engage meaningfully with nuclear specific matters in order to efficiently process licences in this area.
     scope:
       sectors: ["civil"]
       domains:

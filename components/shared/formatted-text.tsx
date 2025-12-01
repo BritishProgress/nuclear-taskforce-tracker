@@ -7,36 +7,70 @@ interface FormattedTextProps {
   className?: string;
 }
 
+interface ListItem {
+  content: string;
+  children?: ListItem[];
+}
+
 interface TextBlock {
   type: 'paragraph' | 'bullet-list' | 'letter-list';
-  items: string[];
+  items: ListItem[] | string[];
 }
 
 function parseText(text: string): TextBlock[] {
   const lines = text.split('\n');
   const blocks: TextBlock[] = [];
   let currentBlock: TextBlock | null = null;
+  let currentListItems: ListItem[] = [];
+  let previousBulletIndent = 0;
 
-  for (const line of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     const trimmedLine = line.trim();
+    const leadingSpaces = line.length - line.trimStart().length;
     
     // Skip empty lines - they end the current block
     if (!trimmedLine) {
-      if (currentBlock) {
+      if (currentBlock && currentBlock.type === 'bullet-list' && currentListItems.length > 0) {
+        currentBlock.items = currentListItems;
         blocks.push(currentBlock);
-        currentBlock = null;
+        currentListItems = [];
+        previousBulletIndent = 0;
+      } else if (currentBlock && currentBlock.type !== 'bullet-list') {
+        blocks.push(currentBlock);
       }
+      currentBlock = null;
       continue;
     }
 
-    // Check for bullet points (lines starting with -)
-    if (trimmedLine.startsWith('- ')) {
-      const content = trimmedLine.slice(2).trim();
+    // Check for bullet points (lines starting with - or −)
+    const bulletMatch = trimmedLine.match(/^[-−]\s+(.+)/);
+    if (bulletMatch) {
+      const content = bulletMatch[1].trim();
+      // A bullet is nested if it has more indentation than the previous bullet
+      const isNested = currentBlock?.type === 'bullet-list' && 
+                       currentListItems.length > 0 && 
+                       leadingSpaces > previousBulletIndent;
+      
       if (currentBlock?.type === 'bullet-list') {
-        currentBlock.items.push(content);
+        if (isNested) {
+          // Add as nested item to the last top-level item
+          const lastItem = currentListItems[currentListItems.length - 1];
+          if (!lastItem.children) {
+            lastItem.children = [];
+          }
+          lastItem.children.push({ content });
+        } else {
+          // Add as top-level item (reset indentation if less indented)
+          currentListItems.push({ content });
+          previousBulletIndent = leadingSpaces;
+        }
       } else {
+        // Start new bullet list
         if (currentBlock) blocks.push(currentBlock);
-        currentBlock = { type: 'bullet-list', items: [content] };
+        currentListItems = [{ content }];
+        previousBulletIndent = leadingSpaces;
+        currentBlock = { type: 'bullet-list', items: [] };
       }
       continue;
     }
@@ -46,18 +80,31 @@ function parseText(text: string): TextBlock[] {
     if (letterMatch) {
       const content = letterMatch[2].trim();
       if (currentBlock?.type === 'letter-list') {
-        currentBlock.items.push(content);
+        (currentBlock.items as string[]).push(content);
       } else {
-        if (currentBlock) blocks.push(currentBlock);
+        if (currentBlock && currentBlock.type === 'bullet-list' && currentListItems.length > 0) {
+          currentBlock.items = currentListItems;
+          blocks.push(currentBlock);
+          currentListItems = [];
+        } else if (currentBlock) {
+          blocks.push(currentBlock);
+        }
         currentBlock = { type: 'letter-list', items: [content] };
       }
       continue;
     }
 
     // Regular paragraph text
-    if (currentBlock?.type === 'paragraph') {
+    if (currentBlock?.type === 'bullet-list' && currentListItems.length > 0) {
+      // Close the bullet list before starting a paragraph
+      currentBlock.items = currentListItems;
+      blocks.push(currentBlock);
+      currentListItems = [];
+      previousBulletIndent = 0;
+      currentBlock = { type: 'paragraph', items: [trimmedLine] };
+    } else if (currentBlock?.type === 'paragraph') {
       // Append to existing paragraph with a space
-      currentBlock.items[0] = currentBlock.items[0] + ' ' + trimmedLine;
+      (currentBlock.items as string[])[0] = (currentBlock.items as string[])[0] + ' ' + trimmedLine;
     } else {
       if (currentBlock) blocks.push(currentBlock);
       currentBlock = { type: 'paragraph', items: [trimmedLine] };
@@ -66,10 +113,26 @@ function parseText(text: string): TextBlock[] {
 
   // Don't forget the last block
   if (currentBlock) {
+    if (currentBlock.type === 'bullet-list' && currentListItems.length > 0) {
+      currentBlock.items = currentListItems;
+    }
     blocks.push(currentBlock);
   }
 
   return blocks;
+}
+
+function renderListItem(item: ListItem, index: number): React.ReactNode {
+  return (
+    <li key={index} className="leading-relaxed">
+      {item.content}
+      {item.children && item.children.length > 0 && (
+        <ul className="list-disc pl-6 mt-2 space-y-1">
+          {item.children.map((child, childIndex) => renderListItem(child, childIndex))}
+        </ul>
+      )}
+    </li>
+  );
 }
 
 export function FormattedText({ text, className = '' }: FormattedTextProps) {
@@ -89,11 +152,7 @@ export function FormattedText({ text, className = '' }: FormattedTextProps) {
           case 'bullet-list':
             return (
               <ul key={index} className="list-disc pl-6 space-y-2 text-foreground">
-                {block.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className="leading-relaxed">
-                    {item}
-                  </li>
-                ))}
+                {(block.items as ListItem[]).map((item, itemIndex) => renderListItem(item, itemIndex))}
               </ul>
             );
           
