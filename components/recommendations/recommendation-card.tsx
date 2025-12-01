@@ -59,14 +59,17 @@ export function RecommendationCard({
             </h3>
 
             {/* Footer */}
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <OwnershipTag 
-                owner={recommendation.ownership.primary_owner} 
-                size="sm" 
-                isPrimary={false}
-              />
+            <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
+              <div className="flex-1 min-w-0">
+                <OwnershipTag 
+                  owner={recommendation.ownership.primary_owner} 
+                  size="sm" 
+                  isPrimary={false}
+                  className="truncate max-w-full"
+                />
+              </div>
               <div className={cn(
-                'flex items-center gap-1 font-mono',
+                'flex items-center gap-1 font-mono flex-shrink-0',
                 overdue && 'text-deep-red'
               )}>
                 {overdue ? (
@@ -76,7 +79,7 @@ export function RecommendationCard({
                 ) : (
                   <Calendar size={12} />
                 )}
-                {formatDateShort(targetDate)}
+                <span className="whitespace-nowrap">{formatDateShort(targetDate)}</span>
               </div>
             </div>
           </CardContent>

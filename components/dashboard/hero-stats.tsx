@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils';
 import { StatusCounts, OverallStatus } from '@/lib/types';
-import { ProgressRing } from '@/components/shared/progress-ring';
 import { 
   AlertCircle, 
   CheckCircle,
@@ -73,19 +72,43 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
         </p>
       </div>
 
-      {/* Progress Ring & Stats */}
+      {/* Progress Bar & Stats */}
       <div className="flex flex-col items-center gap-4 sm:gap-8">
-        {/* Central Progress Ring */}
-        <div className="flex flex-col items-center">
-          <ProgressRing
-            completed={counts.completed}
-            onTrack={counts.on_track}
-            offTrack={counts.off_track}
-            total={counts.total}
-            size="xl"
-            showLabel={true}
-          />
-          <p className="text-sm font-medium text-foreground mt-2">Completed</p>
+        {/* Horizontal Progress Bar */}
+        <div className="w-full max-w-2xl">
+          <div className="relative h-8 sm:h-10 bg-muted rounded-md overflow-hidden">
+            {/* Completed segment */}
+            {counts.completed > 0 && (
+              <div
+                className="absolute left-0 top-0 h-full bg-neon-green transition-all duration-500 ease-out"
+                style={{ width: `${(counts.completed / counts.total) * 100}%` }}
+              />
+            )}
+            {/* On Track segment */}
+            {counts.on_track > 0 && (
+              <div
+                className="absolute top-0 h-full bg-dark-green/30 transition-all duration-500 ease-out"
+                style={{
+                  left: `${(counts.completed / counts.total) * 100}%`,
+                  width: `${(counts.on_track / counts.total) * 100}%`,
+                }}
+              />
+            )}
+            {/* Off Track segment */}
+            {counts.off_track > 0 && (
+              <div
+                className="absolute top-0 h-full bg-deep-red/30 transition-all duration-500 ease-out"
+                style={{
+                  left: `${((counts.completed + counts.on_track) / counts.total) * 100}%`,
+                  width: `${(counts.off_track / counts.total) * 100}%`,
+                }}
+              />
+            )}
+            {/* Atom icon in center */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Atom className="h-5 w-5 sm:h-6 sm:w-6 text-dark-green" />
+            </div>
+          </div>
         </div>
 
         {/* Stats Grid - Centered */}
@@ -96,34 +119,41 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
               const Icon = stat.icon;
               const isClickable = !!onStatusClick;
               const Component = isClickable ? 'button' : 'div';
+              const percentage = counts.total === 0 ? 0 : Math.round((stat.value / counts.total) * 100);
               return (
                 <Component
                   key={stat.label}
                   onClick={isClickable ? () => onStatusClick?.(stat.status) : undefined}
                   className={cn(
-                    'flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-0 p-1.5 sm:p-4 rounded-xl transition-all w-full',
+                    'flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 py-3 px-4 sm:px-8 sm:py-4 rounded-xl transition-all w-full min-w-[120px]',
                     stat.bgColor,
                     isClickable && 'cursor-pointer hover:scale-105 hover:shadow-md active:scale-95'
                   )}
                 >
-                  <div className="flex items-center gap-2 sm:flex-col sm:gap-0">
+                  <div className="flex items-center gap-2 sm:flex-col sm:gap-1">
                     {Icon && (
                       <Icon className={cn(
-                        'h-4 w-4 sm:h-6 sm:w-6 sm:mb-1 sm:mb-2',
+                        'h-5 w-5 sm:h-6 sm:w-6',
                         stat.color,
                         stat.status === 'completed' && 'font-bold'
                       )} />
                     )}
-                    <span className={cn(
-                      'text-xl sm:text-3xl font-bold font-mono',
-                      stat.color,
-                      stat.status === 'completed' && 'font-extrabold'
-                    )}>
-                      {stat.value}
-                    </span>
+                    <div className="flex items-center gap-1.5 sm:flex-col sm:items-center sm:gap-0">
+                      <span className={cn(
+                        'text-2xl sm:text-4xl font-bold font-mono',
+                        stat.color,
+                        stat.status === 'completed' && 'font-extrabold'
+                      )}>
+                        {percentage}%
+                      </span>
+                      <span className="text-xs sm:text-sm font-mono text-muted-foreground">
+                        <span className="sm:hidden">({stat.value}/{counts.total})</span>
+                        <span className="hidden sm:inline">{stat.value}/{counts.total}</span>
+                      </span>
+                    </div>
                   </div>
                   <span className={cn(
-                    'text-sm sm:text-[10px] sm:mt-0.5 sm:mt-1',
+                    'text-sm sm:text-sm sm:mt-1',
                     stat.status === 'completed' ? 'font-semibold text-dark-green' : 'text-muted-foreground'
                   )}>
                     {stat.label}
@@ -140,7 +170,7 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
                 <Component
                   onClick={isClickable ? () => onStatusClick?.(totalStat.status) : undefined}
                   className={cn(
-                    'flex flex-row items-center justify-center gap-3 p-1.5 sm:p-3 rounded-xl transition-all w-full sm:col-span-3',
+                    'flex flex-row items-center justify-center gap-3 p-2 sm:p-3 rounded-xl transition-all w-full sm:col-span-3',
                     totalStat.bgColor,
                     isClickable && 'cursor-pointer hover:scale-105 hover:shadow-md active:scale-95'
                   )}

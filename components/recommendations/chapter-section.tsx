@@ -38,21 +38,21 @@ export function ChapterSection({
       <CollapsibleTrigger asChild>
         <button
           className={cn(
-            'w-full flex items-center justify-between p-4 rounded-lg border transition-all duration-200',
+            'w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 p-4 rounded-lg border transition-all duration-200',
             'hover:shadow-sm',
             colors.bg,
             colors.border,
             isOpen && 'rounded-b-none border-b-0'
           )}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
             {isOpen ? (
-              <ChevronDown className={cn('h-5 w-5', colors.text)} />
+              <ChevronDown className={cn('h-5 w-5 flex-shrink-0', colors.text)} />
             ) : (
-              <ChevronRight className={cn('h-5 w-5', colors.text)} />
+              <ChevronRight className={cn('h-5 w-5 flex-shrink-0', colors.text)} />
             )}
-            <div className="text-left">
-              <h2 className={cn('font-display font-bold text-lg', colors.text)}>
+            <div className="text-left min-w-0 flex-1">
+              <h2 className={cn('font-display font-bold text-lg', colors.text, 'break-words')}>
                 Chapter {chapter.id}: {chapter.title}
               </h2>
               <p className="text-sm text-muted-foreground mt-0.5">
@@ -62,19 +62,19 @@ export function ChapterSection({
           </div>
 
           {/* Stats pills */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0 flex-wrap">
             {completed > 0 && (
-              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-dark-green/10 text-dark-green">
+              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-dark-green/10 text-dark-green whitespace-nowrap">
                 {completed} done
               </span>
             )}
             {onTrack > 0 && (
-              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-dark-green/10 text-dark-green">
+              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-dark-green/10 text-dark-green whitespace-nowrap">
                 {onTrack} on track
               </span>
             )}
             {offTrack > 0 && (
-              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-deep-red/10 text-deep-red">
+              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-deep-red/10 text-deep-red whitespace-nowrap">
                 {offTrack} off track
               </span>
             )}
@@ -90,7 +90,7 @@ export function ChapterSection({
             'bg-card'
           )}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {recommendations.map((rec, index) => (
               <RecommendationCard
                 key={rec.id}

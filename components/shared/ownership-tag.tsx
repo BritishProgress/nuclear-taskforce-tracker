@@ -33,9 +33,9 @@ export function OwnershipTag({
   const tag = (
     <span
       className={cn(
-        'inline-flex items-center rounded font-mono',
+        'inline-flex items-center rounded font-medium',
         isPrimary
-          ? 'bg-dark-green text-beige font-medium'
+          ? 'bg-dark-green text-beige'
           : 'bg-muted text-muted-foreground',
         sizeClasses[size],
         className

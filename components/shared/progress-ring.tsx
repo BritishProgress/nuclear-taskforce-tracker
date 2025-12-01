@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { Atom } from 'lucide-react';
 
 interface ProgressRingProps {
   completed: number;
@@ -29,10 +30,10 @@ export function ProgressRing({
   const completedDisplay = Math.round(completedPercentage);
   
   const sizeConfig = {
-    sm: { dimension: 48, defaultStroke: 4, fontSize: 'text-xs' },
-    md: { dimension: 64, defaultStroke: 5, fontSize: 'text-sm' },
-    lg: { dimension: 96, defaultStroke: 6, fontSize: 'text-lg' },
-    xl: { dimension: 128, defaultStroke: 8, fontSize: 'text-2xl' },
+    sm: { dimension: 48, defaultStroke: 4, fontSize: 'text-xs', iconSize: 16 },
+    md: { dimension: 64, defaultStroke: 5, fontSize: 'text-sm', iconSize: 20 },
+    lg: { dimension: 96, defaultStroke: 6, fontSize: 'text-lg', iconSize: 28 },
+    xl: { dimension: 128, defaultStroke: 12, fontSize: 'text-2xl', iconSize: 36 },
   };
 
   const config = sizeConfig[size];
@@ -108,7 +109,7 @@ export function ProgressRing({
           />
         )}
       </svg>
-      {showLabel && (
+      {showLabel ? (
         <span
           className={cn(
             'absolute font-bold text-foreground',
@@ -117,6 +118,11 @@ export function ProgressRing({
         >
           {completedDisplay}%
         </span>
+      ) : (
+        <Atom
+          className="absolute text-dark-green"
+          size={config.iconSize}
+        />
       )}
     </div>
   );
