@@ -9,9 +9,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { ChevronDown, ChevronRight, ExternalLink } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
-import Link from 'next/link';
 
 interface ChapterSectionProps {
   chapter: Chapter;
@@ -53,33 +52,9 @@ export function ChapterSection({
               <ChevronRight className={cn('h-5 w-5', colors.text)} />
             )}
             <div className="text-left">
-              <div className="flex items-center gap-2">
-                <h2 className={cn('font-display font-bold text-lg', colors.text)}>
-                  Chapter {chapter.id}: {chapter.title}
-                </h2>
-                <Link
-                  href={`/?chapter=${chapter.id}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // Scroll to chapter overview after navigation
-                    setTimeout(() => {
-                      const element = document.querySelector('[data-chapter-overview]');
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
-                    }, 100);
-                  }}
-                  className={cn(
-                    'inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-md transition-colors',
-                    'hover:bg-white/20',
-                    colors.text
-                  )}
-                  title="View chapter overview"
-                >
-                  <ExternalLink size={12} />
-                  Overview
-                </Link>
-              </div>
+              <h2 className={cn('font-display font-bold text-lg', colors.text)}>
+                Chapter {chapter.id}: {chapter.title}
+              </h2>
               <p className="text-sm text-muted-foreground mt-0.5">
                 {recommendations.length} recommendation{recommendations.length !== 1 ? 's' : ''}
               </p>

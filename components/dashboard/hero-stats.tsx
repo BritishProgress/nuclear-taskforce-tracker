@@ -4,8 +4,6 @@ import { cn } from '@/lib/utils';
 import { StatusCounts, OverallStatus } from '@/lib/types';
 import { ProgressRing } from '@/components/shared/progress-ring';
 import { 
-  Circle, 
-  CheckCircle2, 
   AlertCircle, 
   CheckCircle,
   Atom
@@ -20,17 +18,9 @@ interface HeroStatsProps {
 export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) {
   const stats = [
     {
-      label: 'Total',
-      value: counts.total,
-      icon: Atom,
-      color: 'text-dark-green',
-      bgColor: 'bg-dark-green/10',
-      status: 'all' as const,
-    },
-    {
       label: 'On Track',
       value: counts.on_track,
-      icon: CheckCircle2,
+      icon: Atom,
       color: 'text-dark-green',
       bgColor: 'bg-dark-green/10',
       status: 'on_track' as OverallStatus,
@@ -47,17 +37,9 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
       label: 'Completed',
       value: counts.completed,
       icon: CheckCircle,
-      color: 'text-neon-green',
+      color: 'text-dark-green',
       bgColor: 'bg-neon-green/20',
       status: 'completed' as OverallStatus,
-    },
-    {
-      label: 'Not Started',
-      value: counts.not_started,
-      icon: Circle,
-      color: 'text-charcoal',
-      bgColor: 'bg-charcoal/10',
-      status: 'not_started' as OverallStatus,
     },
   ];
 
@@ -89,12 +71,12 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
             size="xl"
             showLabel={true}
           />
-          <p className="text-sm text-muted-foreground mt-2">Completed</p>
+          <p className="text-sm font-medium text-foreground mt-2">Completed</p>
         </div>
 
         {/* Stats Grid - Centered */}
-        <div className="flex justify-center sm:justify-center">
-          <div className="flex flex-col w-full sm:w-auto sm:grid sm:grid-cols-3 md:grid-cols-5 gap-0 sm:gap-4">
+        <div className="flex justify-center sm:justify-center w-full">
+          <div className="flex flex-col w-full sm:w-auto sm:grid sm:grid-cols-3 gap-2 sm:gap-4">
             {stats.map((stat) => {
               const Icon = stat.icon;
               const isClickable = !!onStatusClick;
@@ -104,16 +86,29 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
                   key={stat.label}
                   onClick={isClickable ? () => onStatusClick?.(stat.status) : undefined}
                   className={cn(
-                    'flex flex-col items-center p-1.5 sm:p-4 rounded-xl transition-all w-full sm:w-auto',
+                    'flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-0 p-1.5 sm:p-4 rounded-xl transition-all w-full',
                     stat.bgColor,
                     isClickable && 'cursor-pointer hover:scale-105 hover:shadow-md active:scale-95'
                   )}
                 >
-                  <Icon className={cn('h-4 w-4 sm:h-6 sm:w-6 mb-1 sm:mb-2', stat.color)} />
-                  <span className={cn('text-xl sm:text-3xl font-bold font-mono', stat.color)}>
-                    {stat.value}
-                  </span>
-                  <span className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1">
+                  <div className="flex items-center gap-2 sm:flex-col sm:gap-0">
+                    <Icon className={cn(
+                      'h-4 w-4 sm:h-6 sm:w-6 sm:mb-1 sm:mb-2',
+                      stat.color,
+                      stat.status === 'completed' && 'font-bold'
+                    )} />
+                    <span className={cn(
+                      'text-xl sm:text-3xl font-bold font-mono',
+                      stat.color,
+                      stat.status === 'completed' && 'font-extrabold'
+                    )}>
+                      {stat.value}
+                    </span>
+                  </div>
+                  <span className={cn(
+                    'text-sm sm:text-[10px] sm:mt-0.5 sm:mt-1',
+                    stat.status === 'completed' ? 'font-semibold text-dark-green' : 'text-muted-foreground'
+                  )}>
                     {stat.label}
                   </span>
                 </Component>

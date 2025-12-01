@@ -199,8 +199,11 @@ export function DashboardContent({
               const completed = chapterData.recommendations.filter(r => r.overall_status.status === 'completed').length;
               const onTrack = chapterData.recommendations.filter(r => r.overall_status.status === 'on_track').length;
               const offTrack = chapterData.recommendations.filter(r => r.overall_status.status === 'off_track').length;
-              const notStarted = chapterData.recommendations.filter(r => r.overall_status.status === 'not_started').length;
+              const total = chapterData.recommendations.length;
               const colors = getChapterColors(chapter.id);
+              
+              const completedPercent = total > 0 ? (completed / total) * 100 : 0;
+              const onTrackPercent = total > 0 ? (onTrack / total) * 100 : 0;
               
               return (
                 <div data-chapter-overview className={cn('p-6 rounded-lg border mb-6', colors.bg, colors.border)}>
@@ -218,35 +221,56 @@ export function DashboardContent({
                       <X size={20} />
                     </button>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-foreground">{chapterData.recommendations.length}</div>
-                      <div className="text-xs text-muted-foreground">Total</div>
+                  
+                  {/* Progress Bar with Columns */}
+                  <div className="space-y-3">
+                    <div className="flex w-full h-8 rounded-lg overflow-hidden border border-border/50">
+                      {completed > 0 && (
+                        <div
+                          className="bg-neon-green flex items-center justify-center text-white text-xs font-semibold transition-all duration-500"
+                          style={{ width: `${completedPercent}%` }}
+                        >
+                          {completedPercent > 5 && `${completed}`}
+                        </div>
+                      )}
+                      {onTrack > 0 && (
+                        <div
+                          className="bg-dark-green flex items-center justify-center text-white text-xs font-semibold transition-all duration-500"
+                          style={{ width: `${onTrackPercent}%` }}
+                        >
+                          {onTrackPercent > 5 && `${onTrack}`}
+                        </div>
+                      )}
+                      {offTrack > 0 && (
+                        <div
+                          className="bg-deep-red flex items-center justify-center text-white text-xs font-semibold transition-all duration-500"
+                          style={{ width: `${((offTrack / total) * 100)}%` }}
+                        >
+                          {((offTrack / total) * 100) > 5 && `${offTrack}`}
+                        </div>
+                      )}
                     </div>
-                    {completed > 0 && (
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-neon-green">{completed}</div>
-                        <div className="text-xs text-muted-foreground">Completed</div>
+                    
+                    {/* Legend */}
+                    <div className="flex flex-wrap gap-4 text-xs">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-neon-green"></div>
+                        <span className="text-muted-foreground">Completed ({completed})</span>
                       </div>
-                    )}
-                    {onTrack > 0 && (
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-dark-green">{onTrack}</div>
-                        <div className="text-xs text-muted-foreground">On Track</div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-dark-green"></div>
+                        <span className="text-muted-foreground">On Track ({onTrack})</span>
                       </div>
-                    )}
-                    {offTrack > 0 && (
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-deep-red">{offTrack}</div>
-                        <div className="text-xs text-muted-foreground">Off Track</div>
+                      {offTrack > 0 && (
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-3 h-3 rounded bg-deep-red"></div>
+                          <span className="text-muted-foreground">Off Track ({offTrack})</span>
+                        </div>
+                      )}
+                      <div className="text-muted-foreground ml-auto">
+                        Total: {total}
                       </div>
-                    )}
-                    {notStarted > 0 && (
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-charcoal">{notStarted}</div>
-                        <div className="text-xs text-muted-foreground">Not Started</div>
-                      </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               );
