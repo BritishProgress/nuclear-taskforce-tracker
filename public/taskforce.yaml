@@ -78,11 +78,21 @@ recommendations:
       depends_on: []
       enables: [2, 3, 4, 5]
     overall_status:
-      status: "not_started"
+      status: "completed"
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response to the recommendation."
-    updates: []
+    updates:
+      - date: "2025-12-01"
+        status: "completed"
+        tags: []
+        title: "Prime Minister's strategic steer to the nuclear sector"
+        description: "The Government completed the first recommendation of the Nuclear Regulatory Taskforce report by issuing a strategic steer to the nuclear sector."
+        links:
+          - title: "Prime Minister's Strategic Steer to the Nuclear Sector"
+            url: "https://www.gov.uk/government/publications/prime-ministers-strategic-steer-to-the-nuclear-sector"
+        source:
+          type: "Policy Paper"
     notes: |
       First recommendation to be implemented. Sets the foundation for other reforms.
 
