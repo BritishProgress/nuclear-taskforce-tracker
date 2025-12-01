@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer';
 import { StatusBadge } from '@/components/shared/status-badge';
 import { OwnershipList } from '@/components/shared/ownership-tag';
 import { DeadlineIndicator } from '@/components/shared/deadline-indicator';
+import { FormattedText } from '@/components/shared/formatted-text';
 import { TimelineSection } from './timeline-section';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -178,9 +179,7 @@ export default async function RecommendationPage({ params }: PageProps) {
                 </CardHeader>
                 <CardContent>
                   <div className="prose prose-sm max-w-none">
-                    <p className="text-foreground leading-relaxed whitespace-pre-wrap">
-                      {recommendation.text}
-                    </p>
+                    <FormattedText text={recommendation.text} />
                   </div>
                 </CardContent>
               </Card>
@@ -336,7 +335,7 @@ export default async function RecommendationPage({ params }: PageProps) {
 
               {/* Dependencies */}
               {recommendation.dependencies && 
-               (recommendation.dependencies.depends_on?.length || recommendation.dependencies.enables?.length) && (
+               ((recommendation.dependencies.depends_on?.length ?? 0) > 0 || (recommendation.dependencies.enables?.length ?? 0) > 0) && (
                 <Card>
                   <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-base">
@@ -377,19 +376,6 @@ export default async function RecommendationPage({ params }: PageProps) {
                 </Card>
               )}
 
-              {/* Notes */}
-              {recommendation.notes && (
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-base">Analyst Notes</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-                      {recommendation.notes}
-                    </p>
-                  </CardContent>
-                </Card>
-              )}
             </div>
           </div>
         </section>

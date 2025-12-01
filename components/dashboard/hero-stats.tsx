@@ -37,7 +37,7 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
       label: 'Completed',
       value: counts.completed,
       icon: CheckCircle,
-      color: 'text-neon-green',
+      color: 'text-dark-green',
       bgColor: 'bg-neon-green/20',
       status: 'completed' as OverallStatus,
     },
@@ -56,13 +56,12 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
     <div className={cn('', className)}>
       {/* Hero Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dark-green/10 text-dark-green text-sm font-medium mb-4">
+        <div className="mb-6">
           <img 
-            src="/icon.svg" 
-            alt="" 
-            className="w-4 h-4"
+            src="/logo.svg" 
+            alt="Nuclear Taskforce Tracker" 
+            className="h-8 md:h-10 mx-auto"
           />
-          Centre for British Progress
         </div>
         <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-dark-green mb-4 tracking-tight">
           Nuclear Taskforce Tracker
@@ -70,7 +69,7 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
           Monitoring government progress on{' '}
           <span className="font-semibold text-foreground">{counts.total} recommendations</span>{' '}
-          from the UK Nuclear Regulatory Taskforce
+          from the <span className="whitespace-nowrap">UK Nuclear Regulatory Taskforce</span>
         </p>
       </div>
 

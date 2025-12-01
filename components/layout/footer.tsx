@@ -21,12 +21,16 @@ export function Footer({ className }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <h3 className="font-display font-bold text-lg mb-3">
-              Centre for British Progress
-            </h3>
+            <img 
+              src="/logo_light.svg" 
+              alt="Centre for British Progress" 
+              className="h-8 mb-3"
+            />
             <p className="text-sm text-beige/80 leading-relaxed">
-              Tracking government progress on the UK Nuclear Regulatory Taskforce&apos;s
-              recommendations for regulatory reform. An independent monitoring initiative.
+              The Centre for British Progress is a non-partisan think tank researching and producing concrete ideas for an era of British growth and progress.
+            </p>
+            <p className="text-sm text-beige/80 leading-relaxed mt-2">
+              This project tracks the Government&apos;s progress in implementing the Nuclear Regulatory Taskforce recommendations.
             </p>
           </div>
 
