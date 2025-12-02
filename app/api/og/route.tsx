@@ -440,11 +440,29 @@ export async function GET(request: NextRequest) {
         height: 1260,
       }
     );
-  } catch (e: any) {
-    console.log(`${e.message}`);
-    return new Response(`Failed to generate the image`, {
-      status: 500,
+  } catch (error: unknown) {
+    // Log error properly
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
+    console.error('OG image generation failed:', {
+      message: errorMessage,
+      stack: errorStack,
     });
+
+    // Return a proper error response
+    return new Response(
+      JSON.stringify({ 
+        error: 'Failed to generate the image',
+        message: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
   }
 }
 

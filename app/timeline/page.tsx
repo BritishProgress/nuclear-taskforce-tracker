@@ -7,7 +7,16 @@ import { getTimelineItems } from '@/lib/data';
 import { Clock } from 'lucide-react';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const timelineItems = await getTimelineItems(true);
+  let timelineItems;
+  try {
+    timelineItems = await getTimelineItems(true);
+  } catch (error) {
+    // Fallback metadata if data loading fails
+    return {
+      title: 'Timeline | Nuclear Taskforce Tracker',
+      description: 'Track all updates and developments on nuclear regulatory taskforce recommendations.',
+    };
+  }
   
   return {
     title: 'Timeline | Nuclear Taskforce Tracker',
@@ -40,7 +49,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function TimelinePage() {
-  const timelineItems = await getTimelineItems(true);
+  let timelineItems;
+  try {
+    timelineItems = await getTimelineItems(true);
+  } catch (error) {
+    console.error('Failed to load timeline data:', error);
+    throw new Error('Failed to load timeline data. Please try again later.');
+  }
 
   return (
     <div className="min-h-screen flex flex-col">

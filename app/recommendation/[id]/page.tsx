@@ -37,7 +37,17 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const recommendation = await getRecommendationById(parseInt(id));
+  let recommendation;
+  
+  try {
+    recommendation = await getRecommendationById(parseInt(id));
+  } catch (error) {
+    console.error('Failed to load recommendation for metadata:', error);
+    return { 
+      title: 'Error | Nuclear Taskforce Tracker',
+      description: 'An error occurred while loading this recommendation.',
+    };
+  }
   
   if (!recommendation) {
     return { 
@@ -91,7 +101,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function RecommendationPage({ params }: PageProps) {
   const { id } = await params;
-  const recommendation = await getRecommendationById(parseInt(id));
+  let recommendation;
+  
+  try {
+    recommendation = await getRecommendationById(parseInt(id));
+  } catch (error) {
+    console.error('Failed to load recommendation:', error);
+    throw new Error('Failed to load recommendation. Please try again later.');
+  }
 
   if (!recommendation) {
     notFound();

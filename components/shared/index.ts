@@ -5,4 +5,5 @@ export { ProgressRing, ProgressBar } from './progress-ring';
 export { TimelineEvent, Timeline } from './timeline-event';
 export { FormattedText } from './formatted-text';
 export { Disclaimer } from './disclaimer';
+export { ErrorBoundary } from './error-boundary';
 

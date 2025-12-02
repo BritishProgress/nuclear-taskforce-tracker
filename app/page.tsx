@@ -13,7 +13,16 @@ import {
 } from '@/lib/data';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const counts = await getStatusCounts();
+  let counts;
+  try {
+    counts = await getStatusCounts();
+  } catch (error) {
+    // Fallback metadata if data loading fails
+    return {
+      title: "Nuclear Taskforce Tracker | Centre for British Progress",
+      description: "Tracking government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations.",
+    };
+  }
   
   return {
     title: "Nuclear Taskforce Tracker | Centre for British Progress",
@@ -46,15 +55,23 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  // Fetch all data server-side
-  const [counts, chaptersWithRecs, deadlines, recentUpdates, owners, chapters] = await Promise.all([
-    getStatusCounts(),
-    getChaptersWithRecommendations(),
-    getUpcomingDeadlines(8),
-    getRecentUpdates(6),
-    getUniqueOwners(),
-    getChapters(),
-  ]);
+  // Fetch all data server-side with error handling
+  let counts, chaptersWithRecs, deadlines, recentUpdates, owners, chapters;
+  
+  try {
+    [counts, chaptersWithRecs, deadlines, recentUpdates, owners, chapters] = await Promise.all([
+      getStatusCounts(),
+      getChaptersWithRecommendations(),
+      getUpcomingDeadlines(8),
+      getRecentUpdates(6),
+      getUniqueOwners(),
+      getChapters(),
+    ]);
+  } catch (error) {
+    // Log error and throw to trigger error boundary
+    console.error('Failed to load dashboard data:', error);
+    throw new Error('Failed to load dashboard data. Please try again later.');
+  }
 
   return (
     <div className="min-h-screen flex flex-col">

@@ -16,12 +16,50 @@ export async function loadTaskforceData(): Promise<TaskforceData> {
     return cachedData;
   }
 
-  const filePath = path.join(process.cwd(), 'public', 'taskforce.yaml');
-  const fileContents = await fs.readFile(filePath, 'utf8');
-  const data = yaml.load(fileContents) as TaskforceData;
-  
-  cachedData = data;
-  return data;
+  try {
+    const filePath = path.join(process.cwd(), 'public', 'taskforce.yaml');
+    
+    // Check if file exists
+    try {
+      await fs.access(filePath);
+    } catch {
+      throw new Error(`Taskforce data file not found at ${filePath}`);
+    }
+
+    const fileContents = await fs.readFile(filePath, 'utf8');
+    
+    if (!fileContents || fileContents.trim().length === 0) {
+      throw new Error('Taskforce data file is empty');
+    }
+
+    const data = yaml.load(fileContents) as TaskforceData;
+    
+    // Validate data structure
+    if (!data) {
+      throw new Error('Failed to parse YAML: data is null or undefined');
+    }
+
+    if (!data.recommendations || !Array.isArray(data.recommendations)) {
+      throw new Error('Invalid YAML structure: missing or invalid recommendations array');
+    }
+
+    if (!data.status_scales) {
+      throw new Error('Invalid YAML structure: missing status_scales');
+    }
+
+    cachedData = data;
+    return data;
+  } catch (error) {
+    // Clear cache on error to allow retry
+    cachedData = null;
+    
+    if (error instanceof Error) {
+      console.error('Failed to load taskforce data:', error.message);
+      throw new Error(`Failed to load taskforce data: ${error.message}`);
+    }
+    
+    throw new Error('Failed to load taskforce data: Unknown error');
+  }
 }
 
 /**
