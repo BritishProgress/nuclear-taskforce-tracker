@@ -391,42 +391,7 @@ export function DashboardContent({
               />
             </div>
 
-            {/* Owner Key People */}
-            {filters.owner !== 'all' && ownerInfo[filters.owner] && ownerInfo[filters.owner].length > 0 && (
-              <div className="p-6 rounded-lg border bg-card mb-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h2 className="font-display font-bold text-2xl mb-2">
-                      Key People: {filters.owner}
-                    </h2>
-                  </div>
-                  <button
-                    onClick={() => setFilters(prev => ({ ...prev, owner: 'all' }))}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                    title="Clear owner filter"
-                  >
-                    <X size={20} />
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {ownerInfo[filters.owner].map((person, idx) => (
-                    <div
-                      key={idx}
-                      className="inline-flex flex-col px-2.5 py-1.5 rounded-md bg-muted/50 border border-border/50 text-xs"
-                    >
-                      <div className="font-medium text-foreground">
-                        {person.name}
-                      </div>
-                      <div className="text-muted-foreground text-[10px] leading-tight">
-                        {person.title}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Owner Overview */}
+            {/* Owner Overview - Combined with Key People */}
             {ownerStats && (
               <div data-owner-overview className="p-6 rounded-lg border mb-6 bg-card">
                 <div className="flex items-start justify-between mb-4">
@@ -443,6 +408,30 @@ export function DashboardContent({
                     <X size={20} />
                   </button>
                 </div>
+
+                {/* Key People Section */}
+                {ownerInfo[ownerStats.owner] && ownerInfo[ownerStats.owner].length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="font-semibold text-sm text-muted-foreground mb-3">
+                      Key People
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {ownerInfo[ownerStats.owner].map((person, idx) => (
+                        <div
+                          key={idx}
+                          className="inline-flex flex-col px-2.5 py-1.5 rounded-md bg-muted/50 border border-border/50 text-xs"
+                        >
+                          <div className="font-medium text-foreground">
+                            {person.name}
+                          </div>
+                          <div className="text-muted-foreground text-[10px] leading-tight">
+                            {person.title}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 
                 {/* Progress Bar with Columns */}
                 <div className="space-y-3">
