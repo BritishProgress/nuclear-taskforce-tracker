@@ -18,20 +18,20 @@ interface HeroStatsProps {
 export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) {
   const mainStats = [
     {
-      label: 'On Track',
-      value: counts.on_track,
-      icon: Atom,
-      color: 'text-dark-green',
-      bgColor: 'bg-dark-green/10',
-      status: 'on_track' as OverallStatus,
-    },
-    {
       label: 'Completed',
       value: counts.completed,
       icon: CheckCircle,
       color: 'text-dark-green',
       bgColor: 'bg-neon-green/20',
       status: 'completed' as OverallStatus,
+    },
+    {
+      label: 'On Track',
+      value: counts.on_track,
+      icon: Atom,
+      color: 'text-dark-green',
+      bgColor: 'bg-dark-green/20',
+      status: 'on_track' as OverallStatus,
     },
     {
       label: 'Off Track',
@@ -67,9 +67,7 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
           Nuclear Taskforce Tracker
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          Monitoring government progress on{' '}
-          <span className="font-semibold text-foreground">{counts.total} recommendations</span>{' '}
-          from the <span className="whitespace-nowrap">UK Nuclear Regulatory Taskforce</span>
+          Monitoring government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations
         </p>
       </div>
 
@@ -145,11 +143,11 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
                         stat.color,
                         stat.status === 'completed' && 'font-extrabold'
                       )}>
-                        {percentage}%
+                        {stat.value}
                       </span>
                       <span className="text-xs sm:text-sm font-mono text-muted-foreground">
-                        <span className="sm:hidden">({stat.value}/{counts.total})</span>
-                        <span className="hidden sm:inline">{stat.value}/{counts.total}</span>
+                        <span className="sm:hidden">({percentage}%)</span>
+                        <span className="hidden sm:inline">{percentage}%</span>
                       </span>
                     </div>
                   </div>

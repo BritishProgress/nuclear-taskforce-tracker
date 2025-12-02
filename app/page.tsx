@@ -17,18 +17,18 @@ export async function generateMetadata(): Promise<Metadata> {
   
   return {
     title: "Nuclear Taskforce Tracker | Centre for British Progress",
-    description: `Tracking government progress on ${counts.total} recommendations from the UK Nuclear Regulatory Taskforce. ${counts.completed} completed, ${counts.on_track} on track, ${counts.off_track} off track.`,
+    description: `Monitoring government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations. ${counts.completed} completed, ${counts.on_track} on track, ${counts.off_track} off track.`,
     openGraph: {
       title: "Nuclear Taskforce Tracker | Centre for British Progress",
-      description: `Tracking government progress on ${counts.total} recommendations from the UK Nuclear Regulatory Taskforce. ${counts.completed} completed, ${counts.on_track} on track, ${counts.off_track} off track.`,
+      description: `Monitoring government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations. ${counts.completed} completed, ${counts.on_track} on track, ${counts.off_track} off track.`,
       type: "website",
       url: "/",
       siteName: "Nuclear Taskforce Tracker",
       images: [
         {
           url: "/api/og",
-          width: 1200,
-          height: 630,
+          width: 2400,
+          height: 1260,
           alt: "Nuclear Taskforce Tracker - Dashboard Overview",
         },
       ],
@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: "Nuclear Taskforce Tracker",
-      description: `Tracking ${counts.total} nuclear regulatory recommendations. ${counts.completed} completed.`,
+      description: `Monitoring government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations. ${counts.completed} completed.`,
       images: ["/api/og"],
     },
     alternates: {

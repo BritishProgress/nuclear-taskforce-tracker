@@ -170,11 +170,13 @@ export async function GET(request: NextRequest) {
               style={{
                 display: 'flex',
                 fontSize: '140px',
-                fontWeight: '800',
+                fontWeight: 'bold',
                 color: '#0B4938', // dark-green
                 textAlign: 'center',
                 lineHeight: '1.1',
                 fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               Nuclear Taskforce Tracker
@@ -275,56 +277,6 @@ export async function GET(request: NextRequest) {
               justifyContent: 'center',
             }}
           >
-            {/* On Track Box */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '60px 80px',
-                backgroundColor: 'rgba(11, 73, 56, 0.1)', // dark-green/10
-                borderRadius: '32px',
-                border: '4px solid rgba(11, 73, 56, 0.2)',
-                minWidth: '560px',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  marginBottom: '20px',
-                }}
-              >
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0B4938" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="1"/>
-                  <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5z"/>
-                  <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5z"/>
-                </svg>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  fontSize: '160px',
-                  fontWeight: '800',
-                  color: '#0B4938', // dark-green
-                  marginBottom: '24px',
-                  fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
-                }}
-              >
-                {onTrackPercent}%
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  fontSize: '40px',
-                  fontWeight: '800',
-                  color: '#0B4938', // dark-green
-                }}
-              >
-                On Track
-              </div>
-            </div>
-
             {/* Completed Box */}
             <div
               style={{
@@ -354,23 +306,81 @@ export async function GET(request: NextRequest) {
                 style={{
                   display: 'flex',
                   fontSize: '160px',
-                  fontWeight: '800',
+                  fontWeight: 'bold',
                   color: '#0B4938', // dark-green
                   marginBottom: '24px',
                   fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                {completedPercent}%
+                {counts.completed}
               </div>
               <div
                 style={{
                   display: 'flex',
                   fontSize: '40px',
-                  fontWeight: '800',
+                  fontWeight: 'bold',
                   color: '#0B4938', // dark-green
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 Completed
+              </div>
+            </div>
+
+            {/* On Track Box */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '60px 80px',
+                backgroundColor: 'rgba(11, 73, 56, 0.2)', // dark-green/20 - darker for better visibility
+                borderRadius: '32px',
+                border: '4px solid rgba(11, 73, 56, 0.3)',
+                minWidth: '560px',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  marginBottom: '20px',
+                }}
+              >
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0B4938" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="1"/>
+                  <path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5z"/>
+                  <path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5z"/>
+                </svg>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  fontSize: '160px',
+                  fontWeight: 'bold',
+                  color: '#0B4938', // dark-green
+                  marginBottom: '24px',
+                  fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {counts.on_track}
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  fontSize: '40px',
+                  fontWeight: 'bold',
+                  color: '#0B4938', // dark-green
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                On Track
               </div>
             </div>
 
@@ -404,20 +414,24 @@ export async function GET(request: NextRequest) {
                 style={{
                   display: 'flex',
                   fontSize: '160px',
-                  fontWeight: '800',
+                  fontWeight: 'bold',
                   color: '#B3063E', // deep-red
                   marginBottom: '24px',
                   fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                {offTrackPercent}%
+                {counts.off_track}
               </div>
               <div
                 style={{
                   display: 'flex',
                   fontSize: '40px',
-                  fontWeight: '800',
+                  fontWeight: 'bold',
                   color: '#B3063E', // deep-red
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 Off Track

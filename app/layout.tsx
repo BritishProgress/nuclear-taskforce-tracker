@@ -34,14 +34,14 @@ function getBaseUrl(): string {
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseUrl()),
   title: "Nuclear Taskforce Tracker | Centre for British Progress",
-  description: "Tracking government progress on the UK Nuclear Regulatory Taskforce's 47 recommendations for regulatory reform. An independent monitoring initiative by the Centre for British Progress.",
+  description: "Monitoring government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations. An independent monitoring initiative by the Centre for British Progress.",
   keywords: ["nuclear", "regulation", "UK", "taskforce", "energy", "policy", "government", "nuclear regulation", "regulatory reform"],
   authors: [{ name: "Centre for British Progress" }],
   creator: "Centre for British Progress",
   publisher: "Centre for British Progress",
   openGraph: {
     title: "Nuclear Taskforce Tracker | Centre for British Progress",
-    description: "Tracking government progress on the UK Nuclear Regulatory Taskforce's 47 recommendations for regulatory reform.",
+    description: "Monitoring government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations.",
     type: "website",
     siteName: "Nuclear Taskforce Tracker",
     images: [
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nuclear Taskforce Tracker",
-    description: "Tracking government progress on the UK Nuclear Regulatory Taskforce's 47 recommendations for regulatory reform.",
+    description: "Monitoring government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations.",
     images: ["/icon.svg"],
   },
   robots: {
