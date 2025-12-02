@@ -6,10 +6,46 @@ import { getOwnersWithMoreThanNRecommendations } from '@/lib/data';
 import { OWNER_FULL_NAMES } from '@/lib/constants';
 import { DepartmentsContent } from './departments-content';
 
+import { TWITTER_SITE_HANDLE, TWITTER_CREATOR_HANDLE } from '@/lib/constants';
+
 export async function generateMetadata(): Promise<Metadata> {
+  const ogImageUrl = '/api/og/departments';
+  const description = "Compare progress across departments and organizations implementing the UK Nuclear Regulatory Taskforce's recommendations.";
+
   return {
     title: "Departments Overview | Nuclear Taskforce Tracker",
-    description: "Compare progress across departments and owners with more than 5 recommendations.",
+    description,
+    openGraph: {
+      title: "Compare Organizations | Nuclear Taskforce Tracker",
+      description,
+      type: "website",
+      url: "/departments",
+      siteName: "Nuclear Taskforce Tracker",
+      images: [
+        {
+          url: ogImageUrl,
+          width: 2400,
+          height: 1260,
+          alt: "Nuclear Taskforce Tracker - Compare Organizations Progress",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Compare Organizations | Nuclear Taskforce Tracker",
+      description,
+      images: [
+        {
+          url: ogImageUrl,
+          alt: "Nuclear Taskforce Tracker - Compare Organizations Progress",
+        },
+      ],
+      ...(TWITTER_SITE_HANDLE && { site: TWITTER_SITE_HANDLE }),
+      ...(TWITTER_CREATOR_HANDLE && { creator: TWITTER_CREATOR_HANDLE }),
+    },
+    alternates: {
+      canonical: "/departments",
+    },
   };
 }
 

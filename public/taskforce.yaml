@@ -114,13 +114,15 @@ owner_info:
     key_people:
       - title: "Prime Minister"
         name: "Keir Starmer"
+      - title: "Cabinet Secretary"
+        name: "Chris Wormald"
 
   - owner: "Cabinet Office"
     key_people:
       - title: "Chancellor of the Duchy of Lancaster"
         name: "Darren Jones"
-      - title: "Permanent Secretary"
-        name: "Cat Little"
+      - title: "Cabinet Secretary"
+        name: "Chris Wormald"
 
   - owner: "DBT"
     key_people:
@@ -140,7 +142,7 @@ owner_info:
     key_people:
       - title: "Secretary of State"
         name: "Ed Miliband"
-      - title: "Minister for Nuclear"
+      - title: "Minister of State"
         name: "Lord Vallance of Balham"
       - title: "Interim Permanent Secretary"
         name: "Clive Maxwell"

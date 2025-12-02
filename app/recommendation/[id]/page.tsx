@@ -65,6 +65,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
                      recommendation.overall_status.status === 'off_track' ? 'Off Track' :
                      'Not Started';
 
+  const ogImageUrl = `/api/og/recommendation/${recommendation.id}`;
+
   return {
     title: `${recommendation.code}: ${recommendation.titles.short} | Nuclear Taskforce Tracker`,
     description: `${recommendation.titles.long}. Status: ${statusLabel}. Chapter ${recommendation.chapter_id}: ${chapterTitle}.`,
@@ -84,10 +86,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "Nuclear Taskforce Tracker",
       images: [
         {
-          url: "/icon_dark.svg",
-          width: 400,
-          height: 400,
-          alt: `${recommendation.code} - ${recommendation.titles.short}`,
+          url: ogImageUrl,
+          width: 2400,
+          height: 1260,
+          alt: `${recommendation.code} - ${recommendation.titles.short} - ${statusLabel}`,
         },
       ],
     },
@@ -97,7 +99,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: recommendation.titles.long,
       images: [
         {
-          url: "/icon_dark.svg",
+          url: ogImageUrl,
           alt: `${recommendation.code} - ${recommendation.titles.short} - ${statusLabel}`,
         },
       ],
