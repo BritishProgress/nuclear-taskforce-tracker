@@ -126,6 +126,7 @@ export interface StatusScales {
 }
 
 export interface TaskforceData {
+  last_updated?: string;
   status_scales: StatusScales;
   proposals: Proposal[];
   recommendations: Recommendation[];

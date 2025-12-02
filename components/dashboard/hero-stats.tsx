@@ -67,7 +67,7 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
           Nuclear Taskforce Tracker
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          Monitoring government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations
+          Tracking government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations
         </p>
       </div>
 

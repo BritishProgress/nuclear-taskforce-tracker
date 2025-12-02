@@ -23,7 +23,7 @@ export function Header({ className }: HeaderProps) {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-display font-bold text-lg">
           <img 
-            src="/icon.svg" 
+            src="/icon_dark.svg" 
             alt="Nuclear Taskforce" 
             className="w-8 h-8"
           />

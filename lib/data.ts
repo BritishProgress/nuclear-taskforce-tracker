@@ -24,6 +24,11 @@ export async function getAllData(): Promise<TaskforceData> {
   return loadTaskforceData();
 }
 
+export async function getLastUpdated(): Promise<string | null> {
+  const data = await loadTaskforceData();
+  return data.last_updated || null;
+}
+
 export async function getRecommendations(): Promise<Recommendation[]> {
   const data = await loadTaskforceData();
   return data.recommendations;

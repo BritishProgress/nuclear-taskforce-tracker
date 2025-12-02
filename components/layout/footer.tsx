@@ -1,14 +1,14 @@
-'use client';
-
 import { cn } from '@/lib/utils';
 import { ExternalLink } from 'lucide-react';
+import { getLastUpdated } from '@/lib/data';
 
 interface FooterProps {
   className?: string;
 }
 
-export function Footer({ className }: FooterProps) {
+export async function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const lastUpdated = await getLastUpdated();
 
   return (
     <footer
@@ -71,11 +71,13 @@ export function Footer({ className }: FooterProps) {
               statements, and official publications.
             </p>
             <p className="text-xs text-beige/60">
-              Last updated: {new Date().toLocaleDateString('en-GB', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
+              Last updated: {lastUpdated 
+                ? new Date(lastUpdated).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })
+                : 'N/A'}
             </p>
           </div>
         </div>

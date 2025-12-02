@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "Nuclear Taskforce Tracker",
       images: [
         {
-          url: "/icon.svg",
+          url: "/icon_dark.svg",
           width: 400,
           height: 400,
           alt: `${recommendation.code} - ${recommendation.titles.short}`,
@@ -78,10 +78,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: `${recommendation.code}: ${recommendation.titles.short}`,
       description: recommendation.titles.long,
-      images: ["/icon.svg"],
+      images: ["/icon_dark.svg"],
     },
     alternates: {
       canonical: `/recommendation/${recommendation.id}`,

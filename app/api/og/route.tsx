@@ -9,11 +9,6 @@ export async function GET(request: NextRequest) {
   try {
     // Fetch current status counts
     const counts = await getStatusCounts();
-    
-    // Calculate percentages
-    const onTrackPercent = counts.total === 0 ? 0 : Math.round((counts.on_track / counts.total) * 100);
-    const offTrackPercent = counts.total === 0 ? 0 : Math.round((counts.off_track / counts.total) * 100);
-    const completedPercent = counts.total === 0 ? 0 : Math.round((counts.completed / counts.total) * 100);
 
     // Using system fonts for now - custom fonts can be added later if needed
     // The icons and higher resolution are the main improvements
