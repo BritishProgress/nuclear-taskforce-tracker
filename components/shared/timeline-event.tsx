@@ -77,12 +77,13 @@ export function TimelineEvent({
             />
           </div>
 
-          {/* Timeline notes if available */}
+          {/* TODO: re-check timeline notes and re-add here if needed */}
+          {/* Timeline notes if available 
           {recommendation.delivery_timeline.notes && (
             <p className="text-sm text-muted-foreground leading-relaxed mb-3">
               {recommendation.delivery_timeline.notes}
             </p>
-          )}
+          )} */}
 
           {/* Original timeline text - only show if there's a revised date that's different */}
           {recommendation.delivery_timeline.original_text && 

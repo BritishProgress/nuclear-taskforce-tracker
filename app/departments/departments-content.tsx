@@ -1,24 +1,19 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
 import { OwnerWithStats } from '@/lib/data';
 import { OWNER_FULL_NAMES, OVERALL_STATUS_LABELS } from '@/lib/constants';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Disclaimer } from '@/components/shared';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 interface DepartmentsContentProps {
   ownersWithStats: OwnerWithStats[];
 }
 
-const INITIAL_DISPLAY_COUNT = 10;
-
 export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps) {
   const router = useRouter();
-  const [showAll, setShowAll] = useState(false);
   
   // Sort by progress percentage (descending), then by total count (descending)
   const sortedOwners = useMemo(() => {
@@ -32,14 +27,10 @@ export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps)
     });
   }, [ownersWithStats]);
 
-  // When showAll is true, show all owners; otherwise show first INITIAL_DISPLAY_COUNT
-  const displayedOwners = showAll ? sortedOwners : sortedOwners.slice(0, INITIAL_DISPLAY_COUNT);
-  const hasMore = sortedOwners.length > INITIAL_DISPLAY_COUNT;
-
   return (
     <div className="container py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Departments League Table</h1>
+        <h1 className="text-3xl font-bold mb-2">Department League Table</h1>
         <p className="text-muted-foreground">
           Compare progress across all departments and owners, ordered by completion percentage.
         </p>
@@ -64,7 +55,7 @@ export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps)
                 </tr>
               </thead>
               <tbody className="divide-y">
-                {displayedOwners.map((ownerStats) => {
+                {sortedOwners.map((ownerStats) => {
                   const fullName = OWNER_FULL_NAMES[ownerStats.owner] || ownerStats.owner;
                   const total = ownerStats.statusCounts.total;
                   
@@ -180,29 +171,6 @@ export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps)
           </div>
         </CardContent>
       </Card>
-
-      {/* Expand/Collapse button */}
-      {hasMore && (
-        <div className="mt-4 text-center">
-          <Button
-            variant="outline"
-            onClick={() => setShowAll(!showAll)}
-            className="gap-2"
-          >
-            {showAll ? (
-              <>
-                Show less
-                <ChevronDown size={16} className={cn('rotate-180 transition-transform')} />
-              </>
-            ) : (
-              <>
-                Show all ({sortedOwners.length} owners)
-                <ChevronDown size={16} className={cn('transition-transform')} />
-              </>
-            )}
-          </Button>
-        </div>
-      )}
 
       {/* Legend */}
       <Card className="mt-8">
