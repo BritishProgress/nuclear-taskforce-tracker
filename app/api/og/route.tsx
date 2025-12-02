@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     // The icons and higher resolution are the main improvements
 
     // Twitter/Open Graph image dimensions: 2400x1260 (2x resolution for better quality)
-    return new ImageResponse(
+    const imageResponse = new ImageResponse(
       (
         <div
           style={{
@@ -440,6 +440,18 @@ export async function GET(request: NextRequest) {
         height: 1260,
       }
     );
+
+    // Add explicit headers for social media crawlers
+    // ImageResponse already sets Content-Type: image/png, but we add Cache-Control
+    // Clone the response and merge headers
+    const headers = new Headers(imageResponse.headers);
+    headers.set('Cache-Control', 'public, max-age=600, s-maxage=600, stale-while-revalidate=86400');
+    
+    return new Response(imageResponse.body, {
+      status: imageResponse.status,
+      statusText: imageResponse.statusText,
+      headers: headers,
+    });
   } catch (error: unknown) {
     // Log error properly
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
