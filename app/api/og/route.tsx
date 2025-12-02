@@ -1,8 +1,9 @@
-import { ImageResponse } from '@vercel/og';
+import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getStatusCounts } from '@/lib/data';
 
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 export const revalidate = 600; // Revalidate at most every 10 minutes (600 seconds)
 
 export async function GET(request: NextRequest) {

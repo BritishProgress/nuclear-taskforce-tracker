@@ -79,7 +79,7 @@ export async function getChapters(): Promise<Chapter[]> {
         chapterMap.set(chapterId, {
           id: chapterId,
           title: `Chapter ${chapterId}`,
-        });
+      });
       }
     }
   }
