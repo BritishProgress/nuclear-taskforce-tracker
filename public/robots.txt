@@ -3,7 +3,10 @@
 User-agent: *
 Allow: /
 
-# Disallow API routes from being indexed
+# Allow Open Graph image route (needed for social media crawlers)
+Allow: /api/og
+
+# Disallow other API routes from being indexed
 Disallow: /api/
 
 # Sitemap location (update with your actual domain)
