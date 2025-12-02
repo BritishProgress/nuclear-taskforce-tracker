@@ -72,6 +72,7 @@ export const OWNER_FULL_NAMES: Record<string, string> = {
   'FCDO': 'Foreign, Commonwealth & Development Office',
   'MOJ': 'Ministry of Justice',
   'EDF': 'EDF Energy',
+  'No. 10': 'Number 10',
 };
 
 // Chapter colors for visual distinction (chapters 5-11 from the taskforce report)
@@ -103,4 +104,8 @@ export const DATE_FORMAT_SHORT: Intl.DateTimeFormatOptions = {
   day: 'numeric',
   month: 'short',
 };
+
+// Social media handles (can be overridden via environment variables)
+export const TWITTER_SITE_HANDLE = process.env.NEXT_PUBLIC_TWITTER_SITE_HANDLE || undefined;
+export const TWITTER_CREATOR_HANDLE = process.env.NEXT_PUBLIC_TWITTER_CREATOR_HANDLE || undefined;
 

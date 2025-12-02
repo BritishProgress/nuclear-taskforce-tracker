@@ -41,6 +41,12 @@ export function Header({ className }: HeaderProps) {
             Dashboard
           </Link>
           <Link
+            href="/departments"
+            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+          >
+            Departments
+          </Link>
+          <Link
             href="/timeline"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
@@ -77,6 +83,13 @@ export function Header({ className }: HeaderProps) {
               onClick={() => setMobileMenuOpen(false)}
             >
               Dashboard
+            </Link>
+            <Link
+              href="/departments"
+              className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Departments
             </Link>
             <Link
               href="/timeline"

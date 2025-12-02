@@ -11,8 +11,8 @@ import { Disclaimer } from '@/components/shared';
 import { TimelineSection } from './timeline-section';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { getRecommendationById, getRecommendations } from '@/lib/data';
-import { getChapterColors } from '@/lib/constants';
+import { getRecommendationById, getRecommendations, getChapters } from '@/lib/data';
+import { getChapterColors, TWITTER_SITE_HANDLE, TWITTER_CREATOR_HANDLE } from '@/lib/constants';
 import { 
   ArrowLeft, 
   FileText, 
@@ -56,6 +56,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const chapters = await getChapters();
+  const chapter = chapters.find(c => c.id === recommendation.chapter_id);
+  const chapterTitle = chapter?.title || `Chapter ${recommendation.chapter_id}`;
+
   const statusLabel = recommendation.overall_status.status === 'completed' ? 'Completed' :
                      recommendation.overall_status.status === 'on_track' ? 'On Track' :
                      recommendation.overall_status.status === 'off_track' ? 'Off Track' :
@@ -63,12 +67,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${recommendation.code}: ${recommendation.titles.short} | Nuclear Taskforce Tracker`,
-    description: `${recommendation.titles.long}. Status: ${statusLabel}. Chapter ${recommendation.chapter.number}: ${recommendation.chapter.title}.`,
+    description: `${recommendation.titles.long}. Status: ${statusLabel}. Chapter ${recommendation.chapter_id}: ${chapterTitle}.`,
     keywords: [
       recommendation.code,
       'nuclear regulation',
       'UK nuclear',
-      recommendation.chapter.title,
+      chapterTitle,
       statusLabel.toLowerCase(),
       ...(recommendation.scope.sectors || []),
     ],
@@ -91,7 +95,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: `${recommendation.code}: ${recommendation.titles.short}`,
       description: recommendation.titles.long,
-      images: ["/icon_dark.svg"],
+      images: [
+        {
+          url: "/icon_dark.svg",
+          alt: `${recommendation.code} - ${recommendation.titles.short} - ${statusLabel}`,
+        },
+      ],
+      ...(TWITTER_SITE_HANDLE && { site: TWITTER_SITE_HANDLE }),
+      ...(TWITTER_CREATOR_HANDLE && { creator: TWITTER_CREATOR_HANDLE }),
     },
     alternates: {
       canonical: `/recommendation/${recommendation.id}`,
@@ -114,7 +125,11 @@ export default async function RecommendationPage({ params }: PageProps) {
     notFound();
   }
 
-  const chapterColors = getChapterColors(recommendation.chapter.number);
+  const chapters = await getChapters();
+  const chapter = chapters.find(c => c.id === recommendation.chapter_id);
+  const chapterTitle = chapter?.title || `Chapter ${recommendation.chapter_id}`;
+
+  const chapterColors = getChapterColors(recommendation.chapter_id);
   
   // Prepare updates for timeline (only updates, not deadlines, since deadline is shown in sidebar)
   const timelineItems = (recommendation.updates || [])
@@ -150,11 +165,11 @@ export default async function RecommendationPage({ params }: PageProps) {
             {/* Chapter badge */}
             <div className="flex items-center gap-2 mb-4">
               <span className={`text-sm font-medium ${chapterColors.text}`}>
-                Chapter {recommendation.chapter.number}
+                Chapter {recommendation.chapter_id}
               </span>
               <span className="text-muted-foreground">•</span>
               <span className="text-sm text-muted-foreground">
-                {recommendation.chapter.title}
+                {chapterTitle}
               </span>
             </div>
 

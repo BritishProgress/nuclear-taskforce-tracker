@@ -96,7 +96,7 @@ export function FilterControls({
           <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
         </div>
 
-        {/* Chapter filter */}
+        {/* Chapter filter - only show chapters with recommendations */}
         <div className="relative inline-block">
           <select
             value={filters.chapter}

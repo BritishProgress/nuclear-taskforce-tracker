@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { TWITTER_SITE_HANDLE, TWITTER_CREATOR_HANDLE } from "@/lib/constants";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -57,7 +58,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nuclear Taskforce Tracker",
     description: "Tracking government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations.",
-    images: ["/icon_dark.svg"],
+    images: [
+      {
+        url: "/icon_dark.svg",
+        alt: "Nuclear Taskforce Tracker logo",
+      },
+    ],
+    ...(TWITTER_SITE_HANDLE && { site: TWITTER_SITE_HANDLE }),
+    ...(TWITTER_CREATOR_HANDLE && { creator: TWITTER_CREATOR_HANDLE }),
   },
   robots: {
     index: true,

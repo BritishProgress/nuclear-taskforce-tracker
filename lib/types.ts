@@ -20,17 +20,12 @@ export type UpdateStatus =
 
 export type Confidence = 'low' | 'medium' | 'high';
 
-// Embedded Chapter info in recommendations
-export interface EmbeddedChapter {
-  number: number;
-  title: string;
-}
-
-// For our derived chapter views
+// Chapter definition
 export interface Chapter {
   id: number;
   title: string;
   description?: string;
+  summary?: string;
 }
 
 export interface Proposal {
@@ -105,7 +100,7 @@ export interface Update {
 export interface Recommendation {
   id: number;
   code: string;
-  chapter: EmbeddedChapter;  // Changed from chapter_id to embedded chapter
+  chapter_id: number;
   proposal_ids?: number[];
   titles: Titles;
   text: string;
@@ -125,16 +120,28 @@ export interface StatusScales {
   update_status: UpdateStatus[];
 }
 
+export interface KeyPerson {
+  title: string;
+  name: string;
+}
+
+export interface OwnerInfo {
+  owner: string;
+  key_people?: KeyPerson[];
+}
+
 export interface TaskforceData {
   last_updated?: string;
   status_scales: StatusScales;
+  chapters?: Chapter[];
   proposals: Proposal[];
   recommendations: Recommendation[];
+  owner_info?: OwnerInfo[];
 }
 
 // Computed/Derived Types
 export interface RecommendationWithChapter extends Recommendation {
-  // Already has chapter embedded
+  // Has chapter_id that references the chapters array
 }
 
 export interface ChapterWithRecommendations extends Chapter {

@@ -60,13 +60,21 @@ export function RecommendationCard({
 
             {/* Footer */}
             <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground mt-auto">
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 flex items-center gap-1.5">
                 <OwnershipTag 
                   owner={recommendation.ownership.primary_owner} 
                   size="sm" 
                   isPrimary={false}
                   className="truncate max-w-full"
                 />
+                {recommendation.ownership.co_owners && recommendation.ownership.co_owners.length > 0 && (
+                  <OwnershipTag 
+                    owner={`+${recommendation.ownership.co_owners.length}`} 
+                    size="sm" 
+                    isPrimary={false}
+                    className="whitespace-nowrap"
+                  />
+                )}
               </div>
               <div className={cn(
                 'flex items-center gap-1 font-mono flex-shrink-0',
@@ -132,6 +140,9 @@ export function RecommendationCard({
             <div className="flex items-center gap-1.5">
               <span className="text-muted-foreground">Owner:</span>
               <OwnershipTag owner={recommendation.ownership.primary_owner} size="sm" />
+              {recommendation.ownership.co_owners && recommendation.ownership.co_owners.length > 0 && (
+                <OwnershipTag owner={`+${recommendation.ownership.co_owners.length}`} size="sm" />
+              )}
             </div>
             <div className={cn(
               'flex items-center gap-1.5 font-mono',

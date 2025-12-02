@@ -4,6 +4,7 @@ import { Footer } from '@/components/layout/footer';
 import { Disclaimer } from '@/components/shared';
 import { TimelineClient } from './timeline-client';
 import { getTimelineItems } from '@/lib/data';
+import { TWITTER_SITE_HANDLE, TWITTER_CREATOR_HANDLE } from '@/lib/constants';
 import { Clock } from 'lucide-react';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -40,7 +41,14 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: "Timeline | Nuclear Taskforce Tracker",
       description: `Track all updates on nuclear regulatory recommendations. ${timelineItems.length} timeline items.`,
-      images: ["/icon_dark.svg"],
+      images: [
+        {
+          url: "/icon_dark.svg",
+          alt: "Nuclear Taskforce Tracker Timeline",
+        },
+      ],
+      ...(TWITTER_SITE_HANDLE && { site: TWITTER_SITE_HANDLE }),
+      ...(TWITTER_CREATOR_HANDLE && { creator: TWITTER_CREATOR_HANDLE }),
     },
     alternates: {
       canonical: "/timeline",

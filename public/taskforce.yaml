@@ -14,6 +14,75 @@ status_scales:
     - completed
     - blocked
 
+
+chapters:
+  - id: 1
+    title: 'Overview and Objectives of the Taskforce'
+    summary: |
+      Introduces why the Nuclear Regulatory Taskforce was set up and what it was asked to do: review the civil and defence nuclear regulatory system and recommend reforms that make projects faster and cheaper while maintaining – not weakening – safety. It explains the remit, the focus on regulation rather than industrial strategy or financing, and the main principles guiding the work (proportionality, clarity, system-level thinking, practical delivery).
+
+      It also describes how the Taskforce worked: evidence-gathering from departments, regulators, industry and international comparators; site visits; and commissioned analysis. The chapter then lays out the structure of the report and signals that later sections will move from context, to diagnosis, to concrete recommendations and implementation.
+  - id: 2
+    title: 'Nuclear in the UK'
+    summary: |
+      Sets out the UK nuclear landscape in historical and current terms. It traces the UK’s early leadership (first grid-connected station, pioneering civil and defence programmes) and then the subsequent decline: an ageing fleet, stalled or cancelled projects, and a loss of industrial capability. It maps the main parts of the sector – civil generation, defence (deterrent and submarines), decommissioning and waste, and the wider supply chain.
+
+      The chapter then looks ahead: expected growth in electricity demand (including from AI and electrification), the need for firm low-carbon power for net zero, and the role of nuclear in energy security and national security. Nuclear is framed as a strategic capability that underpins cheap, reliable power, supports high-value jobs, and anchors the independent deterrent.
+  - id: 3
+    title: 'Regulation of Nuclear Activities in the UK'
+    summary: |
+      Summarises how nuclear activities are regulated today and the key concepts that underpin the system. It explains the goal-based approach (dutyholders must demonstrate safety rather than simply follow prescriptive rules), ALARP and ALARA principles, Best Available Techniques, and the core legal instruments such as the Nuclear Installations Act, Health and Safety at Work Act, Ionising Radiations Regulations and Environmental Permitting Regulations.
+
+      The chapter also maps the institutional landscape: ONR, DNSR, the Environment Agency and equivalents in the devolved nations, planning authorities, and central government departments. It describes processes such as safety cases, Generic Design Assessment and Justification, and shows how multiple overlapping regimes shape what happens on nuclear sites.
+  - id: 4
+    title: 'Summary of the Problem'
+    summary: |
+      Provides the central diagnosis of why nuclear projects in the UK are so slow and expensive. Regulation is described as a complex, multi-layer system where decisions are taken not just by regulators but by departments, dutyholders and courts, often influenced by international standards and fear of judicial review. Over time, this has created duplication, unclear accountability, and a pattern of highly conservative decisions that do not obviously improve safety in proportion to their cost.
+
+      Five clusters of issues are highlighted: a risk-averse reading of ALARP; decommissioning and waste approaches that assume very stringent end-states and move slowly on the Geological Disposal Facility; cumbersome Habitats and Environmental Impact Assessment processes; a planning regime that adds long pre-application and examination phases; and cultural and capacity weaknesses that entrench “gold-plating” and slow decision-making. The conclusion is that marginal tweaks will not be enough: a system-level reset is needed.
+  - id: 5
+    title: "Simplification of Nuclear Regulation"
+    summary: |
+      Develops proposals to simplify the institutional and legal landscape. It argues that the current fragmentation – multiple regulators on the same site, overlapping powers, differing standards and heavy use of consultants – drives complexity and slows decisions. A more unified structure is proposed, with clearer lines of accountability and a single place where big regulatory calls are made.
+
+      Key ideas include: moving towards a one-stop model for nuclear safety regulation; designating a lead regulator when more than one body is involved; and ultimately legislating for a Commission for Nuclear Regulation – a collective body responsible for major regulatory decisions. Government’s role is to set strategic direction, resolve cross-cutting policy conflicts, and provide a coherent national framework rather than leaving regulators to navigate those tensions alone.
+  - id: 6
+    title: "Risk Management & Proportionality"
+    summary: |
+      Examines how risk is interpreted and managed in the UK system, particularly the ALARP principle and the Tolerability of Risk (TOR) framework. The analysis suggests that ALARP has drifted towards a one-sided focus on minimising risk without enough weight on what is “reasonably practicable”, and that some radiological dose and risk targets are set more stringently than in peer countries. Qualitative, conservative judgements often dominate over explicit cost-benefit analysis, and portfolio-level trade-offs (e.g. across a defence programme or the decommissioning estate) are weak.
+
+      The chapter proposes clarifying in law what proportionality means for HSWA duties, updating key guidance such as R2P2, and making more systematic use of explicit risk–cost balancing. It also returns to the Three Lines of Defence concept to re-establish clear roles for management, independent assurance and regulators. Another theme is separating truly nuclear hazards from conventional ones on nuclear sites, so that nuclear-grade standards are only applied where justified by the nature of the risk.
+  - id: 7
+    title: "Environmental Assessments & Permitting"
+    summary: |
+      Looks at how environmental law interacts with nuclear projects. While reaffirming the importance of robust protection for habitats and species, the chapter argues that current practice around Habitats Regulations Assessments and EIAs has become duplicative, slow and excessively risk-averse. Fear of legal challenge and an insistence on site-specific micro-mitigation can lead to huge expenditure and physical interventions that may add little to overall environmental outcomes.
+
+      Proposed reforms include creating an alternative compliance route via substantial contributions to a new nature fund in place of elaborate on-site mitigation, streamlining and sequencing environmental assessments so that major issues are resolved once rather than repeatedly, improving access to environmental data, and introducing statutory timelines and clearer guidance on Biodiversity Net Gain. There is also a discussion of judicial review and costs, with suggestions to maintain scrutiny but reduce the chilling effect on timely decision-making.
+  - id: 8
+    title: "The Planning System"
+    summary: |
+      Describes how planning, especially the NSIP regime, affects nuclear projects. The system, intended to speed up major infrastructure, is portrayed as lengthy and procedurally heavy, with long pre-application periods, overlapping assessments and limited flexibility to adapt projects once an application is submitted. It is also largely designed around large, bespoke nuclear stations rather than a future that may involve smaller or modular reactors and a fleet-based rollout.
+
+      The chapter recommends giving nuclear and certain associated projects (like the GDF) clearly prioritised status in national planning policy, simplifying Development Consent Orders, and modernising population density and planning zone criteria to reflect current reactor safety characteristics. It also suggests more proportionate treatment for early investigative works such as boreholes. Many of the proposed changes are framed as potentially beneficial precedents for other critical low-carbon infrastructure.
+  - id: 9
+    title: "Culture, Capacity, Capability, & Innovation"
+    summary: |
+      Shifts focus from rules and institutions to people, behaviours and skills. It argues that culture across the sector – in regulators, government and industry – has a direct impact on safety, cost and timeliness. A narrow interpretation of “safety first” can crowd out consideration of time and cost even where delays also carry risks (e.g. to energy security). Leadership attention to organisational culture, and better tools for assessing and managing it, are identified as crucial.
+
+      The chapter also highlights workforce challenges: shortages of experienced specialists, an ageing workforce, constraints on pay and conditions in regulatory bodies, and heavy reliance on contractors. It calls for implementation of national nuclear skills plans, stronger non-technical skills, and more movement of staff between organisations. Finally, it notes slow uptake of digital tools, data-centric engineering, robotics and AI, and proposes targeted programmes to embed these technologies in design, construction, operation and regulation.
+  - id: 10
+    title: "International Harmonisation"
+    summary: |
+      Sets nuclear regulation in an international context. Many countries are expanding nuclear, but regulatory approaches differ significantly, creating complexity and cost for reactor designs deployed across borders. The UK experience with adapting foreign designs, such as for Hinkley Point C, is used to illustrate how bespoke national requirements can drive up cost and delay without necessarily improving safety.
+
+      The chapter advocates a more strategic UK role in international harmonisation. Suggestions include making systematic use of other trusted regulators’ assessments, conducting joint reviews, focusing UK effort on genuinely local or site-specific issues, and strengthening the UK’s voice in international standards-setting. It also looks at export controls, arguing that current licensing is slow and overly complex for low-risk exports, and recommends a more risk-based regime, time-limited licences and open licences for regulators to support global collaboration while maintaining non-proliferation commitments.
+  - id: 11
+    title: "Additional Recommendations and Issues"
+    summary: |
+      Collects a set of important cross-cutting topics that do not sit neatly in earlier chapters. One major theme is ONR’s funding and charging model: recovering costs “to the penny” from dutyholders limits ONR’s ability to invest in its own capacity, build reserves or engage internationally, and creates uncertainty for industry. A more flexible, predictable model is proposed.
+
+      Other themes include the need for a later review of the Nuclear Installations Act to support novel applications (such as nuclear propulsion at sea), the distorting effect of cost-plus contracts and weak financial incentives on the extent of “gold-plating”, and issues around nuclear liability, insurance and interactions with non-Convention states. The chapter also touches on site availability, approaches to releasing land for new projects, novel nuclear applications (shipping, space, radioisotopes), and the potential of modularisation to cut cost and time in both new build and decommissioning.
+
 proposals:
   - id: 1
     title: "Government to provide clearer leadership and direction for the nuclear sector"
@@ -40,12 +109,166 @@ proposals:
     description: "Removing barriers to faster project delivery and innovation."
     recommendation_ids: [11, 12, 14, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 37, 46, 47]
 
+owner_info:
+  - owner: "No. 10"
+    key_people:
+      - title: "Prime Minister"
+        name: "Keir Starmer"
+
+  - owner: "Cabinet Office"
+    key_people:
+      - title: "Chancellor of the Duchy of Lancaster"
+        name: "Darren Jones"
+      - title: "Permanent Secretary"
+        name: "Cat Little"
+
+  - owner: "DBT"
+    key_people:
+      - title: "Secretary of State"
+        name: "Peter Kyle"
+      - title: "Permanent Secretary"
+        name: "Gareth Davies"
+
+  - owner: "DEFRA"
+    key_people:
+      - title: "Secretary of State"
+        name: "Emma Reynolds"
+      - title: "Permanent Secretary"
+        name: "Paul Kissack"
+
+  - owner: "DESNZ"
+    key_people:
+      - title: "Secretary of State"
+        name: "Ed Miliband"
+      - title: "Minister for Nuclear"
+        name: "Lord Vallance of Balham"
+      - title: "Interim Permanent Secretary"
+        name: "Clive Maxwell"
+
+  - owner: "DNSR"
+    key_people: []
+
+  - owner: "DWP"
+    key_people:
+      - title: "Secretary of State"
+        name: "Pat McFadden"
+      - title: "Permanent Secretary"
+        name: "Sir Peter Schofield"
+
+  - owner: "Dutyholders"
+    key_people: []
+
+  - owner: "EA"
+    key_people:
+      - title: "Chief Executive"
+        name: "Philip Duffy"
+
+  - owner: "EDF"
+    key_people:
+      - title: "Chief Executive, EDF Energy (UK)"
+        name: "Simone Rossi"
+
+  - owner: "Environment Agency"
+    key_people:
+      - title: "Chief Executive"
+        name: "Philip Duffy"
+
+  - owner: "FCDO"
+    key_people:
+      - title: "Secretary of State"
+        name: "Yvette Cooper"
+      - title: "Permanent Under-Secretary"
+        name: "Sir Olly Robbins"
+
+  - owner: "HM Treasury"
+    key_people:
+      - title: "Chancellor of the Exchequer"
+        name: "Rachel Reeves"
+      - title: "Permanent Secretary"
+        name: "James Bowler"
+
+  - owner: "HSE"
+    key_people:
+      - title: "Chief Executive"
+        name: "Sarah Albon"
+
+  - owner: "Industry"
+    key_people: []
+
+  - owner: "MHCLG"
+    key_people:
+      - title: "Secretary of State"
+        name: "Steve Reed"
+      - title: "Permanent Secretary"
+        name: "Dame Sarah Healey"
+
+  - owner: "MOD"
+    key_people:
+      - title: "Secretary of State"
+        name: "John Healey"
+      - title: "Permanent Secretary"
+        name: "Jeremy Pocklington"
+
+  - owner: "MOJ"
+    key_people:
+      - title: "Secretary of State"
+        name: "David Lammy"
+      - title: "Permanent Secretary"
+        name: "Dr Jo Farrar"
+
+  - owner: "NDA"
+    key_people:
+      - title: "Chief Executive"
+        name: "David Peattie"
+
+  - owner: "NSAN"
+    key_people:
+      - title: "Managing Director"
+        name: "Tricia Austin"
+
+  - owner: "Natural England"
+    key_people:
+      - title: "Chief Executive"
+        name: "Marian Spain"
+
+  - owner: "Nuclear Skills Delivery Board"
+    key_people:
+      - title: "Chair"
+        name: "Mark Rouse"
+
+  - owner: "ONR"
+    key_people:
+      - title: "Chief Executive"
+        name: "Mike Finnerty"
+
+  - owner: "Other regulators"
+    key_people: []
+
+  - owner: "Planning Inspectorate"
+    key_people:
+      - title: "Chief Executive"
+        name: "Paul Morrison"
+
+  - owner: "Regulators"
+    key_people: []
+
+  - owner: "UKHSA"
+    key_people:
+      - title: "Chief Executive"
+        name: "Susan Hopkins"
+
+  - owner: "UKRI"
+    key_people:
+      - title: "Chief Executive"
+        name: "Ian Chapman"
+
+
+
+
 recommendations:
   - id: 1
     code: "R01"
-    chapter:
-      number: 5
-      title: "Simplification of Nuclear Regulation"
+    chapter_id: 5
     proposal_ids: [1]
     titles:
       short: "Provide HMG Strategic Steer"
@@ -58,7 +281,7 @@ recommendations:
         - leadership
         - strategic_direction
     ownership:
-      primary_owner: "All of Government"
+      primary_owner: "No. 10"
       co_owners: []
       key_regulators: []
     delivery_timeline:
@@ -93,9 +316,7 @@ recommendations:
 
   - id: 2
     code: "R02"
-    chapter:
-      number: 5
-      title: "Simplification of Nuclear Regulation"
+    chapter_id: 5
     proposal_ids: [2]
     titles:
       short: "Establish Commission for Nuclear Regulation"
@@ -140,9 +361,7 @@ recommendations:
 
   - id: 3
     code: "R03"
-    chapter:
-      number: 5
-      title: "Simplification of Nuclear Regulation"
+    chapter_id: 5
     proposal_ids: [2]
     titles:
       short: "Establish lead regulator model"
@@ -185,9 +404,7 @@ recommendations:
 
   - id: 4
     code: "R04"
-    chapter:
-      number: 5
-      title: "Simplification of Nuclear Regulation"
+    chapter_id: 5
     proposal_ids: [2]
     titles:
       short: "Simplify nuclear regulatory landscape"
@@ -232,9 +449,7 @@ recommendations:
 
   - id: 5
     code: "R05"
-    chapter:
-      number: 5
-      title: "Simplification of Nuclear Regulation"
+    chapter_id: 5
     proposal_ids: [3]
     titles:
       short: "Reset safety case development"
@@ -277,9 +492,7 @@ recommendations:
 
   - id: 6
     code: "R06"
-    chapter:
-      number: 6
-      title: "Risk Management & Proportionality"
+    chapter_id: 6
     proposal_ids: [3]
     titles:
       short: "Define tolerability of risk"
@@ -325,9 +538,7 @@ recommendations:
 
   - id: 7
     code: "R07"
-    chapter:
-      number: 6
-      title: "Risk Management & Proportionality"
+    chapter_id: 6
     proposal_ids: [3]
     titles:
       short: "Review nuclear regulator guidance"
@@ -372,9 +583,7 @@ recommendations:
 
   - id: 8
     code: "R08"
-    chapter:
-      number: 6
-      title: "Risk Management & Proportionality"
+    chapter_id: 6
     proposal_ids: [3]
     titles:
       short: "Define proportionality in HSWA"
@@ -430,9 +639,7 @@ recommendations:
 
   - id: 9
     code: "R09"
-    chapter:
-      number: 6
-      title: "Risk Management & Proportionality"
+    chapter_id: 6
     proposal_ids: [3]
     titles:
       short: "Enterprise-wide portfolio risk management"
@@ -475,9 +682,7 @@ recommendations:
 
   - id: 10
     code: "R10"
-    chapter:
-      number: 6
-      title: "Risk Management & Proportionality"
+    chapter_id: 6
     proposal_ids: [3]
     titles:
       short: "Prevent conflation of nuclear and conventional risks"
@@ -519,9 +724,7 @@ recommendations:
 
   - id: 11
     code: "R11"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [5]
     titles:
       short: "Amend Habitats Regulations"
@@ -566,9 +769,7 @@ recommendations:
 
   - id: 12
     code: "R12"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [5]
     titles:
       short: "Alternative Habitats Regulations pathway"
@@ -609,9 +810,7 @@ recommendations:
 
   - id: 13
     code: "R13"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [3]
     titles:
       short: "Proportionality in EIA regime"
@@ -656,9 +855,7 @@ recommendations:
 
   - id: 14
     code: "R14"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [5]
     titles:
       short: "Modular Low-Carbon Acceleration Zones"
@@ -704,9 +901,7 @@ recommendations:
 
   - id: 15
     code: "R15"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [2]
     titles:
       short: "One and done assessments"
@@ -747,9 +942,7 @@ recommendations:
 
   - id: 16
     code: "R16"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [4]
     titles:
       short: "Increase environmental data sharing"
@@ -794,9 +987,7 @@ recommendations:
 
   - id: 17
     code: "R17"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [5]
     titles:
       short: "Statutory timelines for environmental permitting"
@@ -837,9 +1028,7 @@ recommendations:
 
   - id: 18
     code: "R18"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [5]
     titles:
       short: "Modify BNG implementation"
@@ -884,9 +1073,7 @@ recommendations:
 
   - id: 19
     code: "R19"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [5]
     titles:
       short: "Remove or constrain National Park Duty"
@@ -924,9 +1111,7 @@ recommendations:
 
   - id: 20
     code: "R20"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [5]
     titles:
       short: "Amend judicial review cost caps"
@@ -972,9 +1157,7 @@ recommendations:
 
   - id: 21
     code: "R21"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [4]
     titles:
       short: "Indemnify developers during judicial review"
@@ -1012,9 +1195,7 @@ recommendations:
 
   - id: 22
     code: "R22"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [3]
     titles:
       short: "Proportionate regulatory control for decommissioning"
@@ -1055,9 +1236,7 @@ recommendations:
 
   - id: 23
     code: "R23"
-    chapter:
-      number: 7
-      title: "Environmental Assessments & Permitting"
+    chapter_id: 7
     proposal_ids: [3]
     titles:
       short: "Proportionality in decommissioning permitting"
@@ -1105,9 +1284,7 @@ recommendations:
 
   - id: 24
     code: "R24"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Improve CNP application"
@@ -1148,9 +1325,7 @@ recommendations:
 
   - id: 25
     code: "R25"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Update DCO guidance"
@@ -1199,9 +1374,7 @@ recommendations:
 
   - id: 26
     code: "R26"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Interim DCO Recommendation Reports"
@@ -1238,9 +1411,7 @@ recommendations:
 
   - id: 27
     code: "R27"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Require 'minded to' letters"
@@ -1279,9 +1450,7 @@ recommendations:
 
   - id: 28
     code: "R28"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Reinstate Model Provisions"
@@ -1327,9 +1496,7 @@ recommendations:
 
   - id: 29
     code: "R29"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Consider repeal of section 150"
@@ -1367,9 +1534,7 @@ recommendations:
 
   - id: 30
     code: "R30"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Establish DCO requirements discharge unit"
@@ -1408,9 +1573,7 @@ recommendations:
 
   - id: 31
     code: "R31"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Streamline planning via SDOs"
@@ -1453,9 +1616,7 @@ recommendations:
 
   - id: 32
     code: "R32"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Encourage fleet approaches in EN-7"
@@ -1496,9 +1657,7 @@ recommendations:
 
   - id: 33
     code: "R33"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "New pathway for semi-urban power stations"
@@ -1539,9 +1698,7 @@ recommendations:
 
   - id: 34
     code: "R34"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Proportionate OPZs and DEPZs"
@@ -1585,9 +1742,7 @@ recommendations:
 
   - id: 35
     code: "R35"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [2]
     titles:
       short: "Streamline regulatory justification"
@@ -1631,9 +1786,7 @@ recommendations:
 
   - id: 36
     code: "R36"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [4]
     titles:
       short: "Confirm community benefits consideration"
@@ -1673,9 +1826,7 @@ recommendations:
 
   - id: 37
     code: "R37"
-    chapter:
-      number: 8
-      title: "The Planning System"
+    chapter_id: 8
     proposal_ids: [5]
     titles:
       short: "Equalise NDA position for GDF"
@@ -1720,9 +1871,7 @@ recommendations:
 
   - id: 38
     code: "R38"
-    chapter:
-      number: 9
-      title: "Culture, Capacity, Capability, & Innovation"
+    chapter_id: 9
     proposal_ids: [4]
     titles:
       short: "Boards assess organisational culture"
@@ -1767,9 +1916,7 @@ recommendations:
 
   - id: 39
     code: "R39"
-    chapter:
-      number: 9
-      title: "Culture, Capacity, Capability, & Innovation"
+    chapter_id: 9
     proposal_ids: [4]
     titles:
       short: "Accelerate skills development"
@@ -1814,9 +1961,7 @@ recommendations:
 
   - id: 40
     code: "R40"
-    chapter:
-      number: 9
-      title: "Culture, Capacity, Capability, & Innovation"
+    chapter_id: 9
     proposal_ids: [4]
     titles:
       short: "Enhance regulatory terms and conditions"
@@ -1860,9 +2005,7 @@ recommendations:
 
   - id: 41
     code: "R41"
-    chapter:
-      number: 9
-      title: "Culture, Capacity, Capability, & Innovation"
+    chapter_id: 9
     proposal_ids: [4]
     titles:
       short: "Establish nuclear digital programme"
@@ -1906,9 +2049,7 @@ recommendations:
 
   - id: 42
     code: "R42"
-    chapter:
-      number: 10
-      title: "International Harmonisation"
+    chapter_id: 10
     proposal_ids: [4]
     titles:
       short: "Joint international strategy"
@@ -1959,9 +2100,7 @@ recommendations:
 
   - id: 43
     code: "R43"
-    chapter:
-      number: 10
-      title: "International Harmonisation"
+    chapter_id: 10
     proposal_ids: [3]
     titles:
       short: "Risk-based export licensing"
@@ -2011,9 +2150,7 @@ recommendations:
 
   - id: 44
     code: "R44"
-    chapter:
-      number: 11
-      title: "Additional Recommendations and Issues"
+    chapter_id: 11
     proposal_ids: [4]
     titles:
       short: "Revise ONR charging model"
@@ -2057,9 +2194,7 @@ recommendations:
 
   - id: 45
     code: "R45"
-    chapter:
-      number: 11
-      title: "Additional Recommendations and Issues"
+    chapter_id: 11
     proposal_ids: [3]
     titles:
       short: "Reduce gold-plating and risk aversion"
@@ -2105,9 +2240,7 @@ recommendations:
 
   - id: 46
     code: "R46"
-    chapter:
-      number: 11
-      title: "Additional Recommendations and Issues"
+    chapter_id: 11
     proposal_ids: [5]
     titles:
       short: "Reduce siting uncertainty"
@@ -2149,9 +2282,7 @@ recommendations:
 
   - id: 47
     code: "R47"
-    chapter:
-      number: 11
-      title: "Additional Recommendations and Issues"
+    chapter_id: 11
     proposal_ids: [5]
     titles:
       short: "Establish delivery plan and oversight"
@@ -2164,7 +2295,7 @@ recommendations:
         - implementation
         - governance
     ownership:
-      primary_owner: "All of Government"
+      primary_owner: "No. 10"
       co_owners: []
       key_regulators: []
     delivery_timeline:

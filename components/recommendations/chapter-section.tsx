@@ -12,6 +12,38 @@ import {
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
+interface ChapterSummaryProps {
+  summary: string;
+}
+
+function ChapterSummary({ summary }: ChapterSummaryProps) {
+  const [isSummaryOpen, setIsSummaryOpen] = useState(false);
+
+  return (
+    <Collapsible open={isSummaryOpen} onOpenChange={setIsSummaryOpen} className="mb-4">
+      <CollapsibleTrigger asChild>
+        <button className="w-full text-left flex items-center justify-between gap-2 p-3 rounded-md bg-muted/50 hover:bg-muted/70 transition-colors border border-border/50">
+          <span className="text-sm font-medium">Chapter Summary</span>
+          <ChevronDown
+            size={16}
+            className={cn(
+              'text-muted-foreground flex-shrink-0 transition-transform',
+              isSummaryOpen && 'rotate-180'
+            )}
+          />
+        </button>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="mt-2 p-4 rounded-md bg-muted/30 border border-border/50">
+          <p className="text-sm text-foreground whitespace-pre-line leading-relaxed">
+            {summary}
+          </p>
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+}
+
 interface ChapterSectionProps {
   chapter: Chapter;
   recommendations: Recommendation[];
@@ -90,6 +122,11 @@ export function ChapterSection({
             'bg-card'
           )}
         >
+          {/* Chapter Summary - expandable, closed by default */}
+          {chapter.summary && (
+            <ChapterSummary summary={chapter.summary} />
+          )}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {recommendations.map((rec, index) => (
               <RecommendationCard

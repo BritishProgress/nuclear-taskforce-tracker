@@ -10,7 +10,9 @@ import {
   getRecentUpdates,
   getUniqueOwners,
   getChapters,
+  getAllOwnerInfo,
 } from '@/lib/data';
+import { TWITTER_SITE_HANDLE, TWITTER_CREATOR_HANDLE } from '@/lib/constants';
 
 export async function generateMetadata(): Promise<Metadata> {
   let counts;
@@ -46,7 +48,14 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: "Nuclear Taskforce Tracker",
       description: `Tracking government progress on implementing the UK Nuclear Regulatory Taskforce's recommendations. ${counts.completed} completed.`,
-      images: ["/api/og"],
+      images: [
+        {
+          url: "/api/og",
+          alt: "Nuclear Taskforce Tracker - Dashboard Overview showing progress statistics",
+        },
+      ],
+      ...(TWITTER_SITE_HANDLE && { site: TWITTER_SITE_HANDLE }),
+      ...(TWITTER_CREATOR_HANDLE && { creator: TWITTER_CREATOR_HANDLE }),
     },
     alternates: {
       canonical: "/",
@@ -56,22 +65,26 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   // Fetch all data server-side with error handling
-  let counts, chaptersWithRecs, deadlines, recentUpdates, owners, chapters;
+  let counts, chaptersWithRecs, deadlines, recentUpdates, owners, chapters, ownerInfoMap;
   
   try {
-    [counts, chaptersWithRecs, deadlines, recentUpdates, owners, chapters] = await Promise.all([
+    [counts, chaptersWithRecs, deadlines, recentUpdates, owners, chapters, ownerInfoMap] = await Promise.all([
       getStatusCounts(),
       getChaptersWithRecommendations(),
       getUpcomingDeadlines(8),
       getRecentUpdates(6),
       getUniqueOwners(),
       getChapters(),
+      getAllOwnerInfo(),
     ]);
   } catch (error) {
     // Log error and throw to trigger error boundary
     console.error('Failed to load dashboard data:', error);
     throw new Error('Failed to load dashboard data. Please try again later.');
   }
+
+  // Convert Map to object for serialization
+  const ownerInfo = Object.fromEntries(ownerInfoMap);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -86,6 +99,7 @@ export default async function HomePage() {
             recentUpdates={recentUpdates}
             owners={owners}
             chapters={chapters}
+            ownerInfo={ownerInfo}
           />
         </Suspense>
       </main>

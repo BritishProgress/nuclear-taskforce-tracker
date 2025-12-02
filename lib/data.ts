@@ -17,6 +17,23 @@ import {
 export { formatDate, formatDateShort, daysUntil, isOverdue, getDeadlineStatus } from './date-utils';
 
 // ========================================
+// HELPER FUNCTIONS
+// ========================================
+
+async function getChaptersMap(): Promise<Map<number, Chapter>> {
+  const data = await loadTaskforceData();
+  const chaptersMap = new Map<number, Chapter>();
+  
+  if (data.chapters) {
+    for (const chapter of data.chapters) {
+      chaptersMap.set(chapter.id, chapter);
+    }
+  }
+  
+  return chaptersMap;
+}
+
+// ========================================
 // DATA FETCHING (Server Only)
 // ========================================
 
@@ -36,15 +53,33 @@ export async function getRecommendations(): Promise<Recommendation[]> {
 
 export async function getChapters(): Promise<Chapter[]> {
   const data = await loadTaskforceData();
-  // Extract unique chapters from recommendations
+  // Get chapters from the chapters array in the YAML
+  if (data.chapters && data.chapters.length > 0) {
+    return data.chapters.sort((a, b) => a.id - b.id);
+  }
+  
+  // Fallback: extract from recommendations if chapters array doesn't exist
   const chapterMap = new Map<number, Chapter>();
+  const chaptersMap = new Map<number, Chapter>();
+  if (data.chapters) {
+    for (const chapter of data.chapters) {
+      chaptersMap.set(chapter.id, chapter);
+    }
+  }
   
   for (const rec of data.recommendations) {
-    if (!chapterMap.has(rec.chapter.number)) {
-      chapterMap.set(rec.chapter.number, {
-        id: rec.chapter.number,
-        title: rec.chapter.title,
-      });
+    const chapterId = rec.chapter_id;
+    if (!chapterMap.has(chapterId)) {
+      const chapter = chaptersMap.get(chapterId);
+      if (chapter) {
+        chapterMap.set(chapterId, chapter);
+      } else {
+        // Fallback if chapter not found in chapters array
+        chapterMap.set(chapterId, {
+          id: chapterId,
+          title: `Chapter ${chapterId}`,
+        });
+      }
     }
   }
   
@@ -74,13 +109,17 @@ export async function getRecommendationByCode(code: string): Promise<Recommendat
 
 export async function getChapterById(id: number): Promise<ChapterWithRecommendations | null> {
   const data = await loadTaskforceData();
-  const recommendations = data.recommendations.filter(r => r.chapter.number === id);
+  const chaptersMap = await getChaptersMap();
+  const recommendations = data.recommendations.filter(r => r.chapter_id === id);
   
   if (recommendations.length === 0) return null;
   
+  const chapter = chaptersMap.get(id);
+  if (!chapter) return null;
+  
   return {
-    id: recommendations[0].chapter.number,
-    title: recommendations[0].chapter.title,
+    id: chapter.id,
+    title: chapter.title,
     recommendations,
   };
 }
@@ -91,7 +130,7 @@ export async function getChapterById(id: number): Promise<ChapterWithRecommendat
 
 export async function getRecommendationsByChapter(chapterId: number): Promise<Recommendation[]> {
   const data = await loadTaskforceData();
-  return data.recommendations.filter(r => r.chapter.number === chapterId);
+  return data.recommendations.filter(r => r.chapter_id === chapterId);
 }
 
 export async function getRecommendationsByStatus(status: OverallStatus): Promise<Recommendation[]> {
@@ -143,18 +182,20 @@ export async function getStatusCounts(): Promise<StatusCounts> {
 
 export async function getChaptersWithRecommendations(): Promise<ChapterWithRecommendations[]> {
   const data = await loadTaskforceData();
+  const chaptersMap = await getChaptersMap();
   const chapterMap = new Map<number, ChapterWithRecommendations>();
   
   for (const rec of data.recommendations) {
-    const chapterNum = rec.chapter.number;
-    if (!chapterMap.has(chapterNum)) {
-      chapterMap.set(chapterNum, {
-        id: chapterNum,
-        title: rec.chapter.title,
+    const chapterId = rec.chapter_id;
+    if (!chapterMap.has(chapterId)) {
+      const chapter = chaptersMap.get(chapterId);
+      if (!chapter) continue; // Skip if chapter not found
+      chapterMap.set(chapterId, {
+        ...chapter,
         recommendations: [],
       });
     }
-    chapterMap.get(chapterNum)!.recommendations.push(rec);
+    chapterMap.get(chapterId)!.recommendations.push(rec);
   }
   
   return Array.from(chapterMap.values()).sort((a, b) => a.id - b.id);
@@ -294,4 +335,112 @@ export async function getTimelineItems(includeFutureDeadlines: boolean = true): 
 export function getProgressPercentage(counts: StatusCounts): number {
   if (counts.total === 0) return 0;
   return Math.round((counts.completed / counts.total) * 100);
+}
+
+// ========================================
+// OWNER/DEPARTMENT AGGREGATIONS
+// ========================================
+
+export interface OwnerWithStats {
+  owner: string;
+  recommendations: Recommendation[];
+  statusCounts: StatusCounts;
+  progressPercentage: number;
+  keyPeople?: Array<{ title: string; name: string }>;
+}
+
+export async function getOwnersWithMoreThanNRecommendations(minCount: number = 1): Promise<OwnerWithStats[]> {
+  const data = await loadTaskforceData();
+  const ownerMap = new Map<string, Recommendation[]>();
+  
+  // Group recommendations by all owners (primary and co-owners)
+  for (const rec of data.recommendations) {
+    // Add primary owner
+    const primaryOwner = rec.ownership.primary_owner;
+    if (!ownerMap.has(primaryOwner)) {
+      ownerMap.set(primaryOwner, []);
+    }
+    ownerMap.get(primaryOwner)!.push(rec);
+    
+    // Add co-owners
+    if (rec.ownership.co_owners) {
+      for (const coOwner of rec.ownership.co_owners) {
+        if (!ownerMap.has(coOwner)) {
+          ownerMap.set(coOwner, []);
+        }
+        ownerMap.get(coOwner)!.push(rec);
+      }
+    }
+  }
+  
+  // Create a map of owner info for quick lookup
+  const ownerInfoMap = new Map<string, Array<{ title: string; name: string }>>();
+  if (data.owner_info) {
+    for (const ownerInfo of data.owner_info) {
+      if (ownerInfo.key_people) {
+        ownerInfoMap.set(ownerInfo.owner, ownerInfo.key_people);
+      }
+    }
+  }
+  
+  // Filter owners with more than minCount recommendations and calculate stats
+  const ownersWithStats: OwnerWithStats[] = [];
+  
+  for (const [owner, recommendations] of ownerMap.entries()) {
+    if (recommendations.length >= minCount) {
+      const statusCounts: StatusCounts = {
+        not_started: 0,
+        on_track: 0,
+        off_track: 0,
+        completed: 0,
+        abandoned: 0,
+        total: recommendations.length,
+      };
+      
+      for (const rec of recommendations) {
+        statusCounts[rec.overall_status.status]++;
+      }
+      
+      ownersWithStats.push({
+        owner,
+        recommendations,
+        statusCounts,
+        progressPercentage: getProgressPercentage(statusCounts),
+        keyPeople: ownerInfoMap.get(owner),
+      });
+    }
+  }
+  
+  // Sort by total recommendations (descending), then by progress percentage (descending)
+  return ownersWithStats.sort((a, b) => {
+    if (b.statusCounts.total !== a.statusCounts.total) {
+      return b.statusCounts.total - a.statusCounts.total;
+    }
+    return b.progressPercentage - a.progressPercentage;
+  });
+}
+
+export async function getOwnerInfo(owner: string): Promise<Array<{ title: string; name: string }> | null> {
+  const data = await loadTaskforceData();
+  if (!data.owner_info) {
+    return null;
+  }
+  
+  const ownerInfo = data.owner_info.find(info => info.owner === owner);
+  return ownerInfo?.key_people || null;
+}
+
+export async function getAllOwnerInfo(): Promise<Map<string, Array<{ title: string; name: string }>>> {
+  const data = await loadTaskforceData();
+  const ownerInfoMap = new Map<string, Array<{ title: string; name: string }>>();
+  
+  if (data.owner_info) {
+    for (const ownerInfo of data.owner_info) {
+      if (ownerInfo.key_people && ownerInfo.key_people.length > 0) {
+        ownerInfoMap.set(ownerInfo.owner, ownerInfo.key_people);
+      }
+    }
+  }
+  
+  return ownerInfoMap;
 }
