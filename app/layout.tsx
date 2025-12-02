@@ -23,14 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 // Get the base URL for metadata - use production URL by default, localhost in dev
-function getBaseUrl(): string {
-  // In development, use localhost
-  if (process.env.NODE_ENV === 'development') {
-    return process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-  }
-  // In production, use the actual domain
-  return process.env.NEXT_PUBLIC_SITE_URL || 'https://nuclear.britishprogress.org';
-}
+import { getBaseUrl } from '@/lib/url-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseUrl()),

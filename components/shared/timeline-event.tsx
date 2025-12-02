@@ -135,7 +135,14 @@ export function TimelineEvent({
           )}
 
           {/* Title */}
-          <h4 className="font-semibold text-foreground mb-1.5">{update.title}</h4>
+          <Link
+            href={`/recommendation/${recommendation.id}/update/${update.date}`}
+            className="block"
+          >
+            <h4 className="font-semibold text-foreground mb-1.5 hover:text-primary transition-colors cursor-pointer">
+              {update.title}
+            </h4>
+          </Link>
 
           {/* Description */}
           <p className="text-sm text-muted-foreground leading-relaxed mb-3">

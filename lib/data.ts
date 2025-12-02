@@ -11,6 +11,7 @@ import {
   RecentUpdate,
   ChapterWithRecommendations,
   TimelineItem,
+  Update,
 } from './types';
 
 // Re-export date utilities for convenience (these are also in date-utils.ts for client use)
@@ -99,6 +100,20 @@ export async function getRecommendationById(id: number): Promise<Recommendation 
   const data = await loadTaskforceData();
   const recommendation = data.recommendations.find(r => r.id === id);
   return recommendation || null;
+}
+
+export async function getUpdateByDate(recommendationId: number, updateDate: string): Promise<{ recommendation: Recommendation; update: Update } | null> {
+  const recommendation = await getRecommendationById(recommendationId);
+  if (!recommendation || !recommendation.updates) {
+    return null;
+  }
+  
+  const update = recommendation.updates.find(u => u.date === updateDate);
+  if (!update) {
+    return null;
+  }
+  
+  return { recommendation, update };
 }
 
 export async function getRecommendationByCode(code: string): Promise<Recommendation | null> {

@@ -1,35 +1,42 @@
 import { ImageResponse } from '@vercel/og';
 import { NextRequest } from 'next/server';
-import { getRecommendationById, getChapters } from '@/lib/data';
+import { getUpdateByDate, getChapters } from '@/lib/data';
 
 export const runtime = 'nodejs';
 export const revalidate = 600; // Revalidate at most every 10 minutes
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string; updateId: string }> }
 ) {
   try {
-    const { id } = await params;
-    const recommendation = await getRecommendationById(parseInt(id));
+    const { id, updateId } = await params;
+    const updateData = await getUpdateByDate(parseInt(id), updateId);
     
-    if (!recommendation) {
-      return new Response('Recommendation not found', { status: 404 });
+    if (!updateData) {
+      return new Response('Update not found', { status: 404 });
     }
 
+    const { recommendation, update } = updateData;
     const chapters = await getChapters();
     const chapter = chapters.find(c => c.id === recommendation.chapter_id);
     
-    const statusLabel = recommendation.overall_status.status === 'completed' ? 'Completed' :
-                       recommendation.overall_status.status === 'on_track' ? 'On Track' :
-                       recommendation.overall_status.status === 'off_track' ? 'Off Track' :
-                       'Not Started';
+    const statusLabel = update.status === 'completed' ? 'Completed' :
+                       update.status === 'progress' ? 'Progress' :
+                       update.status === 'risk' ? 'Risk' :
+                       update.status === 'off_track' ? 'Off Track' :
+                       update.status === 'blocked' ? 'Blocked' :
+                       'Info';
 
-    const statusColor = recommendation.overall_status.status === 'completed' ? '#81F494' :
-                       recommendation.overall_status.status === 'on_track' ? '#0B4938' :
-                       recommendation.overall_status.status === 'off_track' ? '#B3063E' :
-                       '#6B7280';
+    const statusColor = update.status === 'completed' ? '#81F494' :
+                       update.status === 'progress' ? '#0B4938' :
+                       update.status === 'risk' ? '#F59E0B' :
+                       update.status === 'off_track' ? '#B3063E' :
+                       update.status === 'blocked' ? '#6B7280' :
+                       '#3B82F6';
 
+    const isCompleted = update.status === 'completed';
+    
     const imageResponse = new ImageResponse(
       (
         <div
@@ -39,7 +46,7 @@ export async function GET(
             display: 'flex',
             flexDirection: 'column',
             backgroundColor: '#FDF9E9', // beige background
-            fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+            fontFamily: 'Inter',
             padding: '80px',
           }}
         >
@@ -177,23 +184,153 @@ export async function GET(
             </div>
           </div>
 
-          {/* Header with Code and Status */}
+          {/* Update Badge */}
           <div
             style={{
               display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: '40px',
+              marginBottom: isCompleted ? '60px' : '40px',
             }}
           >
             <div
               style={{
                 display: 'flex',
-                fontSize: '80px',
+                padding: '16px 32px',
+                backgroundColor: '#0B4938',
+                borderRadius: '12px',
+                fontSize: '40px',
+                fontWeight: 'bold',
+                color: '#FFFFFF',
+              }}
+            >
+              UPDATE
+            </div>
+          </div>
+
+          {/* Completed Status - Big and Clear */}
+          {isCompleted && (
+            <div
+              style={{
+                display: 'flex',
+                marginBottom: '50px',
+                width: '100%',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '40px 60px',
+                  backgroundColor: '#81F494',
+                  borderRadius: '20px',
+                  width: '100%',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    fontSize: '100px',
+                    fontWeight: 'bold',
+                    color: '#0B4938',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    letterSpacing: '4px',
+                  }}
+                >
+                  COMPLETED
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Update Title */}
+          <div
+            style={{
+              display: 'flex',
+              fontSize: isCompleted ? '72px' : '88px',
+              fontWeight: 'bold',
+              color: '#0B4938',
+              marginBottom: '30px',
+              lineHeight: '1.2',
+              maxWidth: '100%',
+            }}
+          >
+            {update.title}
+          </div>
+
+          {/* Date and Status (only show status if not completed, since completed is shown above) */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: '20px',
+              marginBottom: '50px',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                fontSize: '36px',
+                color: '#6B7280',
+                fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
+              }}
+            >
+              {new Date(update.date).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short',
+                year: '2-digit',
+              })}
+            </div>
+            {!isCompleted && (
+              <div
+                style={{
+                  display: 'flex',
+                  padding: '12px 24px',
+                  backgroundColor: statusColor,
+                  borderRadius: '12px',
+                  fontSize: '32px',
+                  fontWeight: 'bold',
+                  color: '#FFFFFF',
+                }}
+              >
+                {statusLabel}
+              </div>
+            )}
+          </div>
+
+          {/* Recommendation Context */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+              padding: '30px',
+              backgroundColor: 'rgba(11, 73, 56, 0.05)',
+              borderRadius: '16px',
+              marginBottom: '60px',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                fontSize: '32px',
+                color: '#6B7280',
+                fontWeight: '600',
+                marginBottom: '8px',
+              }}
+            >
+              Recommendation
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                fontSize: '56px',
                 fontWeight: 'bold',
                 color: '#0B4938',
                 fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace',
+                marginBottom: '8px',
               }}
             >
               {recommendation.code}
@@ -201,79 +338,11 @@ export async function GET(
             <div
               style={{
                 display: 'flex',
-                padding: '30px 60px',
-                backgroundColor: statusColor,
-                borderRadius: '16px',
-                fontSize: '80px',
-                fontWeight: 'bold',
-                color: recommendation.overall_status.status === 'completed' ? '#0B4938' : '#FFFFFF',
-              }}
-            >
-              {statusLabel}
-            </div>
-          </div>
-
-          {/* Title */}
-          <div
-            style={{
-              display: 'flex',
-              fontSize: '96px',
-              fontWeight: 'bold',
-              color: '#0B4938',
-              marginBottom: '40px',
-              lineHeight: '1.2',
-            }}
-          >
-            {recommendation.titles.short}
-          </div>
-
-          {/* Chapter Info */}
-          <div
-            style={{
-              display: 'flex',
-              fontSize: '48px',
-              color: '#6B7280',
-              marginBottom: '60px',
-            }}
-          >
-            Chapter {recommendation.chapter_id}: {chapter?.title || `Chapter ${recommendation.chapter_id}`}
-          </div>
-
-          {/* Owner */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: '20px',
-              marginBottom: '40px',
-            }}
-          >
-            <div
-              style={{
-                fontSize: '40px',
+                fontSize: '36px',
                 color: '#6B7280',
               }}
             >
-              Owner:
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                padding: '16px 32px',
-                backgroundColor: '#E5DFD0',
-                borderRadius: '12px',
-                fontSize: '40px',
-                fontWeight: '600',
-                color: '#0B4938',
-              }}
-            >
-              {recommendation.ownership.primary_owner}
-              {recommendation.ownership.co_owners && recommendation.ownership.co_owners.length > 0 && (
-                <span style={{ marginLeft: '12px', color: '#6B7280' }}>
-                  +{recommendation.ownership.co_owners.length}
-                </span>
-              )}
+              {recommendation.titles.short}
             </div>
           </div>
 
