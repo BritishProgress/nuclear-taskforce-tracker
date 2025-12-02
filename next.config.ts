@@ -2,8 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Ensure @vercel/og is properly bundled for serverless deployments
-  // By not externalizing it, Next.js will include it in the build
-  serverExternalPackages: [],
+  // Explicitly include @vercel/og and its native dependencies in the output file tracing
+  outputFileTracingIncludes: {
+    '/api/og': [
+      './node_modules/@vercel/og/**/*',
+      './node_modules/@vercel/og/dist/**/*',
+    ],
+  },
   
   // Security headers
   async headers() {
