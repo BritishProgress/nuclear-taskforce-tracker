@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
       const buffer = await exportRecommendationsToExcel(recommendations);
       filename += '.xlsx';
       
-      return new NextResponse(buffer, {
+      return new NextResponse(buffer as unknown as BodyInit, {
         headers: {
           'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
           'Content-Disposition': `attachment; filename="${filename}"`,

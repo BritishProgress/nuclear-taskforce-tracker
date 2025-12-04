@@ -137,7 +137,7 @@ function getOwnersFromTimelineItems(items: TimelineItem[]): Set<string> {
 function itemBelongsToOwner(item: TimelineItem, owner: string): boolean {
   const rec = item.recommendation;
   return rec.ownership.primary_owner === owner || 
-         rec.ownership.co_owners?.includes(owner);
+         (rec.ownership.co_owners?.includes(owner) ?? false);
 }
 
 /**
