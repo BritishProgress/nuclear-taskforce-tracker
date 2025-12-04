@@ -2316,6 +2316,15 @@ recommendations:
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
-    updates: []
-    notes: |
-      Critical for ensuring implementation. Based on successful Haddon-Cave implementation model.
+    updates: 
+      - date: "2025-12-04"
+        status: "info"
+        title: "Ed Miliband confirms the Government will produce its implemnetation plan within 3 months"
+        description: "At the Nuclear Industry Association annual conference, Ed Miliband re-iterated the Government's acceptance of the recommendations and confirmed that the Government will produce its implemnetation plan within 3 months."
+        links:
+          - title: "(Coming soon) Text of Ed Miliband's speech at the Nuclear Industry Association annual conference"
+            url: "https://"
+          - title: "(Coming soon) Clip of Ed Miliband's speech at the Nuclear Industry Association annual conference"
+            url: "https://"
+        source:
+          type: "Speech"
