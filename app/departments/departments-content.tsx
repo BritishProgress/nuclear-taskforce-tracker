@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { OwnerWithStats } from '@/lib/data';
 import { OWNER_FULL_NAMES, OVERALL_STATUS_LABELS } from '@/lib/constants';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Disclaimer } from '@/components/shared';
+import { Disclaimer, ExportButton } from '@/components/shared';
 import { ChevronRight } from 'lucide-react';
 
 interface DepartmentsContentProps {
@@ -30,7 +30,15 @@ export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps)
   return (
     <div className="container py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Department League Table</h1>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
+          <h1 className="text-3xl font-bold">Department League Table</h1>
+          <div className="flex-shrink-0">
+            <ExportButton
+              baseUrl="/api/export/departments"
+              label="Export Data"
+            />
+          </div>
+        </div>
         <p className="text-muted-foreground">
           Compare progress across all departments and owners, ordered by completion percentage.
         </p>

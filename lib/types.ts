@@ -14,6 +14,7 @@ export type UpdateStatus =
   | 'info' 
   | 'progress' 
   | 'risk' 
+  | 'on_track'
   | 'off_track' 
   | 'completed' 
   | 'blocked';

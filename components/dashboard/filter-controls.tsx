@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { OverallStatus, Chapter, FilterState } from '@/lib/types';
 import { OVERALL_STATUS_LABELS } from '@/lib/constants';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Search, X, Filter, ChevronDown } from 'lucide-react';
 
 interface FilterControlsProps {
@@ -13,6 +15,7 @@ interface FilterControlsProps {
   chapters: Chapter[];
   owners: string[];
   className?: string;
+  exportButton?: React.ReactNode;
 }
 
 export function FilterControls({
@@ -21,12 +24,16 @@ export function FilterControls({
   chapters,
   owners,
   className,
+  exportButton,
 }: FilterControlsProps) {
   const hasActiveFilters =
     filters.status !== 'all' ||
     filters.chapter !== 'all' ||
     filters.owner !== 'all' ||
-    filters.search !== '';
+    filters.search !== '' ||
+    filters.tag !== undefined;
+
+  const [isOpen, setIsOpen] = useState(hasActiveFilters);
 
   const clearFilters = () => {
     onFilterChange({
@@ -38,33 +45,40 @@ export function FilterControls({
     });
   };
 
-  return (
-    <div className={cn('space-y-4', className)}>
-      {/* Search bar */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search recommendations..."
-          value={filters.search}
-          onChange={(e) =>
-            onFilterChange({ ...filters, search: e.target.value })
-          }
-          className="pl-10 bg-card"
-        />
-        {filters.search && (
-          <button
-            onClick={() => onFilterChange({ ...filters, search: '' })}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-          >
-            <X size={16} />
-          </button>
+  const FilterContent = () => (
+    <div className="space-y-3">
+      {/* Search bar with export button on large screens */}
+      <div className="flex items-center gap-2">
+        <div className="relative flex-1">
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+          <Input
+            placeholder="Search recommendations..."
+            value={filters.search}
+            onChange={(e) =>
+              onFilterChange({ ...filters, search: e.target.value })
+            }
+            className="pl-9 h-8 text-sm bg-card"
+          />
+          {filters.search && (
+            <button
+              onClick={() => onFilterChange({ ...filters, search: '' })}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            >
+              <X size={14} />
+            </button>
+          )}
+        </div>
+        {exportButton && (
+          <div className="hidden lg:block flex-shrink-0">
+            {exportButton}
+          </div>
         )}
       </div>
 
       {/* Filter pills */}
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
-          <Filter size={14} />
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="flex items-center gap-1 text-xs text-muted-foreground">
+          <Filter size={12} />
           Filter:
         </span>
 
@@ -79,8 +93,8 @@ export function FilterControls({
               })
             }
             className={cn(
-              'appearance-none px-4 py-2 pr-8 text-sm rounded-md border bg-card cursor-pointer transition-all',
-              'hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+              'appearance-none px-2.5 py-1 pr-7 text-xs rounded-md border bg-card cursor-pointer transition-all h-7',
+              'hover:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20 focus:border-primary',
               filters.status !== 'all'
                 ? 'border-primary bg-primary/10 text-primary font-medium'
                 : 'border-border text-foreground'
@@ -93,7 +107,7 @@ export function FilterControls({
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+          <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
         </div>
 
         {/* Chapter filter - only show chapters with recommendations */}
@@ -107,8 +121,8 @@ export function FilterControls({
               })
             }
             className={cn(
-              'appearance-none px-4 py-2 pr-8 text-sm rounded-md border bg-card cursor-pointer transition-all',
-              'hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+              'appearance-none px-2.5 py-1 pr-7 text-xs rounded-md border bg-card cursor-pointer transition-all h-7',
+              'hover:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20 focus:border-primary',
               filters.chapter !== 'all'
                 ? 'border-primary bg-primary/10 text-primary font-medium'
                 : 'border-border text-foreground'
@@ -121,7 +135,7 @@ export function FilterControls({
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+          <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
         </div>
 
         {/* Owner filter */}
@@ -132,8 +146,8 @@ export function FilterControls({
               onFilterChange({ ...filters, owner: e.target.value })
             }
             className={cn(
-              'appearance-none px-4 py-2 pr-8 text-sm rounded-md border bg-card cursor-pointer transition-all',
-              'hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary',
+              'appearance-none px-2.5 py-1 pr-7 text-xs rounded-md border bg-card cursor-pointer transition-all h-7',
+              'hover:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/20 focus:border-primary',
               filters.owner !== 'all'
                 ? 'border-primary bg-primary/10 text-primary font-medium'
                 : 'border-border text-foreground'
@@ -146,18 +160,18 @@ export function FilterControls({
               </option>
             ))}
           </select>
-          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+          <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
         </div>
 
         {/* Active tag filter */}
         {filters.tag && (
-          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full border border-primary bg-primary/10 text-primary font-medium">
+          <div className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full border border-primary bg-primary/10 text-primary font-medium">
             <span>Tag: #{filters.tag}</span>
             <button
               onClick={() => onFilterChange({ ...filters, tag: undefined })}
               className="hover:text-primary/70"
             >
-              <X size={14} />
+              <X size={12} />
             </button>
           </div>
         )}
@@ -168,13 +182,71 @@ export function FilterControls({
             variant="ghost"
             size="sm"
             onClick={clearFilters}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground h-7 px-2 text-xs"
           >
-            <X size={14} className="mr-1" />
+            <X size={12} className="mr-1" />
             Clear
           </Button>
         )}
       </div>
+
+      {/* Export button on mobile and medium screens - below all controls */}
+      {exportButton && (
+        <div className="flex justify-end lg:hidden">
+          {exportButton}
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className={cn('w-full', className)}>
+      {/* Collapsible for both mobile and desktop */}
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <div className={cn(
+          'rounded-md border transition-all',
+          hasActiveFilters
+            ? 'border-primary bg-primary/5'
+            : 'border-border/50 bg-muted/50'
+        )}>
+          <CollapsibleTrigger asChild>
+            <button
+              className={cn(
+                'w-full flex items-center justify-between p-2.5 transition-all',
+                'hover:bg-muted/50',
+                isOpen && 'border-b border-border'
+              )}
+            >
+              <div className="flex items-center gap-2">
+                <Filter size={16} className={hasActiveFilters ? 'text-primary' : 'text-muted-foreground'} />
+                <span className={cn(
+                  'text-sm font-medium',
+                  hasActiveFilters ? 'text-primary' : 'text-foreground'
+                )}>
+                  {hasActiveFilters ? 'Filters Active' : 'Filters & Export'}
+                </span>
+                {hasActiveFilters && (
+                  <span className="px-1.5 py-0.5 text-xs rounded-full bg-primary/20 text-primary font-medium">
+                    Active
+                  </span>
+                )}
+              </div>
+              <ChevronDown
+                size={16}
+                className={cn(
+                  'text-muted-foreground transition-transform',
+                  isOpen && 'rotate-180'
+                )}
+              />
+            </button>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className="p-3">
+              <FilterContent />
+            </div>
+          </CollapsibleContent>
+        </div>
+      </Collapsible>
     </div>
   );
 }

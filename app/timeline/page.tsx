@@ -2,9 +2,13 @@ import type { Metadata } from 'next';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Disclaimer } from '@/components/shared';
-import { TimelineClient } from './timeline-client';
+import { TimelineHeaderControlsWrapper } from './timeline-header-controls-wrapper';
+import { TimelinePageClient } from './timeline-page-client';
+import { TimelineViewProvider } from './timeline-view-context';
 import { getTimelineItems } from '@/lib/data';
+import { generateTimelineGrid } from '@/lib/timeline-grid';
 import { TWITTER_SITE_HANDLE, TWITTER_CREATOR_HANDLE } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 import { Clock } from 'lucide-react';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -58,8 +62,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function TimelinePage() {
   let timelineItems;
+  let gridData;
   try {
-    timelineItems = await getTimelineItems(true);
+    [timelineItems, gridData] = await Promise.all([
+      getTimelineItems(true),
+      generateTimelineGrid(52, 4), // 52 weeks ahead, 4 weeks back
+    ]);
   } catch (error) {
     console.error('Failed to load timeline data:', error);
     throw new Error('Failed to load timeline data. Please try again later.');
@@ -70,40 +78,47 @@ export default async function TimelinePage() {
       <Header />
       
       <main className="flex-1">
-        {/* Hero */}
-        <section className="bg-gradient-to-b from-beige to-background py-12">
-          <div className="container">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Clock className="h-6 w-6 text-primary" />
+        <TimelineViewProvider>
+          {/* Hero */}
+          <section className="bg-gradient-to-b from-beige to-background py-12">
+            <div className="container">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <Clock className="h-6 w-6 text-primary" />
+                  </div>
+                  <h1 className="font-display text-3xl md:text-4xl font-bold text-dark-green">
+                    Timeline
+                  </h1>
+                </div>
+                <TimelineHeaderControlsWrapper />
               </div>
-              <h1 className="font-display text-3xl md:text-4xl font-bold text-dark-green">
-                Timeline
-              </h1>
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Track all developments, announcements, status changes, and upcoming deadlines 
+                across the nuclear regulatory taskforce recommendations.
+              </p>
             </div>
-            <p className="text-lg text-muted-foreground max-w-2xl">
-              Track all developments, announcements, status changes, and upcoming deadlines 
-              across the nuclear regulatory taskforce recommendations.
-            </p>
-          </div>
-        </section>
+          </section>
 
-        {/* Timeline Content */}
-        <section className="container py-8">
-          <div className="max-w-3xl">
-            {timelineItems.length > 0 ? (
-              <TimelineClient items={timelineItems} />
-            ) : (
-              <div className="text-center py-16 text-muted-foreground">
-                <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p className="text-lg">No timeline items recorded yet.</p>
-                <p className="text-sm mt-2">
-                  Check back as the government responds to taskforce recommendations.
-                </p>
-              </div>
-            )}
-          </div>
-        </section>
+          {/* Timeline Content */}
+          <section className="container py-8">
+            <div className={cn(
+              timelineItems.length > 0 ? 'w-full' : 'max-w-3xl'
+            )}>
+              {timelineItems.length > 0 ? (
+                <TimelinePageClient timelineItems={timelineItems} gridData={gridData} />
+              ) : (
+                <div className="text-center py-16 text-muted-foreground">
+                  <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg">No timeline items recorded yet.</p>
+                  <p className="text-sm mt-2">
+                    Check back as the government responds to taskforce recommendations.
+                  </p>
+                </div>
+              )}
+            </div>
+          </section>
+        </TimelineViewProvider>
 
         {/* Disclaimer */}
         <section className="container py-8">

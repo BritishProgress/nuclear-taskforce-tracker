@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { HeroStats, FilterControls, DeadlineSidebar } from '@/components/dashboard';
 import { ChapterSection } from '@/components/recommendations';
+import { ExportButton } from '@/components/shared/export-button';
 import { getChapterColors } from '@/lib/constants';
 import { X, ChevronDown, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -388,6 +389,18 @@ export function DashboardContent({
                 onFilterChange={setFilters}
                 chapters={chaptersWithRecs.map(c => ({ id: c.id, title: c.title, summary: c.summary, description: c.description }))}
                 owners={owners}
+                exportButton={
+                  <ExportButton
+                    baseUrl="/api/export/recommendations"
+                    queryParams={{
+                      ...(filters.status !== 'all' && { status: filters.status }),
+                      ...(filters.chapter !== 'all' && { chapter: filters.chapter.toString() }),
+                      ...(filters.owner !== 'all' && { owner: filters.owner }),
+                      ...(filters.tag && { tag: filters.tag }),
+                    }}
+                    label="Export Data"
+                  />
+                }
               />
             </div>
 

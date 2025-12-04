@@ -13,6 +13,7 @@ export const UPDATE_STATUS_LABELS: Record<UpdateStatus, string> = {
   info: 'Info',
   progress: 'Progress',
   risk: 'Risk',
+  on_track: 'On Track',
   off_track: 'Off Track',
   completed: 'Completed',
   blocked: 'Blocked',
@@ -31,6 +32,7 @@ export const UPDATE_STATUS_CLASSES: Record<UpdateStatus, string> = {
   info: 'status-info',
   progress: 'status-progress',
   risk: 'status-risk',
+  on_track: 'status-on-track',
   off_track: 'status-off-track',
   completed: 'status-completed',
   blocked: 'status-blocked',
@@ -49,6 +51,7 @@ export const UPDATE_STATUS_ICONS: Record<UpdateStatus, string> = {
   info: 'Info',
   progress: 'TrendingUp',
   risk: 'AlertTriangle',
+  on_track: 'CheckCircle2',
   off_track: 'AlertCircle',
   completed: 'CheckCircle',
   blocked: 'Ban',
@@ -75,8 +78,12 @@ export const OWNER_FULL_NAMES: Record<string, string> = {
   'No. 10': 'Number 10',
 };
 
-// Chapter colors for visual distinction (chapters 5-11 from the taskforce report)
+// Chapter colors for visual distinction (chapters 1-11 from the taskforce report)
 export const CHAPTER_COLORS: Record<number, { bg: string; text: string; border: string }> = {
+  1: { bg: 'bg-beige/20', text: 'text-dark-green', border: 'border-beige/40' },
+  2: { bg: 'bg-light-blue/10', text: 'text-dark-blue', border: 'border-light-blue/30' },
+  3: { bg: 'bg-neon-green/10', text: 'text-dark-green', border: 'border-neon-green/30' },
+  4: { bg: 'bg-orange/10', text: 'text-orange', border: 'border-orange/30' },
   5: { bg: 'bg-dark-green/10', text: 'text-dark-green', border: 'border-dark-green/20' },
   6: { bg: 'bg-light-blue/10', text: 'text-dark-blue', border: 'border-light-blue/30' },
   7: { bg: 'bg-neon-green/10', text: 'text-dark-green', border: 'border-neon-green/30' },

@@ -27,6 +27,7 @@ const UPDATE_STATUS_ICON_MAP = {
   info: Info,
   progress: TrendingUp,
   risk: AlertTriangle,
+  on_track: CheckCircle2,
   off_track: AlertCircle,
   completed: CheckCircle,
   blocked: Ban,
