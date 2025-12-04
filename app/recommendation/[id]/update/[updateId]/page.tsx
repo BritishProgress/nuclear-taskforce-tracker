@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
+import { TimelineBackLink } from '@/components/shared/timeline-back-link';
 import { StatusBadge } from '@/components/shared/status-badge';
 import { FormattedText } from '@/components/shared/formatted-text';
 import { Disclaimer } from '@/components/shared';
@@ -103,13 +104,16 @@ export default async function UpdatePage({ params }: PageProps) {
         {/* Hero */}
         <section className="bg-gradient-to-b from-beige to-background py-8">
           <div className="container">
-            <Link
-              href={`/recommendation/${recommendation.id}`}
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
-            >
-              <ArrowLeft size={16} />
-              Back to recommendation
-            </Link>
+            <div className="flex items-center gap-4 mb-6">
+              <TimelineBackLink />
+              <Link
+                href={`/recommendation/${recommendation.id}`}
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft size={16} />
+                Back to recommendation
+              </Link>
+            </div>
             
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded-lg bg-primary/10">

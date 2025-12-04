@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { TimelineGridData, TimelineGridCell, RecommendationGridCell, YearGroup } from '@/lib/timeline-grid';
 import { UPDATE_STATUS_LABELS, OWNER_FULL_NAMES } from '@/lib/constants';
@@ -11,10 +12,93 @@ import { formatDateShort } from '@/lib/date-utils';
 import { TimelineItemsModal } from './timeline-items-modal';
 import { TimelineGridViewToggle } from '@/app/timeline/timeline-grid-view-toggle';
 import { useTimelineView } from '@/app/timeline/timeline-view-context';
+import { storeTimelineViewState } from '@/lib/url-utils';
 
 interface TimelineGridProps {
   data: TimelineGridData;
   viewMode?: 'departments' | 'recommendations';
+}
+
+// Component to handle mobile tap behavior: first tap shows tooltip, second tap navigates
+function MobileAwareIconLink({ 
+  href, 
+  children, 
+  className,
+  tooltipContent
+}: { 
+  href: string; 
+  children: React.ReactNode;
+  className?: string;
+  tooltipContent: React.ReactNode;
+}) {
+  const router = useRouter();
+  const { view, gridViewMode } = useTimelineView();
+  const [hasTapped, setHasTapped] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+
+  useEffect(() => {
+    // Detect if device supports touch
+    const checkMobile = () => {
+      setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleClick = (e: React.MouseEvent) => {
+    // Store timeline view state before navigation
+    storeTimelineViewState(view, gridViewMode);
+    
+    if (isMobile) {
+      if (!hasTapped) {
+        // First tap on mobile: prevent navigation, show tooltip
+        e.preventDefault();
+        e.stopPropagation();
+        setHasTapped(true);
+        setTooltipOpen(true);
+        // Reset after a delay so second tap can navigate
+        setTimeout(() => {
+          setHasTapped(false);
+          setTooltipOpen(false);
+        }, 3000);
+      }
+      // Second tap: allow Link to navigate naturally (don't prevent default)
+    }
+    // Desktop: normal behavior (navigate immediately via Link)
+  };
+
+  // Always control the tooltip to avoid controlled/uncontrolled warning
+  // On mobile: control programmatically, on desktop: let it follow hover
+  const handleOpenChange = (open: boolean) => {
+    if (!isMobile) {
+      // On desktop, allow normal hover behavior
+      setTooltipOpen(open);
+    }
+    // On mobile, we control it programmatically, so ignore this
+  };
+  
+  return (
+    <Tooltip 
+      open={tooltipOpen} 
+      onOpenChange={handleOpenChange}
+      delayDuration={200}
+    >
+      <TooltipTrigger asChild>
+        <Link
+          href={href}
+          onClick={handleClick}
+          className={className}
+        >
+          {children}
+        </Link>
+      </TooltipTrigger>
+      <TooltipContent side="top" className="max-w-xs">
+        {tooltipContent}
+      </TooltipContent>
+    </Tooltip>
+  );
 }
 
 const UPDATE_STATUS_ICONS = {
@@ -110,68 +194,66 @@ function TimelineCell({ cell, hasItems, isMonthEnd, isYearEnd, isEven }: { cell:
               item.update.status === 'blocked' ? 'text-dark-blue' :
               'text-light-blue';
             
-            return (
-              <Tooltip key={`${item.date}-${item.recommendation.id}-${idx}`} delayDuration={200}>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={`/recommendation/${item.recommendation.id}/update/${item.update.date}`}
-                    className={cn(
-                      'inline-flex items-center justify-center transition-all hover:scale-110',
-                      statusColor
-                    )}
-                  >
-                    <Icon size={22} className="drop-shadow-md" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="top" className="max-w-xs">
-                  <div className="space-y-1">
-                    <div className="font-semibold text-sm">
-                      {item.recommendation.code}: {item.update.title}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {formatDateShort(item.date)} • {UPDATE_STATUS_LABELS[item.update.status]}
-                    </div>
-                    {item.update.description && (
-                      <div className="text-xs mt-1 line-clamp-2">
-                        {item.update.description}
-                      </div>
-                    )}
+            const tooltipContent = (
+              <div className="space-y-1">
+                <div className="font-semibold text-sm">
+                  {item.recommendation.code}: {item.update.title}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  {formatDateShort(item.date)} • {UPDATE_STATUS_LABELS[item.update.status]}
+                </div>
+                {item.update.description && (
+                  <div className="text-xs mt-1 line-clamp-2">
+                    {item.update.description}
                   </div>
-                </TooltipContent>
-              </Tooltip>
+                )}
+              </div>
+            );
+
+            return (
+              <MobileAwareIconLink
+                key={`${item.date}-${item.recommendation.id}-${idx}`}
+                href={`/recommendation/${item.recommendation.id}/update/${item.update.date}`}
+                className={cn(
+                  'inline-flex items-center justify-center transition-all hover:scale-110',
+                  statusColor
+                )}
+                tooltipContent={tooltipContent}
+              >
+                <Icon size={22} className="drop-shadow-md" />
+              </MobileAwareIconLink>
             );
           } else if (item.type === 'deadline' && item.deadline) {
             const deadlineColor = item.deadline.isOverdue ? 'text-deep-red' : 'text-charcoal';
+            const tooltipContent = (
+              <div className="space-y-1">
+                <div className="font-semibold text-sm">
+                  {item.recommendation.code}: Deadline
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  {formatDateShort(item.date)}
+                  {item.deadline.isOverdue && (
+                    <span className="text-deep-red ml-1">(Overdue)</span>
+                  )}
+                </div>
+                <div className="text-xs">
+                  {item.recommendation.titles.short}
+                </div>
+              </div>
+            );
+
             return (
-              <Tooltip key={`${item.date}-${item.recommendation.id}-deadline`} delayDuration={200}>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={`/recommendation/${item.recommendation.id}`}
-                    className={cn(
-                      'inline-flex items-center justify-center transition-all hover:scale-110',
-                      deadlineColor
-                    )}
-                  >
-                    <Clock size={22} className="drop-shadow-md" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="top" className="max-w-xs">
-                  <div className="space-y-1">
-                    <div className="font-semibold text-sm">
-                      {item.recommendation.code}: Deadline
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {formatDateShort(item.date)}
-                      {item.deadline.isOverdue && (
-                        <span className="text-deep-red ml-1">(Overdue)</span>
-                      )}
-                    </div>
-                    <div className="text-xs">
-                      {item.recommendation.titles.short}
-                    </div>
-                  </div>
-                </TooltipContent>
-              </Tooltip>
+              <MobileAwareIconLink
+                key={`${item.date}-${item.recommendation.id}-deadline`}
+                href={`/recommendation/${item.recommendation.id}`}
+                className={cn(
+                  'inline-flex items-center justify-center transition-all hover:scale-110',
+                  deadlineColor
+                )}
+                tooltipContent={tooltipContent}
+              >
+                <Clock size={22} className="drop-shadow-md" />
+              </MobileAwareIconLink>
             );
           }
           return null;
@@ -193,7 +275,7 @@ function RecommendationCell({ cell, hasItems, isMonthEnd, isYearEnd, isEven }: {
 
 export function TimelineGrid({ data, viewMode = 'departments' }: TimelineGridProps) {
   const { weeks, owners, cells, recommendationCells, recommendations, weeksWithItems, monthGroups, yearGroups } = data;
-  const { gridViewMode, setGridViewMode } = useTimelineView();
+  const { view, gridViewMode, setGridViewMode } = useTimelineView();
   
   // Use gridViewMode from context if available, otherwise fall back to prop
   const activeViewMode = gridViewMode || viewMode;
@@ -398,6 +480,9 @@ export function TimelineGrid({ data, viewMode = 'departments' }: TimelineGridPro
                             <Link
                               href={`/recommendation/${rec.id}`}
                               className="block space-y-0.5 hover:opacity-80 transition-opacity"
+                              onClick={() => {
+                                storeTimelineViewState(view, gridViewMode);
+                              }}
                             >
                               <div className="font-mono font-semibold text-xs">{rec.code}</div>
                               <div className="text-[10px] text-muted-foreground line-clamp-1">

@@ -9,6 +9,8 @@ import { TimelineItem } from '@/lib/types';
 import { UPDATE_STATUS_LABELS, getChapterColors } from '@/lib/constants';
 import { formatDateShort } from '@/lib/date-utils';
 import { Button } from '@/components/ui/button';
+import { storeTimelineViewState } from '@/lib/url-utils';
+import { useTimelineView } from '@/app/timeline/timeline-view-context';
 
 interface TimelineItemsModalProps {
   items: TimelineItem[];
@@ -18,10 +20,28 @@ interface TimelineItemsModalProps {
 
 export function TimelineItemsModal({ items, isOpen, onClose }: TimelineItemsModalProps) {
   const [mounted, setMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const { view, gridViewMode } = useTimelineView();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isOpen && mounted) {
+      // Small delay to ensure DOM is ready, then trigger animation
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 10);
+      return () => clearTimeout(timer);
+    } else {
+      setIsVisible(false);
+    }
+  }, [isOpen, mounted]);
+  
+  const handleLinkClick = () => {
+    storeTimelineViewState(view, gridViewMode);
+  };
 
   if (!isOpen || !mounted) return null;
 
@@ -34,11 +54,20 @@ export function TimelineItemsModal({ items, isOpen, onClose }: TimelineItemsModa
 
   const modalContent = (
     <div 
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50"
+      className={cn(
+        "fixed inset-0 z-[200] flex items-center justify-center p-4 transition-opacity duration-300 ease-out",
+        isVisible ? "opacity-100" : "opacity-0"
+      )}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
       onClick={onClose}
     >
       <div 
-        className="bg-card rounded-lg border shadow-lg max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col"
+        className={cn(
+          "bg-card rounded-lg border shadow-lg max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col transition-all duration-300 ease-out",
+          isVisible 
+            ? "opacity-100 scale-100 translate-y-0" 
+            : "opacity-0 scale-95 translate-y-4"
+        )}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between p-4 border-b">
@@ -71,6 +100,7 @@ export function TimelineItemsModal({ items, isOpen, onClose }: TimelineItemsModa
                 <Link
                   key={idx}
                   href={`/recommendation/${item.recommendation.id}/update/${item.update.date}`}
+                  onClick={handleLinkClick}
                   className={cn(
                     'block p-3 rounded-lg border transition-colors hover:shadow-sm',
                     chapterColors.bg,
@@ -107,6 +137,7 @@ export function TimelineItemsModal({ items, isOpen, onClose }: TimelineItemsModa
                 <Link
                   key={idx}
                   href={`/recommendation/${item.recommendation.id}`}
+                  onClick={handleLinkClick}
                   className={cn(
                     'block p-3 rounded-lg border transition-colors hover:shadow-sm',
                     chapterColors.bg,

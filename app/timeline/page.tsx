@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Disclaimer } from '@/components/shared';
@@ -78,7 +79,8 @@ export default async function TimelinePage() {
       <Header />
       
       <main className="flex-1">
-        <TimelineViewProvider>
+        <Suspense fallback={<div className="container py-8">Loading timeline...</div>}>
+          <TimelineViewProvider>
           {/* Hero */}
           <section className="bg-gradient-to-b from-beige to-background py-12">
             <div className="container">
@@ -118,7 +120,8 @@ export default async function TimelinePage() {
               )}
             </div>
           </section>
-        </TimelineViewProvider>
+          </TimelineViewProvider>
+        </Suspense>
 
         {/* Disclaimer */}
         <section className="container py-8">

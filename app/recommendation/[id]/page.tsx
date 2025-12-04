@@ -8,6 +8,7 @@ import { OwnershipList } from '@/components/shared/ownership-tag';
 import { DeadlineIndicator } from '@/components/shared/deadline-indicator';
 import { FormattedText } from '@/components/shared/formatted-text';
 import { Disclaimer } from '@/components/shared';
+import { TimelineBackLink } from '@/components/shared/timeline-back-link';
 import { TimelineSection } from './timeline-section';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -151,13 +152,16 @@ export default async function RecommendationPage({ params }: PageProps) {
         {/* Breadcrumb & Back */}
         <div className="border-b bg-muted/30">
           <div className="container py-4">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft size={16} />
-              Back to Dashboard
-            </Link>
+            <div className="flex items-center gap-4">
+              <TimelineBackLink />
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft size={16} />
+                Back to Dashboard
+              </Link>
+            </div>
           </div>
         </div>
 

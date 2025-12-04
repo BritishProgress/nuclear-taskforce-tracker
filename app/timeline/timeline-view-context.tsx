@@ -1,6 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { getTimelineViewState, storeTimelineViewState } from '@/lib/url-utils';
 
 type ViewMode = 'list' | 'grid';
 type GridViewMode = 'departments' | 'recommendations';
@@ -14,15 +16,39 @@ interface TimelineViewContextType {
 
 const TimelineViewContext = createContext<TimelineViewContextType | undefined>(undefined);
 
-export function TimelineViewProvider({ children }: { children: ReactNode }) {
-  const [view, setView] = useState<ViewMode>('list');
-  const [gridViewMode, setGridViewMode] = useState<GridViewMode>('departments');
+function TimelineViewProviderInner({ children }: { children: ReactNode }) {
+  const searchParams = useSearchParams();
+  const urlView = searchParams.get('view') as ViewMode | null;
+  const urlGridView = searchParams.get('gridView') as GridViewMode | null;
+  
+  // Try to restore from URL params, then sessionStorage, then defaults
+  const storedState = typeof window !== 'undefined' ? getTimelineViewState() : {};
+  const initialView = urlView || storedState.view || 'list';
+  const initialGridView = urlGridView || storedState.gridViewMode || 'departments';
+  
+  const [view, setView] = useState<ViewMode>(initialView);
+  const [gridViewMode, setGridViewMode] = useState<GridViewMode>(initialGridView);
+  
+  // Update state when URL params change
+  useEffect(() => {
+    if (urlView) setView(urlView);
+    if (urlGridView) setGridViewMode(urlGridView);
+  }, [urlView, urlGridView]);
+  
+  // Store state changes
+  useEffect(() => {
+    storeTimelineViewState(view, gridViewMode);
+  }, [view, gridViewMode]);
   
   return (
     <TimelineViewContext.Provider value={{ view, setView, gridViewMode, setGridViewMode }}>
       {children}
     </TimelineViewContext.Provider>
   );
+}
+
+export function TimelineViewProvider({ children }: { children: ReactNode }) {
+  return <TimelineViewProviderInner>{children}</TimelineViewProviderInner>;
 }
 
 export function useTimelineView() {
