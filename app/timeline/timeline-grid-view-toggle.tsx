@@ -13,7 +13,7 @@ interface TimelineGridViewToggleProps {
 
 export function TimelineGridViewToggle({ mode, onModeChange }: TimelineGridViewToggleProps) {
   return (
-    <div className="flex items-center gap-1 p-0.5 rounded-lg border bg-card">
+    <div className="flex items-center gap-1 p-0.5 rounded-lg border">
       <Button
         variant={mode === 'departments' ? 'default' : 'ghost'}
         size="sm"

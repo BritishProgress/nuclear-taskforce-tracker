@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -16,7 +17,13 @@ interface TimelineItemsModalProps {
 }
 
 export function TimelineItemsModal({ items, isOpen, onClose }: TimelineItemsModalProps) {
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
 
   const sortedItems = [...items].sort((a, b) => 
     new Date(a.date).getTime() - new Date(b.date).getTime()
@@ -25,7 +32,7 @@ export function TimelineItemsModal({ items, isOpen, onClose }: TimelineItemsModa
   const updateCount = sortedItems.filter(item => item.type === 'update').length;
   const deadlineCount = sortedItems.filter(item => item.type === 'deadline').length;
 
-  return (
+  const modalContent = (
     <div 
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50"
       onClick={onClose}
@@ -139,5 +146,7 @@ export function TimelineItemsModal({ items, isOpen, onClose }: TimelineItemsModa
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
 

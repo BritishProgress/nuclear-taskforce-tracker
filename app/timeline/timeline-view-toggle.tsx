@@ -14,7 +14,7 @@ interface TimelineViewToggleProps {
 
 export function TimelineViewToggle({ view, onViewChange }: TimelineViewToggleProps) {
   return (
-    <div className="flex items-center gap-2 p-1 rounded-lg border bg-card">
+    <div className="flex items-center gap-2 p-1 rounded-lg border">
       <Button
         variant={view === 'list' ? 'default' : 'ghost'}
         size="sm"
