@@ -1,13 +1,50 @@
 'use client';
 
+import { memo, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { StatusCounts, OverallStatus } from '@/lib/types';
 import { Disclaimer } from '@/components/shared';
-import { 
-  AlertCircle, 
+import {
+  AlertCircle,
   CheckCircle,
   Atom
 } from 'lucide-react';
+
+// Hoisted static config outside component to prevent recreation
+const MAIN_STATS_CONFIG = [
+  {
+    label: 'Completed',
+    key: 'completed' as const,
+    icon: CheckCircle,
+    color: 'text-dark-green',
+    bgColor: 'bg-neon-green/20',
+    status: 'completed' as OverallStatus,
+  },
+  {
+    label: 'On Track',
+    key: 'on_track' as const,
+    icon: Atom,
+    color: 'text-dark-green',
+    bgColor: 'bg-dark-green/20',
+    status: 'on_track' as OverallStatus,
+  },
+  {
+    label: 'Off Track',
+    key: 'off_track' as const,
+    icon: AlertCircle,
+    color: 'text-deep-red',
+    bgColor: 'bg-deep-red/10',
+    status: 'off_track' as OverallStatus,
+  },
+] as const;
+
+const TOTAL_STAT_CONFIG = {
+  label: 'Total',
+  icon: 'atom' as const,
+  color: 'text-dark-green',
+  bgColor: 'bg-dark-green/10',
+  status: 'all' as const,
+} as const;
 
 interface HeroStatsProps {
   counts: StatusCounts;
@@ -15,42 +52,19 @@ interface HeroStatsProps {
   onStatusClick?: (status: OverallStatus | 'all') => void;
 }
 
-export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) {
-  const mainStats = [
-    {
-      label: 'Completed',
-      value: counts.completed,
-      icon: CheckCircle,
-      color: 'text-dark-green',
-      bgColor: 'bg-neon-green/20',
-      status: 'completed' as OverallStatus,
-    },
-    {
-      label: 'On Track',
-      value: counts.on_track,
-      icon: Atom,
-      color: 'text-dark-green',
-      bgColor: 'bg-dark-green/20',
-      status: 'on_track' as OverallStatus,
-    },
-    {
-      label: 'Off Track',
-      value: counts.off_track,
-      icon: AlertCircle,
-      color: 'text-deep-red',
-      bgColor: 'bg-deep-red/10',
-      status: 'off_track' as OverallStatus,
-    },
-  ];
+export const HeroStats = memo(function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) {
+  const mainStats = useMemo(() =>
+    MAIN_STATS_CONFIG.map(stat => ({
+      ...stat,
+      value: counts[stat.key],
+    })),
+    [counts]
+  );
 
-  const totalStat = {
-    label: 'Total',
+  const totalStat = useMemo(() => ({
+    ...TOTAL_STAT_CONFIG,
     value: counts.total,
-    icon: 'atom' as const,
-    color: 'text-dark-green',
-    bgColor: 'bg-dark-green/10',
-    status: 'all' as const,
-  };
+  }), [counts.total]);
 
   return (
     <div className={cn('', className)}>
@@ -191,5 +205,5 @@ export function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) 
       </div>
     </div>
   );
-}
+});
 

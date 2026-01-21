@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
@@ -183,7 +183,7 @@ export function DashboardContent({
     }
   }, [filters.chapter]);
 
-  const handleStatusClick = (status: OverallStatus | 'all') => {
+  const handleStatusClick = useCallback((status: OverallStatus | 'all') => {
     setFilters(prev => ({
       ...prev,
       status: status,
@@ -192,9 +192,9 @@ export function DashboardContent({
     setTimeout(() => {
       document.querySelector('[data-filter-section]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
-  };
+  }, []);
 
-  const handleTagClick = (tag: string) => {
+  const handleTagClick = useCallback((tag: string) => {
     setFilters(prev => ({
       ...prev,
       tag: tag,
@@ -203,7 +203,7 @@ export function DashboardContent({
     setTimeout(() => {
       document.querySelector('[data-filter-section]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
-  };
+  }, []);
 
   // Filter recommendations based on current filters
   const filteredChapters = useMemo(() => {

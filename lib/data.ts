@@ -1,5 +1,9 @@
 import 'server-only';
-import { loadTaskforceData } from './yaml';
+import { cache } from 'react';
+import { loadTaskforceData as loadTaskforceDataRaw } from './yaml';
+
+// Wrap with React.cache() for request-level deduplication
+const loadTaskforceData = cache(loadTaskforceDataRaw);
 import {
   TaskforceData,
   Recommendation,
@@ -123,15 +127,17 @@ export async function getRecommendationByCode(code: string): Promise<Recommendat
 }
 
 export async function getChapterById(id: number): Promise<ChapterWithRecommendations | null> {
-  const data = await loadTaskforceData();
-  const chaptersMap = await getChaptersMap();
+  const [data, chaptersMap] = await Promise.all([
+    loadTaskforceData(),
+    getChaptersMap(),
+  ]);
   const recommendations = data.recommendations.filter(r => r.chapter_id === id);
-  
+
   if (recommendations.length === 0) return null;
-  
+
   const chapter = chaptersMap.get(id);
   if (!chapter) return null;
-  
+
   return {
     id: chapter.id,
     title: chapter.title,
@@ -196,8 +202,10 @@ export async function getStatusCounts(): Promise<StatusCounts> {
 }
 
 export async function getChaptersWithRecommendations(): Promise<ChapterWithRecommendations[]> {
-  const data = await loadTaskforceData();
-  const chaptersMap = await getChaptersMap();
+  const [data, chaptersMap] = await Promise.all([
+    loadTaskforceData(),
+    getChaptersMap(),
+  ]);
   const chapterMap = new Map<number, ChapterWithRecommendations>();
   
   for (const rec of data.recommendations) {

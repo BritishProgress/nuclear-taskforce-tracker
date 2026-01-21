@@ -1,5 +1,6 @@
 'use client';
 
+import { memo, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { Recommendation } from '@/lib/types';
 import { formatDateShort, daysUntil, isOverdue } from '@/lib/date-utils';
@@ -17,16 +18,19 @@ interface RecommendationCardProps {
   style?: React.CSSProperties;
 }
 
-export function RecommendationCard({
+export const RecommendationCard = memo(function RecommendationCard({
   recommendation,
   variant = 'compact',
   showUpdates = false,
   className,
   style,
 }: RecommendationCardProps) {
-  const targetDate = recommendation.delivery_timeline.revised_target_date || recommendation.delivery_timeline.target_date;
-  const days = daysUntil(targetDate);
-  const overdue = isOverdue(targetDate);
+  const targetDate = useMemo(
+    () => recommendation.delivery_timeline.revised_target_date || recommendation.delivery_timeline.target_date,
+    [recommendation.delivery_timeline.revised_target_date, recommendation.delivery_timeline.target_date]
+  );
+  const days = useMemo(() => daysUntil(targetDate), [targetDate]);
+  const overdue = useMemo(() => isOverdue(targetDate), [targetDate]);
   const latestUpdate = recommendation.updates?.[0];
 
   if (variant === 'compact') {
@@ -172,5 +176,5 @@ export function RecommendationCard({
       </Card>
     </Link>
   );
-}
+});
 

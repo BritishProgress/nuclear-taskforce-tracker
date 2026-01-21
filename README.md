@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nuclear Taskforce Tracker
+
+Tracking the progress of government departments, regulators and industry in implementing the UK Nuclear Regulatory Taskforce's recommendations.
+
+A project by the [Centre for British Progress](https://britishprogress.org).
+
+## About
+
+This project tracks the Government's progress in implementing the Nuclear Regulatory Taskforce recommendations. Data is sourced from public government announcements, parliamentary statements, and official publications.
+
+The Centre for British Progress is a non-partisan think tank researching and producing concrete ideas for an era of British growth and progress.
+
+## Features
+
+- Track 47 recommendations across 7 chapters from the UK Nuclear Regulatory Taskforce
+- View progress by status: completed, on track, off track, or not started
+- Filter and search recommendations
+- View by department and ownership
+- Timeline of updates and announcements
+- Export data to Excel/CSV
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org) 16
+- [React](https://react.dev) 19
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind CSS](https://tailwindcss.com) 4
+- [Radix UI](https://www.radix-ui.com) primitives
+- [Lucide React](https://lucide.dev) icons
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Resources
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Nuclear Regulatory Taskforce Report](https://www.gov.uk/government/publications/nuclear-regulatory-taskforce) - The original government publication
+- [Centre for British Progress](https://britishprogress.org) - Learn more about our work
 
-## Learn More
+## Disclaimer
 
-To learn more about Next.js, take a look at the following resources:
+This is an independent project and is not affiliated with HM Government. The content in this tracker is partially AI-generated based on the Nuclear Regulatory Taskforce report. We have worked hard to ensure it is accurate, but some of the titles, descriptions, etc. may be slightly different or truncated.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+MIT License - see [LICENSE](LICENSE) for details.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you use this project, we'd appreciate a mention or link back to the [Centre for British Progress](https://britishprogress.org). It's not required, but it helps us continue building tools for public transparency.

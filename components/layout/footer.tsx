@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import { getLastUpdated } from '@/lib/data';
 
 interface FooterProps {
@@ -58,6 +58,17 @@ export async function Footer({ className }: FooterProps) {
                 >
                   Centre for British Progress
                   <ExternalLink size={12} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/BritishProgress/nuclear-taskforce-tracker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-beige/80 hover:text-beige transition-colors"
+                >
+                  GitHub
+                  <Github size={12} />
                 </a>
               </li>
             </ul>

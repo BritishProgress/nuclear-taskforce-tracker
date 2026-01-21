@@ -10,7 +10,7 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { ChevronDown, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useMemo, memo } from 'react';
 
 interface ChapterSummaryProps {
   summary: string;
@@ -51,7 +51,7 @@ interface ChapterSectionProps {
   className?: string;
 }
 
-export function ChapterSection({
+export const ChapterSection = memo(function ChapterSection({
   chapter,
   recommendations,
   defaultOpen = true,
@@ -60,10 +60,14 @@ export function ChapterSection({
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const colors = getChapterColors(chapter.id);
 
-  // Calculate stats
-  const completed = recommendations.filter(r => r.overall_status.status === 'completed').length;
-  const onTrack = recommendations.filter(r => r.overall_status.status === 'on_track').length;
-  const offTrack = recommendations.filter(r => r.overall_status.status === 'off_track').length;
+  // Memoized stats calculation
+  const stats = useMemo(() => ({
+    completed: recommendations.filter(r => r.overall_status.status === 'completed').length,
+    onTrack: recommendations.filter(r => r.overall_status.status === 'on_track').length,
+    offTrack: recommendations.filter(r => r.overall_status.status === 'off_track').length,
+  }), [recommendations]);
+
+  const { completed, onTrack, offTrack } = stats;
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen} className={className}>
@@ -142,5 +146,5 @@ export function ChapterSection({
       </CollapsibleContent>
     </Collapsible>
   );
-}
+});
 
