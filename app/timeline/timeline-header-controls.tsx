@@ -8,7 +8,7 @@ export function TimelineHeaderControls() {
   const { view, setView } = useTimelineView();
   
   return (
-    <div className="flex items-center gap-3 flex-shrink-0">
+    <div className="flex items-center gap-3 flex-shrink-0" suppressHydrationWarning>
       <TimelineViewToggle view={view} onViewChange={setView} />
       <TimelineExportButton />
     </div>

@@ -22,6 +22,123 @@ import {
 } from '@/lib/types';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
+function matchesFilters(rec: Recommendation, filters: FilterState, { skipChapter = false, skipOwner = false } = {}): boolean {
+  if (filters.status !== 'all' && rec.overall_status.status !== filters.status) return false;
+  if (!skipOwner && filters.owner !== 'all') {
+    const hasOwner = rec.ownership.primary_owner === filters.owner || rec.ownership.co_owners?.includes(filters.owner);
+    if (!hasOwner) return false;
+  }
+  if (filters.search) {
+    const searchLower = filters.search.toLowerCase();
+    const matchesSearch =
+      rec.titles.short.toLowerCase().includes(searchLower) ||
+      rec.titles.long.toLowerCase().includes(searchLower) ||
+      rec.text.toLowerCase().includes(searchLower) ||
+      rec.code.toLowerCase().includes(searchLower);
+    if (!matchesSearch) return false;
+  }
+  if (filters.tag) {
+    const hasTag = rec.updates?.some(update => update.tags?.includes(filters.tag!));
+    if (!hasTag) return false;
+  }
+  return true;
+}
+
+function countStatuses(recs: Recommendation[]) {
+  let completed = 0, onTrack = 0, offTrack = 0;
+  for (const r of recs) {
+    const s = r.overall_status.status;
+    if (s === 'completed') completed++;
+    else if (s === 'on_track') onTrack++;
+    else if (s === 'off_track') offTrack++;
+  }
+  return { completed, onTrack, offTrack, total: recs.length };
+}
+
+interface ChapterOverviewProps {
+  chapter: Chapter;
+  chapterData: ChapterWithRecommendations;
+  onClear: () => void;
+}
+
+function ChapterOverview({ chapter, chapterData, onClear }: ChapterOverviewProps) {
+  const { completed, onTrack, offTrack, total } = countStatuses(chapterData.recommendations);
+  const colors = getChapterColors(chapter.id);
+  const completedPercent = total > 0 ? (completed / total) * 100 : 0;
+  const onTrackPercent = total > 0 ? (onTrack / total) * 100 : 0;
+  const offTrackPercent = total > 0 ? (offTrack / total) * 100 : 0;
+
+  return (
+    <div data-chapter-overview className={cn('p-6 rounded-lg border mb-6', colors.bg, colors.border)}>
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <h2 className={cn('font-display font-bold text-2xl mb-2', colors.text)}>
+            Chapter {chapter.id}: {chapter.title}
+          </h2>
+        </div>
+        <button
+          onClick={onClear}
+          className="text-muted-foreground hover:text-foreground transition-colors"
+          title="Clear chapter filter"
+        >
+          <X size={20} />
+        </button>
+      </div>
+
+      {/* Progress Bar with Columns */}
+      <div className="space-y-3">
+        <div className="flex w-full h-8 rounded-lg overflow-hidden border border-border/50">
+          {completed > 0 && (
+            <div
+              className="bg-neon-green flex items-center justify-center text-white text-xs font-semibold transition-all duration-500"
+              style={{ width: `${completedPercent}%` }}
+            >
+              {completedPercent > 5 && `${completed}`}
+            </div>
+          )}
+          {onTrack > 0 && (
+            <div
+              className="bg-dark-green/30 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
+              style={{ width: `${onTrackPercent}%` }}
+            >
+              {onTrackPercent > 5 && `${onTrack}`}
+            </div>
+          )}
+          {offTrack > 0 && (
+            <div
+              className="bg-deep-red/30 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
+              style={{ width: `${offTrackPercent}%` }}
+            >
+              {offTrackPercent > 5 && `${offTrack}`}
+            </div>
+          )}
+        </div>
+
+        {/* Legend */}
+        <div className="flex flex-wrap gap-4 text-xs">
+          <div className="flex items-center gap-1.5">
+            <div className="w-3 h-3 rounded bg-neon-green"></div>
+            <span className="text-muted-foreground">Completed ({completed})</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="w-3 h-3 rounded bg-dark-green/30"></div>
+            <span className="text-muted-foreground">On Track ({onTrack})</span>
+          </div>
+          {offTrack > 0 && (
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-deep-red/30"></div>
+              <span className="text-muted-foreground">Off Track ({offTrack})</span>
+            </div>
+          )}
+          <div className="text-muted-foreground ml-auto">
+            Total: {total}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface EmptyChaptersGroupProps {
   chapters: Chapter[];
 }
@@ -215,41 +332,7 @@ export function DashboardContent({
         }
 
         // Filter recommendations within each chapter
-        const filteredRecs = chapter.recommendations.filter((rec) => {
-          // Status filter
-          if (filters.status !== 'all' && rec.overall_status.status !== filters.status) {
-            return false;
-          }
-
-          // Owner filter
-          if (filters.owner !== 'all') {
-            const hasOwner = 
-              rec.ownership.primary_owner === filters.owner ||
-              rec.ownership.co_owners?.includes(filters.owner);
-            if (!hasOwner) return false;
-          }
-
-          // Search filter
-          if (filters.search) {
-            const searchLower = filters.search.toLowerCase();
-            const matchesSearch =
-              rec.titles.short.toLowerCase().includes(searchLower) ||
-              rec.titles.long.toLowerCase().includes(searchLower) ||
-              rec.text.toLowerCase().includes(searchLower) ||
-              rec.code.toLowerCase().includes(searchLower);
-            if (!matchesSearch) return false;
-          }
-
-          // Tag filter - check if any update has the tag
-          if (filters.tag) {
-            const hasTag = rec.updates?.some(update => 
-              update.tags?.includes(filters.tag!)
-            );
-            if (!hasTag) return false;
-          }
-
-          return true;
-        });
+        const filteredRecs = chapter.recommendations.filter((rec) => matchesFilters(rec, filters));
 
         if (filteredRecs.length === 0) return null;
 
@@ -269,49 +352,14 @@ export function DashboardContent({
   // Calculate owner stats when owner filter is active
   const ownerStats = useMemo(() => {
     if (filters.owner === 'all') return null;
-    
-    // Get all recommendations for this owner (from all chapters)
-    const ownerRecs = chaptersWithRecs.flatMap(chapter => 
-      chapter.recommendations.filter(rec => 
-        rec.ownership.primary_owner === filters.owner ||
-        rec.ownership.co_owners?.includes(filters.owner)
-      )
+
+    // Get all recommendations for this owner (from all chapters), applying non-chapter filters
+    const filteredOwnerRecs = chaptersWithRecs.flatMap(chapter =>
+      chapter.recommendations.filter(rec => matchesFilters(rec, filters, { skipChapter: true }))
     );
-    
-    // Apply other filters (status, search, tag) but not chapter filter
-    const filteredOwnerRecs = ownerRecs.filter((rec) => {
-      // Status filter
-      if (filters.status !== 'all' && rec.overall_status.status !== filters.status) {
-        return false;
-      }
 
-      // Search filter
-      if (filters.search) {
-        const searchLower = filters.search.toLowerCase();
-        const matchesSearch =
-          rec.titles.short.toLowerCase().includes(searchLower) ||
-          rec.titles.long.toLowerCase().includes(searchLower) ||
-          rec.text.toLowerCase().includes(searchLower) ||
-          rec.code.toLowerCase().includes(searchLower);
-        if (!matchesSearch) return false;
-      }
+    const { completed, onTrack, offTrack, total } = countStatuses(filteredOwnerRecs);
 
-      // Tag filter
-      if (filters.tag) {
-        const hasTag = rec.updates?.some(update => 
-          update.tags?.includes(filters.tag!)
-        );
-        if (!hasTag) return false;
-      }
-
-      return true;
-    });
-    
-    const completed = filteredOwnerRecs.filter(r => r.overall_status.status === 'completed').length;
-    const onTrack = filteredOwnerRecs.filter(r => r.overall_status.status === 'on_track').length;
-    const offTrack = filteredOwnerRecs.filter(r => r.overall_status.status === 'off_track').length;
-    const total = filteredOwnerRecs.length;
-    
     return {
       owner: filters.owner,
       completed,
@@ -504,84 +552,12 @@ export function DashboardContent({
               const chapter = chapters.find(c => c.id === filters.chapter);
               const chapterData = chaptersWithRecs.find(c => c.id === filters.chapter);
               if (!chapter || !chapterData) return null;
-              
-              const completed = chapterData.recommendations.filter(r => r.overall_status.status === 'completed').length;
-              const onTrack = chapterData.recommendations.filter(r => r.overall_status.status === 'on_track').length;
-              const offTrack = chapterData.recommendations.filter(r => r.overall_status.status === 'off_track').length;
-              const total = chapterData.recommendations.length;
-              const colors = getChapterColors(chapter.id);
-              
-              const completedPercent = total > 0 ? (completed / total) * 100 : 0;
-              const onTrackPercent = total > 0 ? (onTrack / total) * 100 : 0;
-              
               return (
-                <div data-chapter-overview className={cn('p-6 rounded-lg border mb-6', colors.bg, colors.border)}>
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h2 className={cn('font-display font-bold text-2xl mb-2', colors.text)}>
-                        Chapter {chapter.id}: {chapter.title}
-                      </h2>
-                    </div>
-                    <button
-                      onClick={() => setFilters(prev => ({ ...prev, chapter: 'all' }))}
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                      title="Clear chapter filter"
-                    >
-                      <X size={20} />
-                    </button>
-                  </div>
-                  
-                  {/* Progress Bar with Columns */}
-                  <div className="space-y-3">
-                    <div className="flex w-full h-8 rounded-lg overflow-hidden border border-border/50">
-                      {completed > 0 && (
-                        <div
-                          className="bg-neon-green flex items-center justify-center text-white text-xs font-semibold transition-all duration-500"
-                          style={{ width: `${completedPercent}%` }}
-                        >
-                          {completedPercent > 5 && `${completed}`}
-                        </div>
-                      )}
-                      {onTrack > 0 && (
-                        <div
-                          className="bg-dark-green/30 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
-                          style={{ width: `${onTrackPercent}%` }}
-                        >
-                          {onTrackPercent > 5 && `${onTrack}`}
-                        </div>
-                      )}
-                      {offTrack > 0 && (
-                        <div
-                          className="bg-deep-red/30 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
-                          style={{ width: `${((offTrack / total) * 100)}%` }}
-                        >
-                          {((offTrack / total) * 100) > 5 && `${offTrack}`}
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Legend */}
-                    <div className="flex flex-wrap gap-4 text-xs">
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded bg-neon-green"></div>
-                        <span className="text-muted-foreground">Completed ({completed})</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded bg-dark-green/30"></div>
-                        <span className="text-muted-foreground">On Track ({onTrack})</span>
-                      </div>
-                      {offTrack > 0 && (
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-3 h-3 rounded bg-deep-red/30"></div>
-                          <span className="text-muted-foreground">Off Track ({offTrack})</span>
-                        </div>
-                      )}
-                      <div className="text-muted-foreground ml-auto">
-                        Total: {total}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <ChapterOverview
+                  chapter={chapter}
+                  chapterData={chapterData}
+                  onClear={() => setFilters(prev => ({ ...prev, chapter: 'all' }))}
+                />
               );
             })()}
 

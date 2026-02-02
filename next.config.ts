@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    optimizePackageImports: [
+      'lucide-react',
+      '@/components/shared',
+      '@/components/dashboard',
+      '@/components/recommendations',
+      '@/components/layout',
+    ],
+  },
   // Ensure @vercel/og is properly bundled for serverless deployments
   // Explicitly include @vercel/og and its native dependencies in the output file tracing
   outputFileTracingIncludes: {

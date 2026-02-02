@@ -160,23 +160,36 @@ export async function generateTimelineGrid(
     };
   }
   
-  // Find date range
+  // Find date range from actual data
   const dates = timelineItems.map(item => new Date(item.date));
   const minDate = new Date(Math.min(...dates.map(d => d.getTime())));
   const maxDate = new Date(Math.max(...dates.map(d => d.getTime())));
   
-  // Extend range
+  // Extend range backwards only
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   
   const startDate = new Date(minDate);
   startDate.setDate(startDate.getDate() - (weeksBack * 7));
   
-  const endDate = new Date(Math.max(maxDate.getTime(), today.getTime()));
-  endDate.setDate(endDate.getDate() + (weeksAhead * 7));
+  // Only extend to the last month that has data, not weeks ahead
+  // Find the last month with data
+  const lastMonth = new Date(maxDate);
+  lastMonth.setDate(1); // First day of the month
+  lastMonth.setMonth(lastMonth.getMonth() + 1); // Move to next month
+  lastMonth.setDate(0); // Last day of the original month
+  
+  // Use the last day of the last month with data as the end date
+  const endDate = new Date(lastMonth);
+  endDate.setHours(23, 59, 59, 999);
+  
+  // Get the week that contains this date
+  const endWeekStart = getWeekStart(endDate);
+  const endDateFinal = new Date(endWeekStart);
+  endDateFinal.setDate(endDateFinal.getDate() + 6); // End of that week
   
   // Generate weeks
-  const weeks = generateWeeks(startDate, endDate);
+  const weeks = generateWeeks(startDate, endDateFinal);
   
   // Get all owners
   const ownerSet = getOwnersFromTimelineItems(timelineItems);

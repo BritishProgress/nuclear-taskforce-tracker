@@ -14,7 +14,7 @@ interface TimelineViewToggleProps {
 
 export function TimelineViewToggle({ view, onViewChange }: TimelineViewToggleProps) {
   return (
-    <div className="flex items-center gap-2 p-1 rounded-lg border">
+    <div className="flex items-center gap-2 p-1 rounded-lg border" suppressHydrationWarning>
       <Button
         variant={view === 'list' ? 'default' : 'ghost'}
         size="sm"
@@ -23,6 +23,7 @@ export function TimelineViewToggle({ view, onViewChange }: TimelineViewTogglePro
           'gap-2',
           view === 'list' && 'bg-primary text-primary-foreground'
         )}
+        suppressHydrationWarning
       >
         <List size={16} />
         <span className="hidden sm:inline">List</span>
@@ -35,6 +36,7 @@ export function TimelineViewToggle({ view, onViewChange }: TimelineViewTogglePro
           'gap-2',
           view === 'grid' && 'bg-primary text-primary-foreground'
         )}
+        suppressHydrationWarning
       >
         <Grid size={16} />
         <span className="hidden sm:inline">Grid</span>

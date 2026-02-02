@@ -3,6 +3,10 @@
 import { TimelineHeaderControls } from './timeline-header-controls';
 
 export function TimelineHeaderControlsWrapper() {
-  return <TimelineHeaderControls />;
+  return (
+    <div suppressHydrationWarning>
+      <TimelineHeaderControls />
+    </div>
+  );
 }
 

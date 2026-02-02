@@ -30,7 +30,8 @@ export const RecommendationCard = memo(function RecommendationCard({
     [recommendation.delivery_timeline.revised_target_date, recommendation.delivery_timeline.target_date]
   );
   const days = useMemo(() => daysUntil(targetDate), [targetDate]);
-  const overdue = useMemo(() => isOverdue(targetDate), [targetDate]);
+  const isCompleted = recommendation.overall_status.status === 'completed';
+  const overdue = useMemo(() => !isCompleted && isOverdue(targetDate), [targetDate, isCompleted]);
   const latestUpdate = recommendation.updates?.[0];
 
   if (variant === 'compact') {

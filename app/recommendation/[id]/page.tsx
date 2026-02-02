@@ -303,6 +303,8 @@ export default async function RecommendationPage({ params }: PageProps) {
                     targetDate={recommendation.delivery_timeline.target_date}
                     revisedDate={recommendation.delivery_timeline.revised_target_date}
                     size="md"
+                    completed={recommendation.overall_status.status === 'completed'}
+                    completionDate={recommendation.overall_status.status === 'completed' ? recommendation.overall_status.last_updated : undefined}
                   />
                   <p className="text-sm text-muted-foreground">
                     <span className="font-medium">Original target:</span>{' '}

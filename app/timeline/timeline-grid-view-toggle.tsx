@@ -13,7 +13,7 @@ interface TimelineGridViewToggleProps {
 
 export function TimelineGridViewToggle({ mode, onModeChange }: TimelineGridViewToggleProps) {
   return (
-    <div className="flex items-center gap-1 p-0.5 rounded-lg border">
+    <div className="flex items-center gap-1 p-0.5 rounded-lg border" suppressHydrationWarning>
       <Button
         variant={mode === 'departments' ? 'default' : 'ghost'}
         size="sm"
@@ -22,6 +22,7 @@ export function TimelineGridViewToggle({ mode, onModeChange }: TimelineGridViewT
           'gap-1 px-2 h-7',
           mode === 'departments' && 'bg-primary text-primary-foreground'
         )}
+        suppressHydrationWarning
       >
         <Building2 size={14} />
         <span className="hidden sm:inline text-xs">Depts</span>
@@ -34,6 +35,7 @@ export function TimelineGridViewToggle({ mode, onModeChange }: TimelineGridViewT
           'gap-1 px-2 h-7',
           mode === 'recommendations' && 'bg-primary text-primary-foreground'
         )}
+        suppressHydrationWarning
       >
         <FileText size={14} />
         <span className="hidden sm:inline text-xs">Recs</span>

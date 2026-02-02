@@ -9,6 +9,8 @@ interface DeadlineIndicatorProps {
   revisedDate?: string | null;
   size?: 'sm' | 'md' | 'lg';
   showLabel?: boolean;
+  completed?: boolean;
+  completionDate?: string | null;
   className?: string;
 }
 
@@ -17,15 +19,25 @@ export function DeadlineIndicator({
   revisedDate,
   size = 'md',
   showLabel = true,
+  completed = false,
+  completionDate,
   className,
 }: DeadlineIndicatorProps) {
   const effectiveDate = revisedDate || targetDate;
   const days = daysUntil(effectiveDate);
-  const status = getDeadlineStatus(effectiveDate);
+  const rawStatus = getDeadlineStatus(effectiveDate);
+  const status = completed ? 'completed' as const : rawStatus;
   // Only show as revised if there's a revised date AND it's different from the original
   const isRevised = !!revisedDate && revisedDate !== targetDate;
 
   const statusConfig = {
+    completed: {
+      icon: CheckCircle,
+      bgClass: 'bg-neon-green/10',
+      textClass: 'text-dark-green',
+      borderClass: 'border-neon-green/30',
+      label: 'Completed',
+    },
     overdue: {
       icon: AlertTriangle,
       bgClass: 'bg-deep-red/10',
@@ -85,13 +97,22 @@ export function DeadlineIndicator({
         <Icon size={iconSizes[size]} className="shrink-0" />
         {showLabel && <span>{config.label}</span>}
       </div>
-      <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
-        {isRevised && (
-          <span className="line-through">{formatDate(targetDate)}</span>
+      <div className="flex flex-col gap-0.5 text-xs text-muted-foreground font-mono">
+        {completed && completionDate ? (
+          <>
+            <span>Completed: <span className="font-medium text-foreground">{formatDate(completionDate)}</span></span>
+            <span>Deadline: {formatDate(effectiveDate)}</span>
+          </>
+        ) : (
+          <div className="flex items-center gap-2">
+            {isRevised && (
+              <span className="line-through">{formatDate(targetDate)}</span>
+            )}
+            <span className={isRevised ? 'font-medium text-foreground' : ''}>
+              {formatDate(effectiveDate)}
+            </span>
+          </div>
         )}
-        <span className={isRevised ? 'font-medium text-foreground' : ''}>
-          {formatDate(effectiveDate)}
-        </span>
       </div>
     </div>
   );

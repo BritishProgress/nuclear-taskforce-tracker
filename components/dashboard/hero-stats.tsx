@@ -176,27 +176,37 @@ export const HeroStats = memo(function HeroStats({ counts, className, onStatusCl
             })}
 
             {/* Total stat - underneath on desktop, spans all 3 columns */}
-            {(() => {
-              const isClickable = !!onStatusClick;
-              const Component = isClickable ? 'button' : 'div';
-              return (
-                <Component
-                  onClick={isClickable ? () => onStatusClick?.(totalStat.status) : undefined}
-                  className={cn(
-                    'flex flex-row items-center justify-center gap-3 p-2 sm:p-3 rounded-xl transition-all w-full sm:col-span-3',
-                    totalStat.bgColor,
-                    isClickable && 'cursor-pointer hover:scale-105 hover:shadow-md active:scale-95'
-                  )}
-                >
-                  <span className={cn('text-xl sm:text-2xl font-bold font-mono', totalStat.color)}>
-                    {totalStat.value}
-                  </span>
-                  <span className="text-sm sm:text-sm text-muted-foreground">
-                    {totalStat.label}
-                  </span>
-                </Component>
-              );
-            })()}
+            {onStatusClick ? (
+              <button
+                onClick={() => onStatusClick(totalStat.status)}
+                className={cn(
+                  'flex flex-row items-center justify-center gap-3 p-2 sm:p-3 rounded-xl transition-all w-full sm:col-span-3',
+                  totalStat.bgColor,
+                  'cursor-pointer hover:scale-105 hover:shadow-md active:scale-95'
+                )}
+              >
+                <span className={cn('text-xl sm:text-2xl font-bold font-mono', totalStat.color)}>
+                  {totalStat.value}
+                </span>
+                <span className="text-sm sm:text-sm text-muted-foreground">
+                  {totalStat.label}
+                </span>
+              </button>
+            ) : (
+              <div
+                className={cn(
+                  'flex flex-row items-center justify-center gap-3 p-2 sm:p-3 rounded-xl transition-all w-full sm:col-span-3',
+                  totalStat.bgColor,
+                )}
+              >
+                <span className={cn('text-xl sm:text-2xl font-bold font-mono', totalStat.color)}>
+                  {totalStat.value}
+                </span>
+                <span className="text-sm sm:text-sm text-muted-foreground">
+                  {totalStat.label}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 

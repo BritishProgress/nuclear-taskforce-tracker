@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { TimelineGridData, TimelineGridCell, RecommendationGridCell, YearGroup } from '@/lib/timeline-grid';
 import { UPDATE_STATUS_LABELS, OWNER_FULL_NAMES } from '@/lib/constants';
@@ -14,31 +13,11 @@ import { TimelineGridViewToggle } from '@/app/timeline/timeline-grid-view-toggle
 import { useTimelineView } from '@/app/timeline/timeline-view-context';
 import { storeTimelineViewState } from '@/lib/url-utils';
 
-interface TimelineGridProps {
-  data: TimelineGridData;
-  viewMode?: 'departments' | 'recommendations';
-}
+const MobileContext = createContext(false);
 
-// Component to handle mobile tap behavior: first tap shows tooltip, second tap navigates
-function MobileAwareIconLink({ 
-  href, 
-  children, 
-  className,
-  tooltipContent
-}: { 
-  href: string; 
-  children: React.ReactNode;
-  className?: string;
-  tooltipContent: React.ReactNode;
-}) {
-  const router = useRouter();
-  const { view, gridViewMode } = useTimelineView();
-  const [hasTapped, setHasTapped] = useState(false);
+function useMobile() {
   const [isMobile, setIsMobile] = useState(false);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-
   useEffect(() => {
-    // Detect if device supports touch
     const checkMobile = () => {
       setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
     };
@@ -46,6 +25,30 @@ function MobileAwareIconLink({
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+  return isMobile;
+}
+
+interface TimelineGridProps {
+  data: TimelineGridData;
+  viewMode?: 'departments' | 'recommendations';
+}
+
+// Component to handle mobile tap behavior: first tap shows tooltip, second tap navigates
+function MobileAwareIconLink({
+  href,
+  children,
+  className,
+  tooltipContent
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  tooltipContent: React.ReactNode;
+}) {
+  const { view, gridViewMode } = useTimelineView();
+  const [hasTapped, setHasTapped] = useState(false);
+  const isMobile = useContext(MobileContext);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const handleClick = (e: React.MouseEvent) => {
     // Store timeline view state before navigation
@@ -276,6 +279,7 @@ function RecommendationCell({ cell, hasItems, isMonthEnd, isYearEnd, isEven }: {
 export function TimelineGrid({ data, viewMode = 'departments' }: TimelineGridProps) {
   const { weeks, owners, cells, recommendationCells, recommendations, weeksWithItems, monthGroups, yearGroups } = data;
   const { view, gridViewMode, setGridViewMode } = useTimelineView();
+  const isMobile = useMobile();
   
   // Use gridViewMode from context if available, otherwise fall back to prop
   const activeViewMode = gridViewMode || viewMode;
@@ -389,20 +393,15 @@ export function TimelineGrid({ data, viewMode = 'departments' }: TimelineGridPro
   );
 
   return (
+    <MobileContext.Provider value={isMobile}>
     <div className="w-full">
       <div className="mb-2 flex justify-end">
         <TimelineGridViewToggle mode={activeViewMode} onModeChange={setGridViewMode} />
       </div>
       <div className="relative overflow-x-auto overflow-y-auto w-full max-h-[calc(100vh-200px)]">
         {/* Departments View */}
-        <div 
-          className={cn(
-            'transition-all duration-300 ease-in-out',
-            !isRecommendationView 
-              ? 'opacity-100 translate-x-0' 
-              : 'absolute inset-0 opacity-0 -translate-x-4 pointer-events-none overflow-hidden'
-          )}
-        >
+        {!isRecommendationView && (
+        <div className="opacity-100 translate-x-0">
           <div className="inline-block min-w-full">
             <table className="border-collapse w-full border-spacing-0">
               {renderTableHeader('Department/Owner')}
@@ -447,16 +446,11 @@ export function TimelineGrid({ data, viewMode = 'departments' }: TimelineGridPro
             </table>
           </div>
         </div>
+        )}
 
         {/* Recommendations View */}
-        <div 
-          className={cn(
-            'transition-all duration-300 ease-in-out',
-            isRecommendationView 
-              ? 'opacity-100 translate-x-0' 
-              : 'absolute inset-0 opacity-0 translate-x-4 pointer-events-none overflow-hidden'
-          )}
-        >
+        {isRecommendationView && (
+        <div className="opacity-100 translate-x-0">
           <div className="inline-block min-w-full">
             <table className="border-collapse w-full border-spacing-0">
               {renderTableHeader('Recommendation')}
@@ -522,8 +516,10 @@ export function TimelineGrid({ data, viewMode = 'departments' }: TimelineGridPro
             </table>
           </div>
         </div>
+        )}
       </div>
     </div>
+    </MobileContext.Provider>
   );
 }
 

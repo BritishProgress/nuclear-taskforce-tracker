@@ -2121,11 +2121,11 @@ recommendations:
         - international
         - export_control
     ownership:
-      primary_owner: "ONR"
+      primary_owner: "DBT"
       co_owners:
         - "EA"
         - "DESNZ"
-        - "DBT"
+        - "ONR"
         - "FCDO"
       key_regulators:
         - "ONR"
@@ -2146,7 +2146,20 @@ recommendations:
       last_updated: "2025-12-01"
       confidence: "medium"
       summary: "Awaiting formal government response."
-    updates: []
+    updates:
+      - date: "2026-02-02"
+        status: "info"
+        tags: []
+        title: "Primary owner updated to DBT"
+        description: |
+          This page originally listed the ONR as primary owner. On this site we have tried to identify the primary owner from the order that organisations are listed in the report.
+
+          After discussion with the ONR, it has been explained that government has subsequently advised that the Department for Business and Trade is leading on Recommendation 43, and so we have updated this on the tracker accordingly.
+
+          This is because the changes proposed sit outside of ONR's vires and need to be performed by the relevant licensing authority. Export controls are administered principally by the Export Control Joint Unit (ECJU), with input sought from other governmental departments.
+        links: []
+        source:
+          type: "Correspondence"
     notes: |
       Addresses lengthy export licensing processes affecting supply chain participation.
 

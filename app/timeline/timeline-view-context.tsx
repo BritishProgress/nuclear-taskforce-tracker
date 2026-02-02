@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useLayoutEffect, ReactNode } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getTimelineViewState, storeTimelineViewState } from '@/lib/url-utils';
 
@@ -18,16 +18,44 @@ const TimelineViewContext = createContext<TimelineViewContextType | undefined>(u
 
 function TimelineViewProviderInner({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
+  
+  // Get URL params (available on both server and client)
   const urlView = searchParams.get('view') as ViewMode | null;
   const urlGridView = searchParams.get('gridView') as GridViewMode | null;
   
-  // Try to restore from URL params, then sessionStorage, then defaults
-  const storedState = typeof window !== 'undefined' ? getTimelineViewState() : {};
-  const initialView = urlView || storedState.view || 'list';
-  const initialGridView = urlGridView || storedState.gridViewMode || 'departments';
+  // Always initialize with URL params or defaults to match server render
+  // This ensures server and client render the same initial HTML
+  // We use a function initializer to ensure consistent behavior
+  const [view, setView] = useState<ViewMode>(() => urlView || 'list');
+  const [gridViewMode, setGridViewMode] = useState<GridViewMode>(() => urlGridView || 'departments');
+  const [isHydrated, setIsHydrated] = useState(false);
   
-  const [view, setView] = useState<ViewMode>(initialView);
-  const [gridViewMode, setGridViewMode] = useState<GridViewMode>(initialGridView);
+  // Immediately on mount (before paint), restore from sessionStorage if no URL params
+  // This runs synchronously before browser paint to minimize flash
+  useLayoutEffect(() => {
+    setIsHydrated(true);
+    
+    // Only check sessionStorage if URL params weren't provided
+    if (!urlView && !urlGridView && typeof window !== 'undefined') {
+      try {
+        const stored = sessionStorage.getItem('timelineViewState');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          // Only restore 'grid' if it was previously 'grid' (not default 'list')
+          // This ensures we default to 'list' unless user was explicitly on 'grid'
+          if (parsed.view === 'grid' && parsed.view !== view) {
+            setView('grid');
+          }
+          // Only restore gridViewMode if it's not the default 'departments'
+          if (parsed.gridViewMode && parsed.gridViewMode !== 'departments' && parsed.gridViewMode !== gridViewMode) {
+            setGridViewMode(parsed.gridViewMode);
+          }
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+    }
+  }, []); // Only run once on mount
   
   // Update state when URL params change
   useEffect(() => {
@@ -35,10 +63,12 @@ function TimelineViewProviderInner({ children }: { children: ReactNode }) {
     if (urlGridView) setGridViewMode(urlGridView);
   }, [urlView, urlGridView]);
   
-  // Store state changes
+  // Store state changes (only after hydration)
   useEffect(() => {
-    storeTimelineViewState(view, gridViewMode);
-  }, [view, gridViewMode]);
+    if (isHydrated) {
+      storeTimelineViewState(view, gridViewMode);
+    }
+  }, [view, gridViewMode, isHydrated]);
   
   return (
     <TimelineViewContext.Provider value={{ view, setView, gridViewMode, setGridViewMode }}>
