@@ -3,12 +3,15 @@
 // ========================================
 
 // Status Types
-export type OverallStatus = 
-  | 'not_started' 
-  | 'on_track' 
-  | 'off_track' 
-  | 'completed' 
-  | 'abandoned';
+export type OverallStatus =
+  | 'not_started'
+  | 'on_track'
+  | 'off_track'
+  | 'completed'
+  | 'abandoned'
+  | 'clarification_needed'
+  | 'watered_down'
+  | 'nearly';
 
 export type UpdateStatus = 
   | 'info' 
@@ -95,6 +98,7 @@ export interface Update {
   description: string;
   links?: Link[];
   source?: Source;
+  source_key?: string;
   impact_on_overall?: ImpactOnOverall;
 }
 
@@ -113,6 +117,14 @@ export interface Recommendation {
   overall_status: OverallStatusInfo;
   updates?: Update[];
   notes?: string;
+}
+
+// Source definitions for reusable source references
+export interface SourceDefinition {
+  title: string;
+  url: string;
+  type: string;
+  reference?: string;
 }
 
 // Root Data Structure
@@ -134,6 +146,7 @@ export interface OwnerInfo {
 export interface TaskforceData {
   last_updated?: string;
   status_scales: StatusScales;
+  sources?: Record<string, SourceDefinition>;
   chapters?: Chapter[];
   proposals: Proposal[];
   recommendations: Recommendation[];
@@ -155,6 +168,9 @@ export interface StatusCounts {
   off_track: number;
   completed: number;
   abandoned: number;
+  clarification_needed: number;
+  watered_down: number;
+  nearly: number;
   total: number;
 }
 

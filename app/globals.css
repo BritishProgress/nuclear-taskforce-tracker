@@ -30,6 +30,9 @@
   --color-status-progress: var(--color-orange);
   --color-status-risk: var(--color-light-red);
   --color-status-blocked: var(--color-dark-blue);
+  --color-status-clarification-needed: #C49A1A;
+  --color-status-nearly: #C49A1A;
+  --color-status-watered-down: var(--color-deep-red);
 
   /* Theme Variables */
   --color-background: var(--background);
@@ -231,6 +234,15 @@
   }
   .status-blocked {
     @apply bg-dark-blue/10 text-dark-blue border-dark-blue/30;
+  }
+  .status-clarification-needed {
+    @apply bg-[#C49A1A]/15 text-[#C49A1A] border-[#C49A1A]/25;
+  }
+  .status-nearly {
+    @apply bg-[#C49A1A]/15 text-[#C49A1A] border-[#C49A1A]/25;
+  }
+  .status-watered-down {
+    @apply bg-deep-red/10 text-deep-red border-deep-red/30;
   }
 }
 

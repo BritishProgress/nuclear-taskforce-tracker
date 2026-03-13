@@ -21,15 +21,28 @@ export async function GET(
     const chapters = await getChapters();
     const chapter = chapters.find(c => c.id === recommendation.chapter_id);
     
-    const statusLabel = recommendation.overall_status.status === 'completed' ? 'Completed' :
-                       recommendation.overall_status.status === 'on_track' ? 'On Track' :
-                       recommendation.overall_status.status === 'off_track' ? 'Off Track' :
-                       'Not Started';
-
-    const statusColor = recommendation.overall_status.status === 'completed' ? '#81F494' :
-                       recommendation.overall_status.status === 'on_track' ? '#0B4938' :
-                       recommendation.overall_status.status === 'off_track' ? '#B3063E' :
-                       '#6B7280';
+    const statusLabelMap: Record<string, string> = {
+      completed: 'Completed',
+      on_track: 'On Track',
+      off_track: 'Off Track',
+      not_started: 'Not Started',
+      abandoned: 'Abandoned',
+      clarification_needed: 'Clarification Needed',
+      watered_down: 'Watered Down',
+      nearly: 'Nearly',
+    };
+    const statusColorMap: Record<string, string> = {
+      completed: '#81F494',
+      on_track: '#0B4938',
+      off_track: '#B3063E',
+      not_started: '#6B7280',
+      abandoned: '#B3063E',
+      clarification_needed: '#C49A1A',
+      watered_down: '#B3063E',
+      nearly: '#C49A1A',
+    };
+    const statusLabel = statusLabelMap[recommendation.overall_status.status] || 'Not Started';
+    const statusColor = statusColorMap[recommendation.overall_status.status] || '#6B7280';
 
     const imageResponse = new ImageResponse(
       (

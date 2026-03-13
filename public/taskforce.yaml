@@ -6,6 +6,9 @@ status_scales:
     - off_track
     - completed
     - abandoned
+    - clarification_needed
+    - watered_down
+    - nearly
   update_status:
     - info
     - progress
@@ -13,6 +16,13 @@ status_scales:
     - off_track
     - completed
     - blocked
+
+sources:
+  govt_response_2026:
+    title: "Building Our Nuclear Nation: The Government's Response to the Nuclear Regulatory Review 2025"
+    url: "https://assets.publishing.service.gov.uk/media/69b32c14912f3f96bf687b51/building-our-nuclear-nation-government-response-nuclear-regulatory-review.pdf"
+    type: "Policy Paper"
+    reference: "DESNZ, March 2026"
 
 
 chapters:
@@ -299,9 +309,9 @@ recommendations:
       enables: [2, 3, 4, 5]
     overall_status:
       status: "completed"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response to the recommendation."
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Completed. Government going further by legislating ONR strategic factors."
     updates:
       - date: "2025-12-01"
         status: "completed"
@@ -344,8 +354,8 @@ recommendations:
     delivery_timeline:
       original_text: "End of 2027"
       target_date: "2027-12-31"
-      revised_target_date: null
-      notes: "Requires primary legislation"
+      revised_target_date: "2028-07-31"
+      notes: "Govt response: Commission fully functioning by Summer 2028; lead regulator as interim"
     implementation_type:
       - primary_legislation
       - organisational_change
@@ -354,10 +364,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response. Requires primary legislation."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Nuclear Commission by Summer 2028; lead regulator as interim."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Nuclear Commission confirmed"
+        description: |
+          The Government will legislate to establish the UK's first Nuclear Commission, which is to be fully functioning by Summer 2028. In the interim, a lead regulator model will be implemented as a bridging measure. The Government will scope out the Commission's objectives, roles, and composition, broadly following the Taskforce's proposed structure. This is a clear acceptance of the recommendation with a defined timeline, though the Summer 2028 target is later than the Taskforce's end-of-2027 aspiration.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Clear commitment to legislate for Nuclear Commission with defined timeline."
     notes: |
       Major structural reform. Would consolidate decision-making currently fragmented across regulators.
 
@@ -397,10 +417,20 @@ recommendations:
       enables: [2]
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Lead regulator model in place by 31 March 2026; 'super six' formed."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Lead regulator model on track"
+        description: |
+          The Government has already taken steps to implement this recommendation. ONR has written to other regulators to form a "super six" grouping of key nuclear regulators. The lead regulator model will be in place by 31 March 2026, meeting the original target date. The approach will cover both civil and defence sites on a site-based basis, which goes beyond the original scope. This is one of the most advanced recommendations in terms of delivery.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Lead regulator model already being implemented; on track for March 2026 deadline."
     notes: |
       Interim measure to be implemented before Commission for Nuclear Regulation is established.
 
@@ -432,8 +462,8 @@ recommendations:
     delivery_timeline:
       original_text: "March 2026"
       target_date: "2026-03-31"
-      revised_target_date: null
-      notes: null
+      revised_target_date: "2028-12-31"
+      notes: "Govt response: Initial changes Autumn 2026, full merger by end of 2028"
     implementation_type:
       - primary_legislation
       - organisational_change
@@ -442,10 +472,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. ONR-DNSR merger: initial changes Autumn 2026, full merger end 2028."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: ONR-DNSR merger confirmed"
+        description: |
+          The Government will consolidate the nuclear regulatory landscape by merging ONR and DNSR, directly following the Taskforce recommendation. Initial changes will be implemented by Autumn 2026 with full merger completed by the end of 2028. The Government will also strengthen collaboration between the Environment Agency and ONR. This is a significant structural reform that addresses the fragmentation the Taskforce identified, though the full merger timeline extends beyond the original March 2026 target.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Clear commitment to ONR-DNSR merger with phased timeline."
     notes: |
       Proposes merger of DNSR and ONR. Legislative and treaty issues to resolve.
 
@@ -475,8 +515,8 @@ recommendations:
     delivery_timeline:
       original_text: "March 2026"
       target_date: "2026-03-31"
-      revised_target_date: null
-      notes: null
+      revised_target_date: "2027-07-31"
+      notes: "Govt response: Strategic direction by Summer 2026, fully embedded by Summer 2027"
     implementation_type:
       - guidance
       - culture_change
@@ -485,10 +525,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Proportionality Action Plan: strategic direction by Summer 2026, full embedding by Summer 2027."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Proportionality Action Plan for safety cases"
+        description: |
+          The Government is implementing a Proportionality Action Plan to reset safety case development. Strategic direction will be agreed by the end of Summer 2026, with new methodologies fully embedded by Summer 2027. Oversight will be provided through the Nuclear Standards Forum and the Nuclear Regulatory Implementation Programme (NRIP). The approach aligns with the Taskforce recommendation to eliminate duplication and embed simplicity in the safety case regime.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Proportionality Action Plan with clear milestones and oversight mechanisms."
     notes: |
       Aims to simplify and shorten safety cases. Defence sector should realign with 3LoD model.
 
@@ -531,10 +581,20 @@ recommendations:
       enables: [7, 8]
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Expert panel examining ToR framework, reporting by June 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Expert advisory panel on Tolerability of Risk"
+        description: |
+          The Government will convene an expert advisory panel to examine the Tolerability of Risk (ToR) framework as applied to the nuclear sector. The panel will report by June 2026, aligning with the original target date. Notably, the Government has stated that the panel will not review the ToR framework itself or the Linear No-Threshold (LNT) model, which may limit the scope of reform compared to the Taskforce's ambition for Government to take direct responsibility for defining tolerability levels.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Expert panel commissioned; scope excludes ToR framework and LNT review."
     notes: |
       Requires government to take responsibility for defining tolerability of risk, currently left to regulators.
 
@@ -567,8 +627,8 @@ recommendations:
     delivery_timeline:
       original_text: "June 2026"
       target_date: "2026-06-30"
-      revised_target_date: null
-      notes: null
+      revised_target_date: "2026-12-31"
+      notes: "Govt response: SAPs review to be published December 2026"
     implementation_type:
       - guidance
     dependencies:
@@ -576,10 +636,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. ONR reviewing SAPs, consultation Summer 2026, publication December 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: SAPs review and guidance overhaul"
+        description: |
+          ONR is reviewing its Safety Assessment Principles (SAPs) with a consultation planned for Summer 2026 and publication in December 2026. The Environment Agency is also reviewing its guidance in parallel. Oversight of both processes will be provided through the Nuclear Standards Forum and NRIP. The timeline aligns well with R06's expert panel reporting, allowing revised tolerability definitions to inform the updated guidance, as the Taskforce envisaged.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "SAPs review underway with clear consultation and publication timeline."
     notes: |
       Should follow from R6. Review of SAPs, TAGs and numerical targets.
 
@@ -632,10 +702,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted with variation. Using HSWA section 15 (not section 50); consultation Summer 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Proportionality legislation via HSWA section 15"
+        description: |
+          The Government will introduce secondary legislation to define proportionality in the Health and Safety at Work Act, but will use section 15 rather than section 50 as the Taskforce recommended. This is a notable departure in legislative mechanism, though the intended policy outcome — clarifying what proportionality means and moving away from the 'gross disproportion' test — remains the same. Consultation with industry and trade unions is planned for Summer 2026. The choice of section 15 may have different legal implications that will need careful scrutiny.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Commitment to legislate confirmed, though using different HSWA section than recommended."
     notes: |
       Clarifies law on proportionality. Moves away from 'gross disproportion' test.
 
@@ -675,10 +755,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Pan-enterprise safety systems with portfolio-level risk management by end 2027."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Pan-enterprise safety systems"
+        description: |
+          The Government will establish pan-enterprise safety systems with portfolio-level risk management, directly addressing the Taskforce's recommendation. Delivery will be incremental through a combination of policy and legislative reform, with completion targeted by end 2027 — consistent with the original timeline. This is a significant commitment that would enable the defence and decommissioning sectors to manage risk across their entire portfolio rather than on a site-by-site basis, which has been a major source of inefficiency.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Incremental delivery through policy and legislative reform by end 2027."
     notes: |
       Addresses portfolio-level risk management across defence and decommissioning.
 
@@ -717,10 +807,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. CNI themed inspection underway; Safety Directors Forum leading industry initiatives."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Separating nuclear and conventional risks"
+        description: |
+          The Chief Nuclear Inspector (CNI) is conducting a themed inspection on nuclear site health and safety in construction, specifically examining the conflation of nuclear and conventional risks. ONR is establishing a forum for regulators and dutyholders to address this issue, and the Safety Directors Forum is considering industry-led initiatives. The approach is primarily non-legislative, relying on regulatory practice changes and industry collaboration rather than formal rule changes, which is appropriate given the recommendation's focus on dutyholder and regulator behaviour.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Active regulatory engagement through CNI themed inspection and industry forums."
     notes: |
       Addresses over-application of nuclear standards to conventional hazards on nuclear sites.
 
@@ -761,11 +861,22 @@ recommendations:
       depends_on: []
       enables: [12]
     overall_status:
-      status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      status: "clarification_needed"
+      last_updated: "2026-03-13"
+      confidence: "low"
+      summary: "Guidance-heavy approach; statutory underpinning unclear."
+    updates:
+      - date: "2026-03-13"
+        status: "risk"
+        tags: ["govt_response"]
+        title: "Government Response: Habitats Regulations — mostly guidance, limited legislation"
+        description: |
+          The Government is taking forward this recommendation through a combination of legislative and non-legislative measures, but is only legislating for one element: allowing mitigation to be considered at an earlier stage of the HRA process. The remaining four changes recommended by the Taskforce (removing need to prove a negative, redefining compensatory measures, establishing de minimis thresholds, and preventing duplicative HRA assessments) will be addressed through guidance only. The critical question is whether this guidance will have statutory underpinning — without it, the changes are vulnerable to legal challenge under retained EU law, which was a key reason the Taskforce recommended legislative reform in the first place.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_overall_status_to: "clarification_needed"
+          changes_confidence_to: "low"
+          notes: "Only one of five elements being legislated; guidance-only approach for remainder raises legal robustness concerns."
     notes: |
       Substantial reform of Habitats Regulations assessment regime.
 
@@ -802,11 +913,22 @@ recommendations:
       depends_on: [11]
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2025-12-01"
+      status: "watered_down"
+      last_updated: "2026-03-13"
       confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      summary: "Civil pathway uses EDPs rather than direct payments; defence pathway stronger."
+    updates:
+      - date: "2026-03-13"
+        status: "risk"
+        tags: ["govt_response"]
+        title: "Government Response: Environmental Delivery Plans instead of direct payments"
+        description: |
+          The Taskforce recommended a simple, direct payment mechanism to Natural England as an alternative to site-specific HRA compliance. The Government has instead chosen to route civil nuclear through Environmental Delivery Plans (EDPs) under the Nature Restoration Fund — a more complex and less proven mechanism that is still under development with EDPs expected by Autumn 2026. The defence sector is getting a stronger bespoke pathway, creating a two-track system. While EDPs may ultimately deliver the intended outcome, they introduce additional complexity and uncertainty compared to the Taskforce's streamlined proposal, and their effectiveness for nuclear projects is unproven.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_overall_status_to: "watered_down"
+          changes_confidence_to: "medium"
+          notes: "EDPs are more complex than the direct payment mechanism recommended; defence pathway is stronger than civil."
     notes: |
       Proposes payment to nature fund as alternative to site-specific HRA process.
 
@@ -848,10 +970,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. EORs for procedural proportionality by December 2027; interim improvements underway."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Environmental Outcome Reports for EIA proportionality"
+        description: |
+          The Government will use Environmental Outcome Reports (EORs) to deliver procedural proportionality in the EIA regime, with EORs to be in place by December 2027 — consistent with the original target date. In the interim, the Government is continuing improvements to the existing system including affirming the Rochdale Envelope approach. The use of EORs as the delivery mechanism is a broader reform vehicle than the Taskforce's specific EIA amendments, but should achieve the same outcomes of reducing duplication and embedding proportionality in environmental assessment.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "EOR mechanism accepted with December 2027 timeline; interim improvements already underway."
     notes: |
       Addresses growth in length and complexity of EIAs.
 
@@ -893,11 +1025,22 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2025-12-01"
+      status: "nearly"
+      last_updated: "2026-03-13"
       confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      summary: "Using EORs/EDPs for zones rather than bespoke legislation."
+    updates:
+      - date: "2026-03-13"
+        status: "progress"
+        tags: ["govt_response"]
+        title: "Government Response: Zone approach via EORs/EDPs rather than bespoke legislation"
+        description: |
+          The Taskforce recommended bespoke legislation to create Modular Low-Carbon Acceleration Zones with their own environmental assessment and contribution regimes. The Government has instead chosen to deliver the zone concept through the broader EDP and EOR framework — a more generic mechanism that applies across infrastructure types. The Government can legislate for bespoke procedural requirements for defined geographies within this framework, which achieves much of the intended outcome but through a different, less nuclear-specific route. The lack of bespoke legislation means nuclear zones will compete for attention within a wider reform programme.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_overall_status_to: "nearly"
+          changes_confidence_to: "medium"
+          notes: "Achieves much of the outcome through generic EOR/EDP framework rather than bespoke nuclear zone legislation."
     notes: |
       Enables fleet approach via zone-based strategic environmental assessment.
 
@@ -935,10 +1078,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. EORs to address duplicative assessment; Finch not overturned but limited applicability noted."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: One-and-done assessments via EORs; Finch judgment retained"
+        description: |
+          The EOR system will address the duplicative assessment problem, enabling assessments completed under one regime to satisfy requirements under others. However, the Government will NOT overturn the Finch judgment as the Taskforce recommended, instead noting its limited applicability to nuclear projects. Finch's implications will be considered in the development of the EOR framework. While the refusal to overturn Finch is a departure from the Taskforce's recommendation, the practical impact on nuclear may be limited given the specific circumstances of the judgment.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Duplicative assessment addressed through EORs; Finch retained but with limited nuclear impact."
     notes: |
       Addresses duplicative assessments and Supreme Court Finch judgment impact.
 
@@ -970,8 +1123,8 @@ recommendations:
     delivery_timeline:
       original_text: "June 2026"
       target_date: "2026-06-30"
-      revised_target_date: null
-      notes: null
+      revised_target_date: "2028-03-31"
+      notes: "Govt response: Central repository within two years (from March 2026)"
     implementation_type:
       - guidance
       - secondary_legislation
@@ -980,10 +1133,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Central data repository within two years; NDA data to be made available."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Environmental data repository and transparency"
+        description: |
+          The Government will publish environmental datasets in a central repository within two years, with developers required to contribute their data as a condition of approval. The NDA will make its survey data available to potential developers of its sites — a practical step that could significantly reduce duplicative surveying costs. The Government will also explore addressing the cost estimates over GBP 500,000 transparency requirement through the EOR framework. The two-year timeline for the central repository is reasonable but extends beyond the original June 2026 target date.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Central repository within two years; NDA data sharing confirmed; cost transparency via EORs."
     notes: |
       Addresses lack of central repository for environmental data.
 
@@ -1020,11 +1183,22 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2025-12-01"
+      status: "watered_down"
+      last_updated: "2026-03-13"
       confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      summary: "Speeding up permitting but rejecting statutory timelines."
+    updates:
+      - date: "2026-03-13"
+        status: "risk"
+        tags: ["govt_response"]
+        title: "Government Response: Statutory permitting timelines rejected"
+        description: |
+          The Taskforce recommended amending the Environmental Permitting Regulations to impose a statutory 42-day decision deadline with a single 56-day extension and appeal rights. The Government explicitly declined to legislate statutory timelines, arguing they "can lead to unintended outcomes." Instead, it is pursuing operational improvements including exempting low-risk activities from permitting, modernising the permitting process, a Priority Tracked Service for nuclear, a digital platform, and a Lead Environmental Regulator pilot. While these are welcome practical improvements, the absence of any hard statutory backstop means permitting delays lack a binding remedy, significantly weakening the original recommendation.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_overall_status_to: "watered_down"
+          changes_confidence_to: "medium"
+          notes: "Government explicitly rejected statutory timelines. Operational improvements are positive but lack enforceable backstop."
     notes: |
       Addresses long delays in environmental permitting decisions.
 
@@ -1066,10 +1240,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Government will introduce proportionate BNG framework for NSIPs."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Proportionate BNG framework for NSIPs confirmed"
+        description: |
+          The Government will introduce a proportionate and streamlined Biodiversity Net Gain framework for NSIPs, addressing all Taskforce recommendations (18 A-D). Smaller decommissioning activities under 0.2 hectares will be exempt from BNG requirements. DEFRA, DESNZ and NDA are continuing to gather evidence to inform the detailed framework design. This is a comprehensive acceptance of the Taskforce's position on BNG reform.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Full acceptance of BNG reform recommendations with clear exemption for small decommissioning."
     notes: |
       Addresses perverse outcomes of BNG for nuclear, especially decommissioning.
 
@@ -1104,10 +1288,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Government will legislate to constrain the Protected Landscapes Duty."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Protected Landscapes Duty to be constrained"
+        description: |
+          The Government will legislate to constrain the Protected Landscapes Duty, clarifying that NSIP developers are not required to pay financial compensation to comply with the duty. While landscape and nature considerations remain important, the commitment to legislate directly addresses the Taskforce's concern that the broad "seek to further" language was causing delays and litigation risk for nuclear projects. This is a clear acceptance of the recommendation's intent.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Clear commitment to legislate constraining the Protected Landscapes Duty."
     notes: |
       Addresses ambiguous 'seek to further' duty causing delays and litigation.
 
@@ -1149,11 +1343,22 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      status: "clarification_needed"
+      last_updated: "2026-03-13"
+      confidence: "low"
+      summary: "Extending JR reforms but cost caps and escalation mechanism not explicit."
+    updates:
+      - date: "2026-03-13"
+        status: "risk"
+        tags: ["govt_response"]
+        title: "Government Response: JR reforms extended but cost cap specifics unclear"
+        description: |
+          The Government will extend recent NSIP judicial review reforms to environmental permitting and nuclear site licensing, with consultation in Summer 2026 and legislation to follow. However, the response does not explicitly commit to the Taskforce's specific proposals on cost caps — cascading caps, the 70% crowdfunding cap, the 5x multiplier for decision-maker costs, automatic cost protection removal for misuse, and counsel certification requirements. These detailed mechanisms are subsumed within a broad commitment to "modernise the costs regime." The Government must be pressed to confirm whether the Summer 2026 consultation will cover these specific mechanisms.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_overall_status_to: "clarification_needed"
+          changes_confidence_to: "low"
+          notes: "Broad commitment to JR reform but specific cost cap mechanisms from the Taskforce not explicitly adopted."
     notes: |
       Addresses risk and cost of repeated judicial reviews on nuclear projects.
 
@@ -1188,10 +1393,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Government will bring forward targeted indemnification proposals by Summer 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Targeted indemnification for nuclear projects confirmed"
+        description: |
+          The Government will bring forward proposals for targeted indemnification for nuclear projects where planning consent is subject to judicial review. Proposals are expected by Summer 2026, with legislation to follow if required. This directly addresses the Taskforce's recommendation to protect developers from damages incurred while proceeding during JR, and the timeline is consistent with the original target date.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Clear commitment to targeted indemnification proposals by Summer 2026."
     notes: |
       Allows developers to proceed during judicial review without risk of damages.
 
@@ -1229,10 +1444,20 @@ recommendations:
       enables: [23]
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Section 304 commenced; stakeholder convening within six months."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Energy Act 2023 section 304 already commenced"
+        description: |
+          Section 304 of the Energy Act 2023 was commenced in December 2025, ahead of the Taskforce's target date. DESNZ is convening stakeholders within six months to progress implementation. The Government is also continuing to explore commencement of section 303, which would provide the secondary legislation framework. This recommendation is well advanced, with concrete delivery already underway.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Section 304 already commenced in December 2025; stakeholder engagement progressing."
     notes: |
       Implements PRC regime from Energy Act 2023. Potential £6bn savings for NDA.
 
@@ -1267,8 +1492,8 @@ recommendations:
     delivery_timeline:
       original_text: "December 2026"
       target_date: "2026-12-31"
-      revised_target_date: null
-      notes: null
+      revised_target_date: "2027-12-31"
+      notes: "Govt response: Parts b-d by end of 2026, parts a and e by end of 2027"
     implementation_type:
       - secondary_legislation
       - guidance
@@ -1277,10 +1502,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Five specific actions accepted with clear delivery timelines."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Decommissioning permitting reforms accepted"
+        description: |
+          The Government has accepted five specific actions under this recommendation. Parts b-d are to be completed by end of 2026, with parts a and e by end of 2027. Key deliverables include an exemption for stockpiling materials on nuclear sites, speeding up decision-making through constrained discretion for lead regulators, and new Permitted Development Rights for small-scale decommissioning activities. The staggered timeline reflects the varying legislative complexity of each sub-recommendation.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "All five sub-recommendations accepted with clear delivery timelines."
     notes: |
       Comprehensive reform of decommissioning permitting regime.
 
@@ -1317,11 +1552,22 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2025-12-01"
+      status: "nearly"
+      last_updated: "2026-03-13"
       confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      summary: "CNP strengthened in EN-1/EN-7 but NPPF commitment weaker than recommended."
+    updates:
+      - date: "2026-03-13"
+        status: "progress"
+        tags: ["govt_response"]
+        title: "Government Response: CNP strengthened in NPS but NPPF weaker"
+        description: |
+          The Critical National Priority has been strengthened in EN-1 and EN-7, which are already in force and broadly in line with the Taskforce's recommendations. However, the NPPF side is materially weaker: the Government offers only "substantial weight" and a "permanent tilt" rather than the full CNP presumption the Taskforce recommended. There is no commitment to a statutory National Development Management Policy for nuclear development below 50 MWe. The Government is responding to the NPPF consultation in Summer 2026, leaving scope for improvement but current commitments fall short.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_overall_status_to: "nearly"
+          changes_confidence_to: "medium"
+          notes: "EN-1/EN-7 strengthened as recommended but NPPF commitment materially weaker; no statutory NDMP for sub-50MW."
     notes: |
       Strengthens Critical National Priority policy for nuclear.
 
@@ -1367,10 +1613,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "New National Infrastructure Planning Guidance by Summer 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: DCO guidance update by Summer 2026"
+        description: |
+          The Government will publish new National Infrastructure Planning Guidance by Summer 2026. The updated guidance will address pre-application processes, minimise refusals at the acceptance stage, set a four-month expectation for the pre-examination period, and strengthen the Initial Assessment of Principal Issues (IAPI) to focus examinations on material matters. This is a comprehensive acceptance of the Taskforce's DCO streamlining recommendations, delivered through guidance rather than legislation.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Comprehensive DCO guidance update committed by Summer 2026."
     notes: |
       Addresses delays in DCO process caused by burdensome requirements.
 
@@ -1404,10 +1660,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Delivering through strengthened IAPI process under PIA reforms."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Interim reports via strengthened IAPI"
+        description: |
+          The Government is delivering this recommendation through a strengthened IAPI process. Under the Planning and Infrastructure Act, Examining Authorities will be required to make procedural decisions in light of the principal issues assessment. The IAPI will function as a near-equivalent to the Taskforce's proposed Interim Recommendation Report, providing early clarity on the Examining Authority's key areas of focus. While delivered through a different mechanism than the Taskforce proposed, the functional outcome is substantively similar.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "IAPI reforms deliver functional equivalent of interim recommendation reports."
     notes: |
       Provides early clarity on ExA views to streamline examination.
 
@@ -1443,10 +1709,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "New guidance encouraging 'minded to' letters by Summer 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Guidance on 'minded to' letters by Summer 2026"
+        description: |
+          The Government will issue new guidance by Summer 2026 encouraging the use of "minded to" letters during post-examination decision-making delays. It will not legislate a statutory requirement, taking the view that a statutory obligation would be an additional bureaucratic hurdle. While the Taskforce recommended legislation, the Government's approach via guidance still advances the core objective of improving transparency during decision-making delays. The effectiveness will depend on the strength of the guidance language and ministerial willingness to follow it.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Guidance approach rather than legislation, but commitment to Summer 2026 delivery is clear."
     notes: |
       Addresses delays in post-examination decision-making.
 
@@ -1489,10 +1765,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Updated guidance on Model Provisions by end of Summer 2027."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Model Provisions guidance by Summer 2027"
+        description: |
+          The Government will update guidance by end of Summer 2027 setting clear expectations for model provisions in DCOs. It prefers guidance over legislation to maintain flexibility, and will undertake stakeholder engagement to inform the design of standardised provisions. While the Taskforce recommended reinstating the Model Provisions through legislation, the Government's guidance-based approach still aims to reduce the treatment of every DCO as a bespoke exercise. The longer timeline (Summer 2027) gives space for comprehensive stakeholder input.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Guidance approach preferred over legislation; delivery by Summer 2027."
     notes: |
       Addresses treatment of every project as novel.
 
@@ -1527,10 +1813,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Exploring operational improvements to incorporate secondary consents into DCOs."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Section 150 not repealed but operational improvements explored"
+        description: |
+          The Government has considered the case for repealing section 150 of the Planning Act 2008 and discussed it with the Taskforce. Rather than repeal, it sees potential for increased incorporation of secondary consents into DCOs. It is exploring operational improvements through revised guidance to achieve the same "one stop shop" objective. While not the legislative approach the Taskforce recommended, the Government is actively seeking to reduce the fragmentation of consent requirements through practical means.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Not repealing section 150 but exploring operational improvements to consolidate consents."
     notes: |
       Reinforces 'one-stop-shop' purpose of Planning Act.
 
@@ -1566,10 +1862,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "New unit within Infrastructure Planning Delivery team for post-consent discharge."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: DCO requirements discharge unit being established"
+        description: |
+          DESNZ is establishing a new unit within the Infrastructure Planning Delivery team dedicated to post-consent discharge of DCO requirements. The unit will initially focus on nuclear power and electricity networks, with a view to expanding its remit over time. This directly implements the Taskforce's recommendation to centralise DCO requirements discharge, following the model of DfT's National Case Unit. The phased approach allows the unit to build capacity and processes before broadening its scope.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "New discharge unit being established within DESNZ, initially for nuclear and electricity networks."
     notes: |
       Centralises DCO requirements discharge. Based on DfT National Case Unit model.
 
@@ -1609,10 +1915,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "SDO route available; PIA direction power added; automatic consent after 8 weeks rejected."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: SDO route and PIA direction power confirmed"
+        description: |
+          Nuclear projects can already apply for Special Development Orders. The Planning and Infrastructure Act introduces a new power for NSIP applicants to request a direction out of the NSIP regime for appropriate projects. The Government does not accept automatic consent after eight weeks for local authority applications, but will consult on expanding the consultation direction for refusal notification. The core SDO pathway is available, though the automatic consent backstop the Taskforce recommended has been rejected.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "SDO route and PIA direction power available; automatic 8-week consent not accepted."
     notes: |
       Provides faster route for sub-50MW nuclear and decommissioning projects.
 
@@ -1641,8 +1957,8 @@ recommendations:
     delivery_timeline:
       original_text: "December 2026"
       target_date: "2026-12-31"
-      revised_target_date: null
-      notes: null
+      revised_target_date: "2027-03-31"
+      notes: "Govt response: All EN-7 updates within 12 months (from March 2026)"
     implementation_type:
       - policy
     dependencies:
@@ -1650,10 +1966,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Fleet criterion to be introduced in next EN-7 update."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Fleet criterion for EN-7 confirmed"
+        description: |
+          The Government will introduce a fleet criterion in the next EN-7 update, favouring impact mitigations that do not require functional design changes. This directly supports the Taskforce's vision for standardised fleet deployment of reactor designs. The updated EN-7 will be published for consultation as soon as practicable, with all EN-7 updates to be completed within 12 months. This is a clear acceptance that fleet approaches should be embedded in national planning policy for nuclear.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Fleet criterion confirmed for next EN-7 update, consultation as soon as practicable."
     notes: |
       Critical for enabling fleet approach to nuclear deployment.
 
@@ -1681,8 +2007,8 @@ recommendations:
     delivery_timeline:
       original_text: "December 2026"
       target_date: "2026-12-31"
-      revised_target_date: null
-      notes: null
+      revised_target_date: "2027-03-31"
+      notes: "Govt response: Implementation within 12 months (from March 2026)"
     implementation_type:
       - policy
       - guidance
@@ -1691,10 +2017,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Going further: alternatives to SUPDC for all reactor classes, not just LWRs."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Going further with SUPDC alternatives for all reactor classes"
+        description: |
+          The Government is going further than the Taskforce recommended. Rather than creating a pathway limited to light water reactors, it will work with ONR to bring forward alternatives to the Semi-Urban Population Density Criterion for all classes of reactor, targeted within 12 months. This broadens the scope significantly beyond the original recommendation, which focused on amending EN-7 for LWRs. The expanded approach should benefit advanced reactor developers who might otherwise have faced continued siting constraints under the original 1967 methodology.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Government exceeding recommendation scope by covering all reactor classes, not just LWRs."
     notes: |
       Addresses outdated SUPDC methodology from 1967 that restricts siting.
 
@@ -1735,10 +2071,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Alternative OPZ arrangements identified; REPPIR19 amendments and appeals process planned."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Alternative OPZ arrangements and REPPIR19 reform"
+        description: |
+          Policy delivery is already underway. Experts have identified alternative OPZ arrangements, and options are being prepared for both GW-scale and SMR/AMR reactors. The Government will amend REPPIR19 and introduce an appeals process for disputed DEPZ determinations. This aligns closely with the Taskforce recommendation and demonstrates that technical groundwork has progressed ahead of the formal response, giving confidence in the December 2026 delivery timeline.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Delivery already underway with expert analysis complete; REPPIR19 amendments confirmed."
     notes: |
       Addresses outdated default planning zones that don't reflect modern reactor designs.
 
@@ -1779,10 +2125,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. GBE-N to submit justification application to DEFRA within six months for all LWRs."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Regulatory justification application within six months"
+        description: |
+          The Government will work with GBE-N to submit a regulatory justification application to DEFRA within six months for all Light Water Reactors. It is going further by using the experience gained from this process to streamline justification for other reactor classes, with legislative change if needed. This represents a concrete and time-bound commitment that directly addresses the Taskforce's concern about duplicative justification requirements, and the extension to non-LWR technologies exceeds the original scope.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Six-month timeline for LWR justification application; streamlining for other reactor classes planned."
     notes: |
       Eliminates duplicative justification process for LWRs.
 
@@ -1818,11 +2174,22 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      status: "abandoned"
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Government declined to legislate; NPS and s106 guidance only."
+    updates:
+      - date: "2026-03-13"
+        status: "off_track"
+        tags: ["govt_response"]
+        title: "Government Response: Declined to legislate on community benefits"
+        description: |
+          The Government has declined to implement this recommendation. It will not legislate to make community benefits a material planning consideration, arguing that doing so would risk novel legal challenges, create delay, and undermine long-established planning principles. Instead, the Government is strengthening policy expectations in the NPS framework and considering changes to s106 guidance. This falls fundamentally short of the Taskforce's recommendation, which specifically called for primary legislation to override existing case law prohibiting the consideration of community benefits in planning decisions.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_overall_status_to: "abandoned"
+          changes_confidence_to: "high"
+          notes: "Government explicitly declined to legislate. NPS and s106 guidance changes do not constitute the legal reform recommended."
     notes: |
       Clarifies treatment of community benefits in planning decisions.
 
@@ -1864,10 +2231,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. GDF getting CNP status; NDA statutory undertaker legislation; new PDRs; all by Dec 2027."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Strategic approach to GDF planning reform"
+        description: |
+          The Government is taking a strategic approach across all elements of this recommendation. The GDF will receive Critical National Priority status, and primary legislation is being pursued to grant the NDA statutory undertaker status with compulsory purchase powers. New permitted development rights will be introduced via GPDO amendment, and an alternative planning route for deep borehole investigations is being assessed. All actions are targeted for completion by December 2027, aligning with the original Taskforce timeline.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Comprehensive acceptance across all four sub-recommendations with December 2027 delivery target."
     notes: |
       Addresses delays in GDF development. NISTA gave GDF a "red" rating.
 
@@ -1899,8 +2276,8 @@ recommendations:
     delivery_timeline:
       original_text: "June 2026 then ongoing"
       target_date: "2026-06-30"
-      revised_target_date: null
-      notes: "Ongoing requirement after initial implementation"
+      revised_target_date: "2026-10-31"
+      notes: "Govt response: Reports within four months (July 2026); CEs at NRIP from Autumn 2026"
     implementation_type:
       - culture_change
       - governance
@@ -1909,10 +2286,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Chancellor's letter sent; leaders to report within four months; CEs at NRIP from Autumn 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Chancellor's letter and culture change mandate"
+        description: |
+          The Government wholly supports this recommendation. The Chancellor has sent an open letter to sector leaders, who have been asked to report within four months on culture change plans, process improvements, risk appetite, and contractual incentive alignment. Chief Executives will attend the Nuclear Regulatory Implementation Panel from Autumn 2026 onwards. This creates a direct accountability mechanism from board level to the highest levels of government, which is stronger than the Taskforce's recommendation for boards to self-assess culture.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Chancellor's letter creates direct accountability; four-month reporting deadline set."
     notes: |
       Critical for addressing cultural barriers to delivery identified throughout report.
 
@@ -1954,10 +2341,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Interchange scaling to 160 placements/year; new training on risk, digital, human factors by Sep 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Skills plan with scaled interchange and new training elements"
+        description: |
+          Implementation is proceeding through the Nuclear Skills Plan. The Interchange programme is being scaled dramatically from 20 to 160 placements per year by 2029-30, and a Sector Experts into Training programme is being established. New training elements covering risk tolerance, digital skills, and human factors will be in place by September 2026. This directly addresses the Taskforce's emphasis on broadening workforce experience through secondments and strengthening non-technical skills, with concrete scaling targets that demonstrate serious commitment to delivery.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Interchange scaling from 20 to 160 placements; new training elements by September 2026."
     notes: |
       Addresses skills gap. Sector needs ~40,000 new employees over five years.
 
@@ -1998,10 +2395,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Data gathering underway; implementation plan by Summer 2026; defence aligned with ONR-DNSR merger."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Remuneration data gathering and implementation plan"
+        description: |
+          Work is underway to gather data on roles and remuneration across the regulatory bodies, with an implementation plan due by Summer 2026. This will complement improvements already being made by DEFRA to Environment Agency terms. Defence-side implementation will be aligned with the ONR-DNSR merger process. While the commitment is clear, the Summer 2026 implementation plan is a planning milestone rather than delivery, so the actual improvements to pay and conditions will follow later.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Data gathering underway; implementation plan by Summer 2026."
     notes: |
       Addresses difficulty attracting and retaining SQEP in regulatory bodies.
 
@@ -2042,10 +2449,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Nuclear digital programme for AI/digital; university network; skills emphasis during 2026."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Nuclear digital programme and university network"
+        description: |
+          The Government is establishing a nuclear digital programme focused on AI and digital technologies, alongside a university network for nuclear safety and regulation research. The Nuclear Skills Plan will emphasise digital skills during 2026, with doctoral training, post-doctoral research, and upskilling programmes being developed. This is a comprehensive response that matches the Taskforce's vision of a jointly funded Government-Industry programme, and the university network adds an academic research dimension not explicitly in the original recommendation.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Digital programme established; university network and skills emphasis add breadth to response."
     notes: |
       Covers digitised safety cases, AI, data-centric engineering, robotics.
 
@@ -2083,8 +2500,8 @@ recommendations:
     delivery_timeline:
       original_text: "June 2026"
       target_date: "2026-06-30"
-      revised_target_date: null
-      notes: null
+      revised_target_date: "2026-10-31"
+      notes: "Govt response: Joint strategy and delivery plan by Autumn 2026"
     implementation_type:
       - strategic_direction
       - funding
@@ -2093,10 +2510,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Joint strategy by Autumn 2026; £1.3m for mutual recognition; Atlantic Partnership sprint."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: International strategy with funding and mutual recognition"
+        description: |
+          A joint Government-Regulator international strategy will be developed by Autumn 2026. The Government is providing £1.3 million in funding to ONR and the Environment Agency to develop a mutual recognition framework with trusted international regulators. ONR has launched a sprint project for the Atlantic Partnership, and a template for European regulator collaboration on SMRs is being developed. This represents a well-funded, multi-track approach to international harmonisation that aligns with the Taskforce's ambition to leverage foreign regulatory approvals and accelerate design assessments.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "£1.3m funding committed; multiple workstreams including Atlantic Partnership and European SMR template."
     notes: |
       Aims for GDA decisions within 2 years, licensing within 1 year.
 
@@ -2143,9 +2570,9 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Five-year licences as standard; ten-year under consideration; ECJU dedicated contacts; 20-day target."
     updates:
       - date: "2026-02-02"
         status: "info"
@@ -2160,6 +2587,16 @@ recommendations:
         links: []
         source:
           type: "Correspondence"
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Export licence reform with five-year standard and risk-based approach"
+        description: |
+          Five-year export licences are already being encouraged as standard, and ten-year licences are under consideration. ECJU will establish dedicated contacts for nuclear companies, and a 20-day processing target will be applied across the system. The Government is adopting the risk-based, proportionate approach the Taskforce recommended. This response addresses all major elements of R43, including the dedicated ECJU point of contact and streamlined processing timelines that were central to the original recommendation.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Five-year licences already encouraged; ten-year under consideration; 20-day processing target set."
     notes: |
       Addresses lengthy export licensing processes affecting supply chain participation.
 
@@ -2200,10 +2637,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Legislative amendments planned for reformed charging model; interim admin improvements."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: ONR charging model reform requiring legislative amendments"
+        description: |
+          ONR will revise its charging model, which will require amendments to multiple pieces of legislation. The reformed model is designed to deliver financial independence, governance assurance, and fee predictability for dutyholders. In the interim, immediate improvements to existing administrative processes are being made. This is a significant commitment given the legislative complexity involved, and the dual-track approach of interim improvements alongside structural reform demonstrates awareness that the current cost-recovery model constrains ONR capacity.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Legislative amendments confirmed for reformed charging model; interim admin improvements underway."
     notes: |
       Addresses ONR funding model constraints.
 
@@ -2236,8 +2683,8 @@ recommendations:
     delivery_timeline:
       original_text: "March 2026"
       target_date: "2026-03-31"
-      revised_target_date: null
-      notes: "Responses due September 2026"
+      revised_target_date: "2026-09-30"
+      notes: "Govt response: Leaders to set out plans within six months (September 2026)"
     implementation_type:
       - contracting
       - culture_change
@@ -2246,10 +2693,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Chancellor's letter sent; proportionate ALARP contracting being explored; six-month response window."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Chancellor's letter and proportionate ALARP contracting"
+        description: |
+          The Chancellor has sent an open letter declaring nuclear a strategic national priority and setting expectations of proportionate, outcome-focused regulation. Leaders have been asked to produce six-month plans addressing gold-plating, risk appetite, culture change, and contractual alignment. The Government will also explore contracting mechanisms that incentivise proportionate ALARP solutions. This directly implements the Taskforce's recommendation for a Chancellor's letter and contracting reform, with the six-month response window creating a clear accountability checkpoint.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Chancellor's letter sent; six-month plans required from sector leaders."
     notes: |
       Addresses lack of sharp financial incentives to control costs.
 
@@ -2288,10 +2745,20 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: []
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. Credible projects get clarity; NDA/GBE-N 28-day notification; Advanced Nuclear Framework Pipeline."
+    updates:
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: Land availability clarity for credible projects"
+        description: |
+          Credible projects will receive clarity on land availability, with NDA and GBE-N required to notify Government of approaches and a 28-day response commitment from Government. The Advanced Nuclear Framework Pipeline will serve as the mechanism for demonstrating project credibility. The Government is also encouraging constructive private landowner engagement. This implements the Taskforce's 28-day response mechanism, though the addition of a credibility threshold through the Pipeline framework represents a new gating mechanism not in the original recommendation.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "28-day response commitment confirmed; credibility demonstrated via Advanced Nuclear Framework Pipeline."
     notes: |
       Addresses difficulty obtaining confirmation on potential land use for new entrants.
 
@@ -2326,10 +2793,10 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2025-12-01"
-      confidence: "medium"
-      summary: "Awaiting formal government response."
-    updates: 
+      last_updated: "2026-03-13"
+      confidence: "high"
+      summary: "Accepted. NRIP established; expert council chaired by DESNZ; first meeting June 2026; reports to PM's office."
+    updates:
       - date: "2025-12-04"
         status: "info"
         title: "Ed Miliband confirms the Government will produce its implementation plan within 3 months"
@@ -2341,3 +2808,13 @@ recommendations:
             url: "https://x.com/BritishProgress/status/1996560187927269572"
         source:
           type: "Speech"
+      - date: "2026-03-13"
+        status: "on_track"
+        tags: ["govt_response"]
+        title: "Government Response: NRIP established with expert council"
+        description: |
+          The Nuclear Regulatory Implementation Panel (NRIP) has been established as an expert council chaired by DESNZ, with senior figures from government, regulators, industry, and the original Taskforce. It will meet at least twice yearly, with the first meeting scheduled for June 2026. NRIP reports to the PM's office, the Secretary of State for ESNZ, and the Defence Secretary. This directly implements the Taskforce's recommendation for a high-level oversight body, and the inclusion of Taskforce members provides continuity and accountability for the reform programme.
+        source_key: "govt_response_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "NRIP formally established; first meeting June 2026; reports to PM's office."

@@ -14,15 +14,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getRecommendationById, getRecommendations, getChapters } from '@/lib/data';
 import { getChapterColors, TWITTER_SITE_HANDLE, TWITTER_CREATOR_HANDLE } from '@/lib/constants';
-import { 
-  ArrowLeft, 
-  FileText, 
-  Users, 
-  Calendar, 
+import {
+  ArrowLeft,
+  FileText,
+  Users,
+  Calendar,
   Target,
   Building,
   Layers,
   Link2,
+  History,
 } from 'lucide-react';
 
 interface PageProps {
@@ -306,10 +307,22 @@ export default async function RecommendationPage({ params }: PageProps) {
                     completed={recommendation.overall_status.status === 'completed'}
                     completionDate={recommendation.overall_status.status === 'completed' ? recommendation.overall_status.last_updated : undefined}
                   />
-                  <p className="text-sm text-muted-foreground">
-                    <span className="font-medium">Original target:</span>{' '}
-                    {recommendation.delivery_timeline.original_text}
-                  </p>
+                  {recommendation.delivery_timeline.revised_target_date && recommendation.delivery_timeline.revised_target_date !== recommendation.delivery_timeline.target_date ? (
+                    <div className="rounded-md border border-border bg-muted/30 p-3 space-y-1.5">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <History size={12} />
+                        <span className="font-medium">Original Taskforce deadline</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {recommendation.delivery_timeline.original_text}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-sm text-muted-foreground">
+                      <span className="font-medium">Taskforce target:</span>{' '}
+                      {recommendation.delivery_timeline.original_text}
+                    </p>
+                  )}
                   {recommendation.delivery_timeline.notes && (
                     <p className="text-sm text-muted-foreground">
                       <span className="font-medium">Notes:</span>{' '}

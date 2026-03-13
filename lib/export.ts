@@ -508,12 +508,15 @@ export async function exportDepartmentsToCSV(): Promise<string> {
       rec => rec.ownership.primary_owner === owner || rec.ownership.co_owners?.includes(owner)
     );
     
-    const statusCounts = {
+    const statusCounts: Record<string, number> = {
       not_started: 0,
       on_track: 0,
       off_track: 0,
       completed: 0,
       abandoned: 0,
+      clarification_needed: 0,
+      watered_down: 0,
+      nearly: 0,
     };
     
     let totalDays = 0;
@@ -586,12 +589,15 @@ export async function exportDepartmentsToExcel(): Promise<Buffer> {
       rec => rec.ownership.primary_owner === owner || rec.ownership.co_owners?.includes(owner)
     );
     
-    const statusCounts = {
+    const statusCounts: Record<string, number> = {
       not_started: 0,
       on_track: 0,
       off_track: 0,
       completed: 0,
       abandoned: 0,
+      clarification_needed: 0,
+      watered_down: 0,
+      nearly: 0,
     };
     
     let totalDays = 0;

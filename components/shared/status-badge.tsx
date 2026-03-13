@@ -13,6 +13,9 @@ import {
   TrendingUp,
   AlertTriangle,
   Ban,
+  HelpCircle,
+  ArrowDownCircle,
+  Clock,
 } from 'lucide-react';
 
 const OVERALL_STATUS_ICON_MAP = {
@@ -21,6 +24,9 @@ const OVERALL_STATUS_ICON_MAP = {
   off_track: AlertCircle,
   completed: CheckCircle,
   abandoned: XCircle,
+  clarification_needed: HelpCircle,
+  watered_down: ArrowDownCircle,
+  nearly: Clock,
 };
 
 const UPDATE_STATUS_ICON_MAP = {

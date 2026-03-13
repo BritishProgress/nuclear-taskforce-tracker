@@ -1,5 +1,19 @@
 import { OverallStatus, UpdateStatus } from './types';
 
+// Status group mappings for the three hero categories
+// Every OverallStatus must appear in exactly one group
+export const STATUS_GROUPS: Record<'completed' | 'on_track' | 'off_track', OverallStatus[]> = {
+  completed: ['completed'],
+  on_track: ['on_track', 'nearly'],
+  off_track: ['off_track', 'clarification_needed', 'watered_down', 'abandoned', 'not_started'],
+};
+
+/** Given a filter status, return the array of statuses it should match */
+export function getStatusGroup(status: OverallStatus): OverallStatus[] | null {
+  const group = STATUS_GROUPS[status as keyof typeof STATUS_GROUPS];
+  return group ?? null;
+}
+
 // Status display names
 export const OVERALL_STATUS_LABELS: Record<OverallStatus, string> = {
   not_started: 'Not Started',
@@ -7,6 +21,9 @@ export const OVERALL_STATUS_LABELS: Record<OverallStatus, string> = {
   off_track: 'Off Track',
   completed: 'Completed',
   abandoned: 'Abandoned',
+  clarification_needed: 'Clarification Needed',
+  watered_down: 'Watered Down',
+  nearly: 'Nearly',
 };
 
 export const UPDATE_STATUS_LABELS: Record<UpdateStatus, string> = {
@@ -26,6 +43,9 @@ export const OVERALL_STATUS_CLASSES: Record<OverallStatus, string> = {
   off_track: 'status-off-track',
   completed: 'status-completed',
   abandoned: 'status-abandoned',
+  clarification_needed: 'status-clarification-needed',
+  watered_down: 'status-watered-down',
+  nearly: 'status-nearly',
 };
 
 export const UPDATE_STATUS_CLASSES: Record<UpdateStatus, string> = {
@@ -45,6 +65,9 @@ export const OVERALL_STATUS_ICONS: Record<OverallStatus, string> = {
   off_track: 'AlertCircle',
   completed: 'CheckCircle',
   abandoned: 'XCircle',
+  clarification_needed: 'HelpCircle',
+  watered_down: 'ArrowDownCircle',
+  nearly: 'Clock',
 };
 
 export const UPDATE_STATUS_ICONS: Record<UpdateStatus, string> = {

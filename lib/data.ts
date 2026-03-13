@@ -191,13 +191,16 @@ export async function getStatusCounts(): Promise<StatusCounts> {
     off_track: 0,
     completed: 0,
     abandoned: 0,
+    clarification_needed: 0,
+    watered_down: 0,
+    nearly: 0,
     total: data.recommendations.length,
   };
-  
+
   for (const rec of data.recommendations) {
     counts[rec.overall_status.status]++;
   }
-  
+
   return counts;
 }
 
@@ -276,7 +279,14 @@ export async function getRecentUpdates(limit: number = 10): Promise<RecentUpdate
   }
   
   return updates
-    .sort((a, b) => new Date(b.update.date).getTime() - new Date(a.update.date).getTime())
+    .sort((a, b) => {
+      const dateDiff = new Date(b.update.date).getTime() - new Date(a.update.date).getTime();
+      if (dateDiff !== 0) return dateDiff;
+      // Same day: prioritise updates that change overall status
+      const aChanges = a.update.impact_on_overall?.changes_overall_status_to ? 1 : 0;
+      const bChanges = b.update.impact_on_overall?.changes_overall_status_to ? 1 : 0;
+      return bChanges - aChanges;
+    })
     .slice(0, limit);
 }
 
@@ -417,6 +427,9 @@ export async function getOwnersWithMoreThanNRecommendations(minCount: number = 1
         off_track: 0,
         completed: 0,
         abandoned: 0,
+        clarification_needed: 0,
+        watered_down: 0,
+        nearly: 0,
         total: recommendations.length,
       };
       

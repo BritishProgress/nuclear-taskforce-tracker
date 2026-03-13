@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { HeroStats, FilterControls, DeadlineSidebar } from '@/components/dashboard';
 import { ChapterSection } from '@/components/recommendations';
 import { ExportButton } from '@/components/shared/export-button';
-import { getChapterColors } from '@/lib/constants';
+import { getChapterColors, getStatusGroup } from '@/lib/constants';
 import { X, ChevronDown, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -23,7 +23,16 @@ import {
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 function matchesFilters(rec: Recommendation, filters: FilterState, { skipChapter = false, skipOwner = false } = {}): boolean {
-  if (filters.status !== 'all' && rec.overall_status.status !== filters.status) return false;
+  if (filters.status !== 'all') {
+    const group = getStatusGroup(filters.status);
+    if (group) {
+      // Filter is a group key (completed/on_track/off_track) - match any status in the group
+      if (!group.includes(rec.overall_status.status)) return false;
+    } else {
+      // Filter is an individual status - exact match
+      if (rec.overall_status.status !== filters.status) return false;
+    }
+  }
   if (!skipOwner && filters.owner !== 'all') {
     const hasOwner = rec.ownership.primary_owner === filters.owner || rec.ownership.co_owners?.includes(filters.owner);
     if (!hasOwner) return false;
@@ -45,14 +54,17 @@ function matchesFilters(rec: Recommendation, filters: FilterState, { skipChapter
 }
 
 function countStatuses(recs: Recommendation[]) {
-  let completed = 0, onTrack = 0, offTrack = 0;
+  let completed = 0, onTrack = 0, offTrack = 0, clarificationNeeded = 0, wateredDown = 0, nearly = 0;
   for (const r of recs) {
     const s = r.overall_status.status;
     if (s === 'completed') completed++;
     else if (s === 'on_track') onTrack++;
     else if (s === 'off_track') offTrack++;
+    else if (s === 'clarification_needed') clarificationNeeded++;
+    else if (s === 'watered_down') wateredDown++;
+    else if (s === 'nearly') nearly++;
   }
-  return { completed, onTrack, offTrack, total: recs.length };
+  return { completed, onTrack, offTrack, clarificationNeeded, wateredDown, nearly, total: recs.length };
 }
 
 interface ChapterOverviewProps {
@@ -62,11 +74,14 @@ interface ChapterOverviewProps {
 }
 
 function ChapterOverview({ chapter, chapterData, onClear }: ChapterOverviewProps) {
-  const { completed, onTrack, offTrack, total } = countStatuses(chapterData.recommendations);
+  const { completed, onTrack, offTrack, clarificationNeeded, wateredDown, nearly, total } = countStatuses(chapterData.recommendations);
   const colors = getChapterColors(chapter.id);
   const completedPercent = total > 0 ? (completed / total) * 100 : 0;
   const onTrackPercent = total > 0 ? (onTrack / total) * 100 : 0;
   const offTrackPercent = total > 0 ? (offTrack / total) * 100 : 0;
+  const clarificationPercent = total > 0 ? (clarificationNeeded / total) * 100 : 0;
+  const wateredDownPercent = total > 0 ? (wateredDown / total) * 100 : 0;
+  const nearlyPercent = total > 0 ? (nearly / total) * 100 : 0;
 
   return (
     <div data-chapter-overview className={cn('p-6 rounded-lg border mb-6', colors.bg, colors.border)}>
@@ -104,6 +119,30 @@ function ChapterOverview({ chapter, chapterData, onClear }: ChapterOverviewProps
               {onTrackPercent > 5 && `${onTrack}`}
             </div>
           )}
+          {nearly > 0 && (
+            <div
+              className="bg-[#C49A1A]/25 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
+              style={{ width: `${nearlyPercent}%` }}
+            >
+              {nearlyPercent > 5 && `${nearly}`}
+            </div>
+          )}
+          {clarificationNeeded > 0 && (
+            <div
+              className="bg-[#C49A1A]/15 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
+              style={{ width: `${clarificationPercent}%` }}
+            >
+              {clarificationPercent > 5 && `${clarificationNeeded}`}
+            </div>
+          )}
+          {wateredDown > 0 && (
+            <div
+              className="bg-deep-red/20 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
+              style={{ width: `${wateredDownPercent}%` }}
+            >
+              {wateredDownPercent > 5 && `${wateredDown}`}
+            </div>
+          )}
           {offTrack > 0 && (
             <div
               className="bg-deep-red/30 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
@@ -124,6 +163,24 @@ function ChapterOverview({ chapter, chapterData, onClear }: ChapterOverviewProps
             <div className="w-3 h-3 rounded bg-dark-green/30"></div>
             <span className="text-muted-foreground">On Track ({onTrack})</span>
           </div>
+          {nearly > 0 && (
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-[#C49A1A]/25"></div>
+              <span className="text-muted-foreground">Nearly ({nearly})</span>
+            </div>
+          )}
+          {clarificationNeeded > 0 && (
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-[#C49A1A]/15"></div>
+              <span className="text-muted-foreground">Clarification Needed ({clarificationNeeded})</span>
+            </div>
+          )}
+          {wateredDown > 0 && (
+            <div className="flex items-center gap-1.5">
+              <div className="w-3 h-3 rounded bg-deep-red/20"></div>
+              <span className="text-muted-foreground">Watered Down ({wateredDown})</span>
+            </div>
+          )}
           {offTrack > 0 && (
             <div className="flex items-center gap-1.5">
               <div className="w-3 h-3 rounded bg-deep-red/30"></div>
@@ -358,17 +415,23 @@ export function DashboardContent({
       chapter.recommendations.filter(rec => matchesFilters(rec, filters, { skipChapter: true }))
     );
 
-    const { completed, onTrack, offTrack, total } = countStatuses(filteredOwnerRecs);
+    const { completed, onTrack, offTrack, clarificationNeeded, wateredDown, nearly, total } = countStatuses(filteredOwnerRecs);
 
     return {
       owner: filters.owner,
       completed,
       onTrack,
       offTrack,
+      clarificationNeeded,
+      wateredDown,
+      nearly,
       total,
       completedPercent: total > 0 ? (completed / total) * 100 : 0,
       onTrackPercent: total > 0 ? (onTrack / total) * 100 : 0,
       offTrackPercent: total > 0 ? (offTrack / total) * 100 : 0,
+      clarificationPercent: total > 0 ? (clarificationNeeded / total) * 100 : 0,
+      wateredDownPercent: total > 0 ? (wateredDown / total) * 100 : 0,
+      nearlyPercent: total > 0 ? (nearly / total) * 100 : 0,
     };
   }, [chaptersWithRecs, filters]);
 
@@ -513,6 +576,30 @@ export function DashboardContent({
                         {ownerStats.onTrackPercent > 5 && `${ownerStats.onTrack}`}
                       </div>
                     )}
+                    {ownerStats.nearly > 0 && (
+                      <div
+                        className="bg-[#C49A1A]/25 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
+                        style={{ width: `${ownerStats.nearlyPercent}%` }}
+                      >
+                        {ownerStats.nearlyPercent > 5 && `${ownerStats.nearly}`}
+                      </div>
+                    )}
+                    {ownerStats.clarificationNeeded > 0 && (
+                      <div
+                        className="bg-[#C49A1A]/15 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
+                        style={{ width: `${ownerStats.clarificationPercent}%` }}
+                      >
+                        {ownerStats.clarificationPercent > 5 && `${ownerStats.clarificationNeeded}`}
+                      </div>
+                    )}
+                    {ownerStats.wateredDown > 0 && (
+                      <div
+                        className="bg-deep-red/20 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
+                        style={{ width: `${ownerStats.wateredDownPercent}%` }}
+                      >
+                        {ownerStats.wateredDownPercent > 5 && `${ownerStats.wateredDown}`}
+                      </div>
+                    )}
                     {ownerStats.offTrack > 0 && (
                       <div
                         className="bg-deep-red/30 flex items-center justify-center text-foreground text-xs font-semibold transition-all duration-500"
@@ -522,7 +609,7 @@ export function DashboardContent({
                       </div>
                     )}
                   </div>
-                  
+
                   {/* Legend */}
                   <div className="flex flex-wrap gap-4 text-xs">
                     <div className="flex items-center gap-1.5">
@@ -533,6 +620,24 @@ export function DashboardContent({
                       <div className="w-3 h-3 rounded bg-dark-green/30"></div>
                       <span className="text-muted-foreground">On Track ({ownerStats.onTrack})</span>
                     </div>
+                    {ownerStats.nearly > 0 && (
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-[#C49A1A]/25"></div>
+                        <span className="text-muted-foreground">Nearly ({ownerStats.nearly})</span>
+                      </div>
+                    )}
+                    {ownerStats.clarificationNeeded > 0 && (
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-[#C49A1A]/15"></div>
+                        <span className="text-muted-foreground">Clarification Needed ({ownerStats.clarificationNeeded})</span>
+                      </div>
+                    )}
+                    {ownerStats.wateredDown > 0 && (
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-deep-red/20"></div>
+                        <span className="text-muted-foreground">Watered Down ({ownerStats.wateredDown})</span>
+                      </div>
+                    )}
                     {ownerStats.offTrack > 0 && (
                       <div className="flex items-center gap-1.5">
                         <div className="w-3 h-3 rounded bg-deep-red/30"></div>

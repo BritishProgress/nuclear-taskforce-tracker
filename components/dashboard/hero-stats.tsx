@@ -3,6 +3,7 @@
 import { memo, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { StatusCounts, OverallStatus } from '@/lib/types';
+import { STATUS_GROUPS } from '@/lib/constants';
 import { Disclaimer } from '@/components/shared';
 import {
   AlertCircle,
@@ -53,12 +54,20 @@ interface HeroStatsProps {
 }
 
 export const HeroStats = memo(function HeroStats({ counts, className, onStatusClick }: HeroStatsProps) {
+  // Map all statuses into three buckets so they sum to total
+  const sumGroup = (group: OverallStatus[]) => group.reduce((sum, s) => sum + counts[s], 0);
+  const completedCount = sumGroup(STATUS_GROUPS.completed);
+  const onTrackCount = sumGroup(STATUS_GROUPS.on_track);
+  const offTrackCount = sumGroup(STATUS_GROUPS.off_track);
+
   const mainStats = useMemo(() =>
     MAIN_STATS_CONFIG.map(stat => ({
       ...stat,
-      value: counts[stat.key],
+      value: stat.key === 'completed' ? completedCount
+        : stat.key === 'on_track' ? onTrackCount
+        : offTrackCount,
     })),
-    [counts]
+    [completedCount, onTrackCount, offTrackCount]
   );
 
   const totalStat = useMemo(() => ({
@@ -91,29 +100,29 @@ export const HeroStats = memo(function HeroStats({ counts, className, onStatusCl
         <div className="w-full max-w-2xl">
           <div className="relative h-8 sm:h-10 bg-muted rounded-md overflow-hidden">
             {/* Completed segment */}
-            {counts.completed > 0 && (
+            {completedCount > 0 && (
               <div
                 className="absolute left-0 top-0 h-full bg-neon-green transition-all duration-500 ease-out"
-                style={{ width: `${(counts.completed / counts.total) * 100}%` }}
+                style={{ width: `${(completedCount / counts.total) * 100}%` }}
               />
             )}
             {/* On Track segment */}
-            {counts.on_track > 0 && (
+            {onTrackCount > 0 && (
               <div
                 className="absolute top-0 h-full bg-dark-green/30 transition-all duration-500 ease-out"
                 style={{
-                  left: `${(counts.completed / counts.total) * 100}%`,
-                  width: `${(counts.on_track / counts.total) * 100}%`,
+                  left: `${(completedCount / counts.total) * 100}%`,
+                  width: `${(onTrackCount / counts.total) * 100}%`,
                 }}
               />
             )}
             {/* Off Track segment */}
-            {counts.off_track > 0 && (
+            {offTrackCount > 0 && (
               <div
                 className="absolute top-0 h-full bg-deep-red/30 transition-all duration-500 ease-out"
                 style={{
-                  left: `${((counts.completed + counts.on_track) / counts.total) * 100}%`,
-                  width: `${(counts.off_track / counts.total) * 100}%`,
+                  left: `${((completedCount + onTrackCount) / counts.total) * 100}%`,
+                  width: `${(offTrackCount / counts.total) * 100}%`,
                 }}
               />
             )}

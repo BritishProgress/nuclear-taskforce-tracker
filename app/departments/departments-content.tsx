@@ -73,6 +73,9 @@ export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps)
                   const notStartedPct = (ownerStats.statusCounts.not_started / total) * 100;
                   const offTrackPct = (ownerStats.statusCounts.off_track / total) * 100;
                   const abandonedPct = (ownerStats.statusCounts.abandoned / total) * 100;
+                  const clarificationPct = (ownerStats.statusCounts.clarification_needed / total) * 100;
+                  const wateredDownPct = (ownerStats.statusCounts.watered_down / total) * 100;
+                  const nearlyPct = (ownerStats.statusCounts.nearly / total) * 100;
 
                   return (
                     <tr
@@ -126,6 +129,30 @@ export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps)
                                 className="bg-muted-foreground/20 transition-all duration-500"
                                 style={{ width: `${notStartedPct}%` }}
                                 title={`${ownerStats.statusCounts.not_started} not started`}
+                              />
+                            )}
+                            {/* Nearly (amber) */}
+                            {ownerStats.statusCounts.nearly > 0 && (
+                              <div
+                                className="bg-[#C49A1A]/25 transition-all duration-500"
+                                style={{ width: `${nearlyPct}%` }}
+                                title={`${ownerStats.statusCounts.nearly} nearly`}
+                              />
+                            )}
+                            {/* Clarification Needed (amber) */}
+                            {ownerStats.statusCounts.clarification_needed > 0 && (
+                              <div
+                                className="bg-[#C49A1A]/15 transition-all duration-500"
+                                style={{ width: `${clarificationPct}%` }}
+                                title={`${ownerStats.statusCounts.clarification_needed} clarification needed`}
+                              />
+                            )}
+                            {/* Watered Down (red) */}
+                            {ownerStats.statusCounts.watered_down > 0 && (
+                              <div
+                                className="bg-deep-red/20 transition-all duration-500"
+                                style={{ width: `${wateredDownPct}%` }}
+                                title={`${ownerStats.statusCounts.watered_down} watered down`}
                               />
                             )}
                             {/* Off Track (red) */}
@@ -186,7 +213,7 @@ export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps)
           <CardTitle className="text-sm">Progress Bar Legend</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-neon-green rounded" />
               <span>{OVERALL_STATUS_LABELS.completed}</span>
@@ -194,6 +221,18 @@ export function DepartmentsContent({ ownersWithStats }: DepartmentsContentProps)
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-dark-green/30 rounded" />
               <span>{OVERALL_STATUS_LABELS.on_track}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-[#C49A1A]/25 rounded" />
+              <span>{OVERALL_STATUS_LABELS.nearly}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-[#C49A1A]/15 rounded" />
+              <span>{OVERALL_STATUS_LABELS.clarification_needed}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-deep-red/20 rounded" />
+              <span>{OVERALL_STATUS_LABELS.watered_down}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-deep-red/30 rounded" />

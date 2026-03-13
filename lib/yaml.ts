@@ -47,6 +47,31 @@ export async function loadTaskforceData(): Promise<TaskforceData> {
       throw new Error('Invalid YAML structure: missing status_scales');
     }
 
+    // Resolve source_key references in updates
+    if (data.sources) {
+      for (const rec of data.recommendations) {
+        if (rec.updates) {
+          for (const update of rec.updates) {
+            if (update.source_key && data.sources[update.source_key]) {
+              const sourceDef = data.sources[update.source_key];
+              // Add link if not already present
+              if (!update.links) {
+                update.links = [];
+              }
+              const alreadyHasLink = update.links.some(l => l.url === sourceDef.url);
+              if (!alreadyHasLink) {
+                update.links.push({ title: sourceDef.title, url: sourceDef.url });
+              }
+              // Set source if not already set
+              if (!update.source) {
+                update.source = { type: sourceDef.type, reference: sourceDef.reference };
+              }
+            }
+          }
+        }
+      }
+    }
+
     cachedData = data;
     return data;
   } catch (error) {
