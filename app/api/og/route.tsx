@@ -1,6 +1,8 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getStatusCounts } from '@/lib/data';
+import { STATUS_GROUPS } from '@/lib/constants';
+import { OverallStatus } from '@/lib/types';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -10,6 +12,12 @@ export async function GET(request: NextRequest) {
   try {
     // Fetch current status counts
     const counts = await getStatusCounts();
+
+    // Group statuses to match the homepage hero stats
+    const sumGroup = (group: OverallStatus[]) => group.reduce((sum, s) => sum + counts[s], 0);
+    const completedCount = sumGroup(STATUS_GROUPS.completed);
+    const onTrackCount = sumGroup(STATUS_GROUPS.on_track);
+    const offTrackCount = sumGroup(STATUS_GROUPS.off_track);
 
     // Using system fonts for now - custom fonts can be added later if needed
     // The icons and higher resolution are the main improvements
@@ -200,7 +208,7 @@ export async function GET(request: NextRequest) {
               }}
             >
               {/* Completed segment */}
-              {counts.completed > 0 && (
+              {completedCount > 0 && (
                 <div
                   style={{
                     display: 'flex',
@@ -208,35 +216,35 @@ export async function GET(request: NextRequest) {
                     left: 0,
                     top: 0,
                     height: '100%',
-                    width: `${(counts.completed / counts.total) * 100}%`,
+                    width: `${(completedCount / counts.total) * 100}%`,
                     backgroundColor: '#81F494', // neon-green
                   }}
                 />
               )}
               {/* On Track segment */}
-              {counts.on_track > 0 && (
+              {onTrackCount > 0 && (
                 <div
                   style={{
                     display: 'flex',
                     position: 'absolute',
                     top: 0,
                     height: '100%',
-                    left: `${(counts.completed / counts.total) * 100}%`,
-                    width: `${(counts.on_track / counts.total) * 100}%`,
+                    left: `${(completedCount / counts.total) * 100}%`,
+                    width: `${(onTrackCount / counts.total) * 100}%`,
                     backgroundColor: 'rgba(11, 73, 56, 0.3)', // dark-green/30
                   }}
                 />
               )}
               {/* Off Track segment */}
-              {counts.off_track > 0 && (
+              {offTrackCount > 0 && (
                 <div
                   style={{
                     display: 'flex',
                     position: 'absolute',
                     top: 0,
                     height: '100%',
-                    left: `${((counts.completed + counts.on_track) / counts.total) * 100}%`,
-                    width: `${(counts.off_track / counts.total) * 100}%`,
+                    left: `${((completedCount + onTrackCount) / counts.total) * 100}%`,
+                    width: `${(offTrackCount / counts.total) * 100}%`,
                     backgroundColor: 'rgba(179, 6, 62, 0.3)', // deep-red/30
                   }}
                 />
@@ -310,7 +318,7 @@ export async function GET(request: NextRequest) {
                   justifyContent: 'center',
                 }}
               >
-                {counts.completed}
+                {completedCount}
               </div>
               <div
                 style={{
@@ -364,7 +372,7 @@ export async function GET(request: NextRequest) {
                   justifyContent: 'center',
                 }}
               >
-                {counts.on_track}
+                {onTrackCount}
               </div>
               <div
                 style={{
@@ -418,7 +426,7 @@ export async function GET(request: NextRequest) {
                   justifyContent: 'center',
                 }}
               >
-                {counts.off_track}
+                {offTrackCount}
               </div>
               <div
                 style={{
