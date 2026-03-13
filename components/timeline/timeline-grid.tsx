@@ -136,8 +136,33 @@ function TimelineCell({ cell, hasItems, isMonthEnd, isYearEnd, isEven }: { cell:
     new Date(a.date).getTime() - new Date(b.date).getTime()
   );
   
-  // If more than 2 items, show count badge
+  // If more than 2 items, show count badge colored by worst status
   if (sortedItems.length > 2) {
+    // Determine dominant color: red > orange > completed (neon green) > on_track (dark green) > default
+    const hasRed = sortedItems.some(item =>
+      (item.type === 'update' && (item.update?.status === 'risk' || item.update?.status === 'off_track' || item.update?.status === 'blocked')) ||
+      (item.type === 'deadline' && item.deadline?.isOverdue)
+    );
+    const hasOrange = sortedItems.some(item =>
+      item.type === 'update' && item.update?.status === 'progress'
+    );
+    const hasCompleted = sortedItems.some(item =>
+      item.type === 'update' && item.update?.status === 'completed'
+    );
+    const hasOnTrack = sortedItems.some(item =>
+      item.type === 'update' && item.update?.status === 'on_track'
+    );
+
+    const badgeColors = hasRed
+      ? 'bg-deep-red/20 text-deep-red border-deep-red/40 hover:bg-deep-red/30'
+      : hasOrange
+      ? 'bg-orange/20 text-orange border-orange/40 hover:bg-orange/30'
+      : hasCompleted
+      ? 'bg-neon-green/20 text-dark-green border-neon-green/40 hover:bg-neon-green/30'
+      : hasOnTrack
+      ? 'bg-dark-green/20 text-dark-green border-dark-green/40 hover:bg-dark-green/30'
+      : 'bg-primary/20 text-primary border-primary/40 hover:bg-primary/30';
+
     return (
       <>
         <td className={cn(
@@ -151,9 +176,9 @@ function TimelineCell({ cell, hasItems, isMonthEnd, isYearEnd, isEven }: { cell:
           <div className="absolute inset-0 flex items-center justify-center z-0">
             <Tooltip delayDuration={200}>
               <TooltipTrigger asChild>
-                <button 
+                <button
                   onClick={() => setIsModalOpen(true)}
-                  className="px-2.5 py-1 rounded-full bg-primary/20 text-primary text-sm font-bold border-2 border-primary/40 cursor-pointer hover:bg-primary/30 transition-colors shadow-sm"
+                  className={cn("px-2.5 py-1 rounded-full text-sm font-bold border-2 cursor-pointer transition-colors shadow-sm", badgeColors)}
                 >
                   {sortedItems.length}
                 </button>

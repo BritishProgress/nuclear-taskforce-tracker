@@ -329,7 +329,7 @@ export async function getTimelineItems(includeFutureDeadlines: boolean = true): 
   if (includeFutureDeadlines) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    
+
     for (const rec of data.recommendations) {
       // Only include deadlines for non-completed/abandoned recommendations
       if (rec.overall_status.status !== 'completed' && rec.overall_status.status !== 'abandoned') {
@@ -338,7 +338,7 @@ export async function getTimelineItems(includeFutureDeadlines: boolean = true): 
           const targetDateObj = new Date(targetDate);
           const diffTime = targetDateObj.getTime() - today.getTime();
           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-          
+
           items.push({
             type: 'deadline',
             date: targetDate,
@@ -351,6 +351,22 @@ export async function getTimelineItems(includeFutureDeadlines: boolean = true): 
             },
           });
         }
+      }
+
+      // Show original deadline as "moved" marker when it was revised
+      if (rec.delivery_timeline.revised_target_date &&
+          rec.delivery_timeline.revised_target_date !== rec.delivery_timeline.target_date) {
+        items.push({
+          type: 'deadline_moved',
+          date: rec.delivery_timeline.target_date,
+          recommendation: rec,
+          deadline: {
+            targetDate: rec.delivery_timeline.target_date,
+            revisedDate: rec.delivery_timeline.revised_target_date,
+            daysUntil: 0,
+            isOverdue: false,
+          },
+        });
       }
     }
   }

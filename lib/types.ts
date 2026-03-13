@@ -186,7 +186,7 @@ export interface RecentUpdate {
 }
 
 export interface TimelineItem {
-  type: 'update' | 'deadline';
+  type: 'update' | 'deadline' | 'deadline_moved';
   date: string;
   update?: Update;
   recommendation: Recommendation;

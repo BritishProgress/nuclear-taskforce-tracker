@@ -1,13 +1,173 @@
 'use client';
 
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Update, Recommendation, TimelineItem } from '@/lib/types';
 import { formatDate } from '@/lib/date-utils';
 import { StatusBadge } from './status-badge';
 import { DeadlineIndicator } from './deadline-indicator';
 import { DeadlineChangeBadge } from './deadline-change-badge';
-import { ExternalLink, FileText, Calendar } from 'lucide-react';
+import { ExternalLink, FileText, Calendar, ArrowRight, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
+
+function TimelineUpdateEvent({
+  item,
+  update,
+  recommendation,
+  date,
+  showRecommendation,
+  isLast,
+  isSignificant,
+  className,
+  onTagClick,
+}: {
+  item: TimelineItem;
+  update: Update;
+  recommendation: Recommendation;
+  date: string;
+  showRecommendation: boolean;
+  isLast: boolean;
+  isSignificant: boolean;
+  className?: string;
+  onTagClick?: (tag: string) => void;
+}) {
+  const [isExpanded, setIsExpanded] = useState(isSignificant);
+
+  const details = (
+    <>
+      {/* Description */}
+      <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+        {update.description}
+      </p>
+
+      {/* Deadline change indicator */}
+      {update.tags?.includes('deadline_change') &&
+       recommendation.delivery_timeline.revised_target_date &&
+       recommendation.delivery_timeline.revised_target_date !== recommendation.delivery_timeline.target_date && (
+        <div className="mb-3">
+          <DeadlineChangeBadge
+            originalDate={recommendation.delivery_timeline.target_date}
+            revisedDate={recommendation.delivery_timeline.revised_target_date}
+          />
+        </div>
+      )}
+
+      {/* Tags */}
+      {update.tags && update.tags.filter(t => t !== 'deadline_change').length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {update.tags.filter(t => t !== 'deadline_change').map((tag) => (
+            <button
+              key={tag}
+              onClick={onTagClick ? () => onTagClick(tag) : undefined}
+              className={cn(
+                'inline-flex items-center px-2 py-0.5 text-xs font-medium bg-muted text-muted-foreground rounded transition-colors',
+                onTagClick && 'cursor-pointer hover:bg-primary/10 hover:text-primary'
+              )}
+            >
+              #{tag}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Links */}
+      {update.links && update.links.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {update.links.map((link, index) => (
+            <a
+              key={index}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-light-blue hover:text-dark-blue transition-colors"
+            >
+              <ExternalLink size={14} />
+              {link.title}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {/* Source */}
+      {update.source && (
+        <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
+          <FileText size={12} />
+          <span>
+            {update.source.type}
+            {update.source.reference && ` • ${update.source.reference}`}
+          </span>
+        </div>
+      )}
+
+      {/* Impact note */}
+      {update.impact_on_overall?.notes && (
+        <div className="mt-3 p-2 bg-muted/50 rounded-md text-sm text-muted-foreground border-l-2 border-primary">
+          {update.impact_on_overall.notes}
+        </div>
+      )}
+    </>
+  );
+
+  return (
+    <div className={cn('relative pl-6', className)}>
+      {/* Timeline line */}
+      {!isLast && (
+        <div className="absolute left-[9px] top-6 bottom-0 w-0.5 bg-border" />
+      )}
+
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-1.5 w-[18px] h-[18px] rounded-full bg-card border-2 border-primary flex items-center justify-center">
+        <div className="w-2 h-2 rounded-full bg-primary" />
+      </div>
+
+      <div className={cn(isSignificant ? 'pb-6' : 'pb-4')}>
+        {/* Header */}
+        <div className="flex flex-wrap items-center gap-2 mb-2">
+          <time className="text-sm font-mono text-muted-foreground">
+            {formatDate(date)}
+          </time>
+          <StatusBadge status={update.status} type="update" size="sm" />
+          {!isSignificant && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="inline-flex items-center gap-0.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ChevronDown size={14} className={cn('transition-transform', isExpanded && 'rotate-180')} />
+            </button>
+          )}
+        </div>
+
+        {/* Recommendation link if showing */}
+        {showRecommendation && recommendation && (
+          <Link
+            href={`/recommendation/${recommendation.id}`}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors mb-2"
+          >
+            <span className="font-mono">{recommendation.code}</span>
+            <span className="text-muted-foreground">•</span>
+            <span>{recommendation.titles.short}</span>
+          </Link>
+        )}
+
+        {/* Title */}
+        <Link
+          href={`/recommendation/${recommendation.id}/update/${update.date}`}
+          className="block"
+        >
+          <h4 className={cn(
+            'font-semibold text-foreground hover:text-primary transition-colors cursor-pointer',
+            isExpanded && 'mb-1.5'
+          )}>
+            {update.title}
+          </h4>
+        </Link>
+
+        {/* Collapsible details */}
+        {isExpanded && details}
+      </div>
+    </div>
+  );
+}
 
 interface TimelineEventProps {
   item: TimelineItem;
@@ -100,123 +260,52 @@ export function TimelineEvent({
     );
   }
   
-  // Render update item
-  if (type === 'update' && update) {
+  // Render deadline moved marker
+  if (type === 'deadline_moved' && deadline?.revisedDate) {
     return (
       <div className={cn('relative pl-6', className)}>
-        {/* Timeline line */}
         {!isLast && (
           <div className="absolute left-[9px] top-6 bottom-0 w-0.5 bg-border" />
         )}
-        
-        {/* Timeline dot */}
-        <div className="absolute left-0 top-1.5 w-[18px] h-[18px] rounded-full bg-card border-2 border-primary flex items-center justify-center">
-          <div className="w-2 h-2 rounded-full bg-primary" />
+        <div className="absolute left-0 top-1.5 w-[18px] h-[18px] rounded-full bg-card border-2 border-muted-foreground/40 flex items-center justify-center">
+          <Calendar className="w-2.5 h-2.5 text-muted-foreground/60" />
         </div>
-
-        <div className="pb-6">
-          {/* Header */}
-          <div className="flex flex-wrap items-center gap-2 mb-2">
-            <time className="text-sm font-mono text-muted-foreground">
-              {formatDate(date)}
-            </time>
-            <StatusBadge status={update.status} type="update" size="sm" />
-          </div>
-
-          {/* Recommendation link if showing */}
-          {showRecommendation && recommendation && (
+        <div className="pb-4">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+            <time className="font-mono">{formatDate(date)}</time>
+            <span className="text-muted-foreground/50">|</span>
             <Link
               href={`/recommendation/${recommendation.id}`}
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors mb-2"
+              className="font-mono font-medium text-primary hover:text-primary/80 transition-colors"
             >
-              <span className="font-mono">{recommendation.code}</span>
-              <span className="text-muted-foreground">•</span>
-              <span>{recommendation.titles.short}</span>
+              {recommendation.code}
             </Link>
-          )}
-
-          {/* Title */}
-          <Link
-            href={`/recommendation/${recommendation.id}/update/${update.date}`}
-            className="block"
-          >
-            <h4 className="font-semibold text-foreground mb-1.5 hover:text-primary transition-colors cursor-pointer">
-              {update.title}
-            </h4>
-          </Link>
-
-          {/* Description */}
-          <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-            {update.description}
-          </p>
-
-          {/* Deadline change indicator */}
-          {update.tags?.includes('deadline_change') &&
-           recommendation.delivery_timeline.revised_target_date &&
-           recommendation.delivery_timeline.revised_target_date !== recommendation.delivery_timeline.target_date && (
-            <div className="mb-3">
-              <DeadlineChangeBadge
-                originalDate={recommendation.delivery_timeline.target_date}
-                revisedDate={recommendation.delivery_timeline.revised_target_date}
-              />
-            </div>
-          )}
-
-          {/* Tags */}
-          {update.tags && update.tags.filter(t => t !== 'deadline_change').length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-3">
-              {update.tags.filter(t => t !== 'deadline_change').map((tag) => (
-                <button
-                  key={tag}
-                  onClick={onTagClick ? () => onTagClick(tag) : undefined}
-                  className={cn(
-                    'inline-flex items-center px-2 py-0.5 text-xs font-medium bg-muted text-muted-foreground rounded transition-colors',
-                    onTagClick && 'cursor-pointer hover:bg-primary/10 hover:text-primary'
-                  )}
-                >
-                  #{tag}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Links */}
-          {update.links && update.links.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {update.links.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-light-blue hover:text-dark-blue transition-colors"
-                >
-                  <ExternalLink size={14} />
-                  {link.title}
-                </a>
-              ))}
-            </div>
-          )}
-
-          {/* Source */}
-          {update.source && (
-            <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
-              <FileText size={12} />
-              <span>
-                {update.source.type}
-                {update.source.reference && ` • ${update.source.reference}`}
-              </span>
-            </div>
-          )}
-
-          {/* Impact note */}
-          {update.impact_on_overall?.notes && (
-            <div className="mt-3 p-2 bg-muted/50 rounded-md text-sm text-muted-foreground border-l-2 border-primary">
-              {update.impact_on_overall.notes}
-            </div>
-          )}
+            <span>deadline moved</span>
+            <ArrowRight size={12} />
+            <span className="font-mono font-medium">{formatDate(deadline.revisedDate)}</span>
+          </div>
         </div>
       </div>
+    );
+  }
+
+  // Render update item
+  if (type === 'update' && update) {
+    const isSignificant = !!update.impact_on_overall?.changes_overall_status_to ||
+      !!update.tags?.includes('deadline_change');
+
+    return (
+      <TimelineUpdateEvent
+        item={item}
+        update={update}
+        recommendation={recommendation}
+        date={date}
+        showRecommendation={showRecommendation}
+        isLast={isLast}
+        isSignificant={isSignificant}
+        className={className}
+        onTagClick={onTagClick}
+      />
     );
   }
   
