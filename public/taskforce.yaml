@@ -370,7 +370,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: Nuclear Commission confirmed"
         description: |
           The Government will legislate to establish the UK's first Nuclear Commission, which is to be fully functioning by Summer 2028. In the interim, a lead regulator model will be implemented as a bridging measure. The Government will scope out the Commission's objectives, roles, and composition, broadly following the Taskforce's proposed structure. This is a clear acceptance of the recommendation with a defined timeline, though the Summer 2028 target is later than the Taskforce's end-of-2027 aspiration.
@@ -478,7 +478,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: ONR-DNSR merger confirmed"
         description: |
           The Government will consolidate the nuclear regulatory landscape by merging ONR and DNSR, directly following the Taskforce recommendation. Initial changes will be implemented by Autumn 2026 with full merger completed by the end of 2028. The Government will also strengthen collaboration between the Environment Agency and ONR. This is a significant structural reform that addresses the fragmentation the Taskforce identified, though the full merger timeline extends beyond the original March 2026 target.
@@ -531,7 +531,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: Proportionality Action Plan for safety cases"
         description: |
           The Government is implementing a Proportionality Action Plan to reset safety case development. Strategic direction will be agreed by the end of Summer 2026, with new methodologies fully embedded by Summer 2027. Oversight will be provided through the Nuclear Standards Forum and the Nuclear Regulatory Implementation Programme (NRIP). The approach aligns with the Taskforce recommendation to eliminate duplication and embed simplicity in the safety case regime.
@@ -642,7 +642,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: SAPs review and guidance overhaul"
         description: |
           ONR is reviewing its Safety Assessment Principles (SAPs) with a consultation planned for Summer 2026 and publication in December 2026. The Environment Agency is also reviewing its guidance in parallel. Oversight of both processes will be provided through the Nuclear Standards Forum and NRIP. The timeline aligns well with R06's expert panel reporting, allowing revised tolerability definitions to inform the updated guidance, as the Taskforce envisaged.
@@ -1139,7 +1139,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: Environmental data repository and transparency"
         description: |
           The Government will publish environmental datasets in a central repository within two years, with developers required to contribute their data as a condition of approval. The NDA will make its survey data available to potential developers of its sites — a practical step that could significantly reduce duplicative surveying costs. The Government will also explore addressing the cost estimates over GBP 500,000 transparency requirement through the EOR framework. The two-year timeline for the central repository is reasonable but extends beyond the original June 2026 target date.
@@ -1508,7 +1508,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: Decommissioning permitting reforms accepted"
         description: |
           The Government has accepted five specific actions under this recommendation. Parts b-d are to be completed by end of 2026, with parts a and e by end of 2027. Key deliverables include an exemption for stockpiling materials on nuclear sites, speeding up decision-making through constrained discretion for lead regulators, and new Permitted Development Rights for small-scale decommissioning activities. The staggered timeline reflects the varying legislative complexity of each sub-recommendation.
@@ -1972,7 +1972,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: Fleet criterion for EN-7 confirmed"
         description: |
           The Government will introduce a fleet criterion in the next EN-7 update, favouring impact mitigations that do not require functional design changes. This directly supports the Taskforce's vision for standardised fleet deployment of reactor designs. The updated EN-7 will be published for consultation as soon as practicable, with all EN-7 updates to be completed within 12 months. This is a clear acceptance that fleet approaches should be embedded in national planning policy for nuclear.
@@ -2023,7 +2023,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: Going further with SUPDC alternatives for all reactor classes"
         description: |
           The Government is going further than the Taskforce recommended. Rather than creating a pathway limited to light water reactors, it will work with ONR to bring forward alternatives to the Semi-Urban Population Density Criterion for all classes of reactor, targeted within 12 months. This broadens the scope significantly beyond the original recommendation, which focused on amending EN-7 for LWRs. The expanded approach should benefit advanced reactor developers who might otherwise have faced continued siting constraints under the original 1967 methodology.
@@ -2292,7 +2292,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: Chancellor's letter and culture change mandate"
         description: |
           The Government wholly supports this recommendation. The Chancellor has sent an open letter to sector leaders, who have been asked to report within four months on culture change plans, process improvements, risk appetite, and contractual incentive alignment. Chief Executives will attend the Nuclear Regulatory Implementation Panel from Autumn 2026 onwards. This creates a direct accountability mechanism from board level to the highest levels of government, which is stronger than the Taskforce's recommendation for boards to self-assess culture.
@@ -2516,7 +2516,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: International strategy with funding and mutual recognition"
         description: |
           A joint Government-Regulator international strategy will be developed by Autumn 2026. The Government is providing £1.3 million in funding to ONR and the Environment Agency to develop a mutual recognition framework with trusted international regulators. ONR has launched a sprint project for the Atlantic Partnership, and a template for European regulator collaboration on SMRs is being developed. This represents a well-funded, multi-track approach to international harmonisation that aligns with the Taskforce's ambition to leverage foreign regulatory approvals and accelerate design assessments.
@@ -2699,7 +2699,7 @@ recommendations:
     updates:
       - date: "2026-03-13"
         status: "on_track"
-        tags: ["govt_response"]
+        tags: ["govt_response", "deadline_change"]
         title: "Government Response: Chancellor's letter and proportionate ALARP contracting"
         description: |
           The Chancellor has sent an open letter declaring nuclear a strategic national priority and setting expectations of proportionate, outcome-focused regulation. Leaders have been asked to produce six-month plans addressing gold-plating, risk appetite, culture change, and contractual alignment. The Government will also explore contracting mechanisms that incentivise proportionate ALARP solutions. This directly implements the Taskforce's recommendation for a Chancellor's letter and contracting reform, with the six-month response window creating a clear accountability checkpoint.

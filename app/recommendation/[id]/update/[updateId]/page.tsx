@@ -13,8 +13,9 @@ import { getUpdateByDate, getChapters } from '@/lib/data';
 import { TWITTER_SITE_HANDLE, TWITTER_CREATOR_HANDLE } from '@/lib/constants';
 import { formatDate } from '@/lib/date-utils';
 import { getFullUrl } from '@/lib/url-utils';
-import { 
-  ArrowLeft, 
+import { DeadlineChangeBadge } from '@/components/shared/deadline-change-badge';
+import {
+  ArrowLeft,
   Calendar,
   Link2,
   FileText,
@@ -158,10 +159,21 @@ export default async function UpdatePage({ params }: PageProps) {
                   <FormattedText text={update.description} />
                 </div>
 
+                {/* Deadline change indicator */}
+                {update.tags?.includes('deadline_change') &&
+                 recommendation.delivery_timeline.revised_target_date &&
+                 recommendation.delivery_timeline.revised_target_date !== recommendation.delivery_timeline.target_date && (
+                  <DeadlineChangeBadge
+                    originalDate={recommendation.delivery_timeline.target_date}
+                    revisedDate={recommendation.delivery_timeline.revised_target_date}
+                    size="md"
+                  />
+                )}
+
                 {/* Tags */}
-                {update.tags && update.tags.length > 0 && (
+                {update.tags && update.tags.filter(t => t !== 'deadline_change').length > 0 && (
                   <div className="flex flex-wrap gap-2">
-                    {update.tags.map((tag, idx) => (
+                    {update.tags.filter(t => t !== 'deadline_change').map((tag, idx) => (
                       <Badge key={idx} variant="secondary">
                         {tag}
                       </Badge>

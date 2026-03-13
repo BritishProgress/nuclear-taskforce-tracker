@@ -9,6 +9,7 @@ import { TimelineItem } from '@/lib/types';
 import { UPDATE_STATUS_LABELS, getChapterColors } from '@/lib/constants';
 import { formatDateShort } from '@/lib/date-utils';
 import { Button } from '@/components/ui/button';
+import { DeadlineChangeBadge } from '@/components/shared/deadline-change-badge';
 import { storeTimelineViewState } from '@/lib/url-utils';
 import { useTimelineView } from '@/app/timeline/timeline-view-context';
 
@@ -126,6 +127,17 @@ export function TimelineItemsModal({ items, isOpen, onClose }: TimelineItemsModa
                       {item.update.description && (
                         <div className="text-xs text-muted-foreground line-clamp-2">
                           {item.update.description}
+                        </div>
+                      )}
+                      {item.update.tags?.includes('deadline_change') &&
+                       item.recommendation.delivery_timeline.revised_target_date &&
+                       item.recommendation.delivery_timeline.revised_target_date !== item.recommendation.delivery_timeline.target_date && (
+                        <div className="mt-1.5">
+                          <DeadlineChangeBadge
+                            originalDate={item.recommendation.delivery_timeline.target_date}
+                            revisedDate={item.recommendation.delivery_timeline.revised_target_date}
+                            size="sm"
+                          />
                         </div>
                       )}
                     </div>

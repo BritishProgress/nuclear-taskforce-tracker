@@ -5,6 +5,7 @@ import { Update, Recommendation, TimelineItem } from '@/lib/types';
 import { formatDate } from '@/lib/date-utils';
 import { StatusBadge } from './status-badge';
 import { DeadlineIndicator } from './deadline-indicator';
+import { DeadlineChangeBadge } from './deadline-change-badge';
 import { ExternalLink, FileText, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
@@ -149,10 +150,22 @@ export function TimelineEvent({
             {update.description}
           </p>
 
+          {/* Deadline change indicator */}
+          {update.tags?.includes('deadline_change') &&
+           recommendation.delivery_timeline.revised_target_date &&
+           recommendation.delivery_timeline.revised_target_date !== recommendation.delivery_timeline.target_date && (
+            <div className="mb-3">
+              <DeadlineChangeBadge
+                originalDate={recommendation.delivery_timeline.target_date}
+                revisedDate={recommendation.delivery_timeline.revised_target_date}
+              />
+            </div>
+          )}
+
           {/* Tags */}
-          {update.tags && update.tags.length > 0 && (
+          {update.tags && update.tags.filter(t => t !== 'deadline_change').length > 0 && (
             <div className="flex flex-wrap gap-1.5 mb-3">
-              {update.tags.map((tag) => (
+              {update.tags.filter(t => t !== 'deadline_change').map((tag) => (
                 <button
                   key={tag}
                   onClick={onTagClick ? () => onTagClick(tag) : undefined}
