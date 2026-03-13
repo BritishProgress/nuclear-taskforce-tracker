@@ -18,6 +18,7 @@ function TimelineUpdateEvent({
   showRecommendation,
   isLast,
   isSignificant,
+  alwaysExpanded,
   className,
   onTagClick,
 }: {
@@ -28,10 +29,11 @@ function TimelineUpdateEvent({
   showRecommendation: boolean;
   isLast: boolean;
   isSignificant: boolean;
+  alwaysExpanded?: boolean;
   className?: string;
   onTagClick?: (tag: string) => void;
 }) {
-  const [isExpanded, setIsExpanded] = useState(isSignificant);
+  const [isExpanded, setIsExpanded] = useState(alwaysExpanded || isSignificant);
 
   const details = (
     <>
@@ -127,7 +129,7 @@ function TimelineUpdateEvent({
             {formatDate(date)}
           </time>
           <StatusBadge status={update.status} type="update" size="sm" />
-          {!isSignificant && (
+          {!isSignificant && !alwaysExpanded && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="inline-flex items-center gap-0.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
@@ -173,6 +175,7 @@ interface TimelineEventProps {
   item: TimelineItem;
   showRecommendation?: boolean;
   isLast?: boolean;
+  alwaysExpanded?: boolean;
   className?: string;
   onTagClick?: (tag: string) => void;
 }
@@ -181,6 +184,7 @@ export function TimelineEvent({
   item,
   showRecommendation = false,
   isLast = false,
+  alwaysExpanded,
   className,
   onTagClick,
 }: TimelineEventProps) {
@@ -303,6 +307,7 @@ export function TimelineEvent({
         showRecommendation={showRecommendation}
         isLast={isLast}
         isSignificant={isSignificant}
+        alwaysExpanded={alwaysExpanded}
         className={className}
         onTagClick={onTagClick}
       />
@@ -315,6 +320,7 @@ export function TimelineEvent({
 interface TimelineProps {
   items: TimelineItem[];
   showRecommendations?: boolean;
+  alwaysExpanded?: boolean;
   className?: string;
   onTagClick?: (tag: string) => void;
 }
@@ -322,6 +328,7 @@ interface TimelineProps {
 export function Timeline({
   items,
   showRecommendations = false,
+  alwaysExpanded,
   className,
   onTagClick,
 }: TimelineProps) {
@@ -341,6 +348,7 @@ export function Timeline({
           item={item}
           showRecommendation={showRecommendations}
           isLast={index === items.length - 1}
+          alwaysExpanded={alwaysExpanded}
           onTagClick={onTagClick}
         />
       ))}

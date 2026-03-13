@@ -17,9 +17,10 @@ export function TimelineSection({ items }: TimelineSectionProps) {
   };
 
   return (
-    <Timeline 
-      items={items} 
+    <Timeline
+      items={items}
       showRecommendations={false}
+      alwaysExpanded
       onTagClick={handleTagClick}
     />
   );
