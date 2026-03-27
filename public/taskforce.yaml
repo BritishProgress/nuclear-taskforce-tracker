@@ -416,7 +416,7 @@ recommendations:
       depends_on: [1]
       enables: [2]
     overall_status:
-      status: "on_track"
+      status: "completed"
       last_updated: "2026-03-13"
       confidence: "high"
       summary: "Accepted. Lead regulator model in place by 31 March 2026; 'super six' formed."
