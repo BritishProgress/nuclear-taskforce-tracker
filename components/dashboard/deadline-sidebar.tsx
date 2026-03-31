@@ -1,8 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { UpcomingDeadline, RecentUpdate } from '@/lib/types';
-import { formatDateShort } from '@/lib/date-utils';
+import { formatDateShort, daysUntil as calcDaysUntil } from '@/lib/date-utils';
 import { StatusBadge } from '@/components/shared/status-badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -16,11 +17,29 @@ interface DeadlineSidebarProps {
   className?: string;
 }
 
+function useClientDaysUntil(deadlines: UpcomingDeadline[]) {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+
+  return deadlines.map((item) => {
+    const dateStr = item.recommendation.delivery_timeline.revised_target_date ||
+      item.recommendation.delivery_timeline.target_date;
+    const days = hydrated ? calcDaysUntil(dateStr) : null;
+    return {
+      ...item,
+      daysUntil: days,
+      isOverdue: days !== null ? days < 0 : null,
+    };
+  });
+}
+
 export function DeadlineSidebar({
   deadlines,
   recentUpdates,
   className,
 }: DeadlineSidebarProps) {
+  const clientDeadlines = useClientDaysUntil(deadlines);
+
   return (
     <div className={cn('space-y-6', className)}>
       {/* Upcoming Deadlines */}
@@ -39,7 +58,7 @@ export function DeadlineSidebar({
                   No upcoming deadlines
                 </p>
               ) : (
-                deadlines.map((item) => (
+                clientDeadlines.map((item) => (
                   <Link
                     key={item.recommendation.id}
                     href={`/recommendation/${item.recommendation.id}`}
@@ -47,7 +66,7 @@ export function DeadlineSidebar({
                   >
                     <div className={cn(
                       'p-3 rounded-lg border transition-colors hover:border-primary/30 hover:bg-muted/50',
-                      item.isOverdue && 'border-deep-red/30 bg-deep-red/5'
+                      item.isOverdue === true && 'border-deep-red/30 bg-deep-red/5'
                     )}>
                       <div className="flex items-start justify-between gap-2 mb-1">
                         <span className="font-mono text-sm font-bold text-primary">
@@ -55,11 +74,17 @@ export function DeadlineSidebar({
                         </span>
                         <div className={cn(
                           'flex items-center gap-1 text-xs font-mono',
-                          item.isOverdue ? 'text-deep-red' : 
-                          item.daysUntil <= 30 ? 'text-orange' : 
+                          item.daysUntil === null ? 'text-muted-foreground' :
+                          item.isOverdue ? 'text-deep-red' :
+                          item.daysUntil <= 30 ? 'text-orange' :
                           'text-muted-foreground'
                         )}>
-                          {item.isOverdue ? (
+                          {item.daysUntil === null ? (
+                            <>
+                              <Clock size={12} />
+                              &ndash;
+                            </>
+                          ) : item.isOverdue ? (
                             <>
                               <AlertTriangle size={12} />
                               {Math.abs(item.daysUntil)}d ago

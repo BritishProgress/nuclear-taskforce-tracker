@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { daysUntil, formatDate, getDeadlineStatus } from '@/lib/date-utils';
 import { Calendar, AlertTriangle, Clock, CheckCircle } from 'lucide-react';
@@ -23,9 +24,12 @@ export function DeadlineIndicator({
   completionDate,
   className,
 }: DeadlineIndicatorProps) {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+
   const effectiveDate = revisedDate || targetDate;
-  const days = daysUntil(effectiveDate);
-  const rawStatus = getDeadlineStatus(effectiveDate);
+  const days = hydrated ? daysUntil(effectiveDate) : null;
+  const rawStatus = hydrated ? getDeadlineStatus(effectiveDate) : 'distant' as const;
   const status = completed ? 'completed' as const : rawStatus;
   // Only show as revised if there's a revised date AND it's different from the original
   const isRevised = !!revisedDate && revisedDate !== targetDate;
@@ -43,28 +47,28 @@ export function DeadlineIndicator({
       bgClass: 'bg-deep-red/10',
       textClass: 'text-deep-red',
       borderClass: 'border-deep-red/30',
-      label: `${Math.abs(days)} days overdue`,
+      label: days !== null ? `${Math.abs(days)} days overdue` : '\u2013',
     },
     imminent: {
       icon: Clock,
       bgClass: 'bg-orange/10',
       textClass: 'text-orange',
       borderClass: 'border-orange/30',
-      label: days === 0 ? 'Due today' : `${days} days`,
+      label: days === null ? '\u2013' : days === 0 ? 'Due today' : `${days} days`,
     },
     upcoming: {
       icon: Calendar,
       bgClass: 'bg-light-blue/10',
       textClass: 'text-dark-blue',
       borderClass: 'border-light-blue/30',
-      label: `${days} days`,
+      label: days !== null ? `${days} days` : '\u2013',
     },
     distant: {
       icon: CheckCircle,
       bgClass: 'bg-muted',
       textClass: 'text-muted-foreground',
       borderClass: 'border-border',
-      label: `${days} days`,
+      label: days !== null ? `${days} days` : '\u2013',
     },
   };
 

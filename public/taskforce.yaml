@@ -23,6 +23,11 @@ sources:
     url: "https://assets.publishing.service.gov.uk/media/69b32c14912f3f96bf687b51/building-our-nuclear-nation-government-response-nuclear-regulatory-review.pdf"
     type: "Policy Paper"
     reference: "DESNZ, March 2026"
+  onr_lead_regulator_2026:
+    title: "Positive progress made on nuclear taskforce recommendations to reduce regulatory complexity"
+    url: "https://www.onr.org.uk/news/all-news/2026/03/positive-progress-made-on-nuclear-taskforce-recommendations-to-reduce-regulatory-complexity"
+    type: "News"
+    reference: "ONR, 31 March 2026"
 
 
 chapters:
@@ -416,10 +421,10 @@ recommendations:
       depends_on: [1]
       enables: [2]
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "completed"
+      last_updated: "2026-03-31"
       confidence: "high"
-      summary: "Accepted. Lead regulator model in place by 31 March 2026; 'super six' formed."
+      summary: "Completed. ONR designated as default lead regulator; inaugural meeting held 31 March 2026."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -431,6 +436,20 @@ recommendations:
         impact_on_overall:
           changes_confidence_to: "high"
           notes: "Lead regulator model already being implemented; on track for March 2026 deadline."
+      - date: "2026-03-31"
+        status: "completed"
+        tags: ["implementation"]
+        title: "Inaugural lead regulator meeting held; ONR designated as default lead"
+        description: |
+          ONR held the inaugural lead regulator meeting in London with the heads of the Environment Agency, Defence Nuclear Safety Regulator, and other relevant regulators. Terms of reference were discussed. ONR Chief Executive Mike Finnerty described it as "a powerful signal of what is possible when we work collectively with shared purpose." ONR cited the Sellafield G6 group as a precedent for successful multi-regulator collaboration. This is an interim arrangement pending the UK Nuclear Commission, which is targeted to be fully operational by summer 2028.
+        links:
+          - title: "Positive progress made on nuclear taskforce recommendations to reduce regulatory complexity"
+            url: "https://www.onr.org.uk/news/all-news/2026/03/positive-progress-made-on-nuclear-taskforce-recommendations-to-reduce-regulatory-complexity"
+        source_key: "onr_lead_regulator_2026"
+        impact_on_overall:
+          changes_overall_status_to: "completed"
+          changes_confidence_to: "high"
+          notes: "Lead regulator model operational; inaugural meeting held on deadline date."
     notes: |
       Interim measure to be implemented before Commission for Nuclear Regulation is established.
 
@@ -539,6 +558,18 @@ recommendations:
         impact_on_overall:
           changes_confidence_to: "high"
           notes: "Proportionality Action Plan with clear milestones and oversight mechanisms."
+      - date: "2026-03-31"
+        status: "progress"
+        tags: ["implementation"]
+        title: "ONR holds safety case forum with senior site operator executives"
+        description: |
+          ONR convened a forum with senior executives from site operators, securing commitments to simplify safety case structures, eliminate duplication, and embed simplicity. The Proportionality Action Plan is under development with government, with strategic direction expected by summer 2026 and full method embedding by mid-2027. Oversight will be provided through the Nuclear Standards Forum and NRIP.
+        links:
+          - title: "Positive progress made on nuclear taskforce recommendations to reduce regulatory complexity"
+            url: "https://www.onr.org.uk/news/all-news/2026/03/positive-progress-made-on-nuclear-taskforce-recommendations-to-reduce-regulatory-complexity"
+        source_key: "onr_lead_regulator_2026"
+        impact_on_overall:
+          notes: "Industry engagement progressing; commitments secured from site operators."
     notes: |
       Aims to simplify and shorten safety cases. Defence sector should realign with 3LoD model.
 
