@@ -6,6 +6,47 @@ A project by the [Centre for British Progress](https://britishprogress.org).
 
 **Live at:** [nuclear.britishprogress.org](https://nuclear.britishprogress.org) · **Repo:** [BritishProgress/nuclear-taskforce-tracker](https://github.com/BritishProgress/nuclear-taskforce-tracker) · **Stack:** a Next.js site on Vercel, with all tracker data in one YAML file · **Maintainers:** Pedro & Matthew.
 
+## Data inventory (for storage planning)
+
+Total on-disk footprint: **~2.0 MB** (the live data is a single committed YAML). **This is a Next.js web app**, deployed publicly, tracking 47 Nuclear Regulatory Taskforce recommendations. No backend database — the data file is loaded at build time.
+
+### Live data — committed to git
+
+| Path | Size | Format | Source / provenance |
+| ---- | ---- | ------ | ------------------- |
+| `public/taskforce.yaml` | 152 KB, 2850 lines | YAML | **Single source of truth** for the tracker: 47 recommendations × 7 chapters × status updates × sources. Last updated 2025-12-01 in the file header. Maintained by hand against public government announcements and parliamentary statements. **Partly AI-generated** per the README disclaimer. |
+| `govt-response-updates.md` | 98 KB | Markdown | Status-update log for the March 2026 DESNZ "Building Our Nuclear Nation" government response. Source for batch updates to `taskforce.yaml`. |
+
+### Committed to git
+
+| Path | Size | Format | Notes |
+| ---- | ---- | ------ | ----- |
+| `app/`, `components/`, `lib/` (`data.ts`, `yaml.ts`, `timeline-grid.ts`, `export.ts`, `constants.ts`, `types.ts`, `utils.ts`, `date-utils.ts`, `url-utils.ts`) | ~600 KB | TS/TSX | Next.js 16 App Router app code |
+| `public/*.svg`, `robots.txt` | 220 KB | SVG + text | Static assets (CBP logos, icons) |
+| `package.json`, `package-lock.json` (523 KB), configs | ~535 KB | JSON | npm metadata |
+| `PROJECT_PLAN.md` | 25 KB | Markdown | Project plan |
+| `DEPLOYMENT_NOTES.md` | 2 KB | Markdown | Deploy notes |
+| `LICENSE`, `README.md` | small | — | MIT licence + README |
+
+### Gitignored
+
+`node_modules/`, `.next/`, `.vercel/`, `*.tsbuildinfo`, `.env*`, build artefacts. Standard Next.js exclusions. No persistent application data.
+
+### External
+
+- **Public deployment** (likely Vercel; gitignored `.vercel/` suggests it). The tracker is publicly accessible.
+- **Source data:** Nuclear Regulatory Taskforce Report (gov.uk publication), DESNZ "Building Our Nuclear Nation" government response (March 2026), parliamentary statements, departmental announcements. All public.
+- **No Drive folder, no database.**
+
+### Refresh cadence
+
+- `public/taskforce.yaml` updates ad hoc when government publishes responses or progress is announced. Last published update: 2025-12-01 (file header); March 2026 update applied via `govt-response-updates.md`.
+
+### Why this matters for storage redesign
+
+- **All "data" is a single committed YAML.** This is the simplest storage model in the entire `work/` tree — no shared-storage implications.
+- The interesting question for storage redesign is whether maintaining `taskforce.yaml` manually (currently AI-assisted; see README disclaimer) should become more automated, in which case a structured upstream source (Airtable? `cbp-grid`-style Postgres?) would replace the YAML. That's a *workflow* question, not a *storage* question.
+
 ## About
 
 This project tracks the Government's progress in implementing the Nuclear Regulatory Taskforce recommendations. Data is sourced from public government announcements, parliamentary statements, and official publications.
