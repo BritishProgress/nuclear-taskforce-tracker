@@ -3,6 +3,14 @@
 > A beautiful, modern tracker for UK Nuclear Regulatory Taskforce recommendations.
 > Built by the **Centre for British Progress** using Next.js, shadcn/ui, and Tailwind CSS.
 
+> **Historical note:** this document records the *original build plan* and may not
+> reflect the current codebase. For example, Phase 7 (Data Export) is now shipped
+> (`lib/export.ts` + `app/api/export/*`, using ExcelJS, not xlsx), some components in
+> the directory tree below were never built (`progress-overview.tsx`,
+> `recommendation-detail.tsx`, `nav.tsx`), and the date helpers live in
+> `lib/date-utils.ts` (not `lib/utils.ts`). See `README.md` / `CLAUDE.md` for the
+> current state.
+
 ---
 
 ## Table of Contents
