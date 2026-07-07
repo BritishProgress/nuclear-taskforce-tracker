@@ -130,21 +130,21 @@ owner_info:
       - title: "Prime Minister"
         name: "Keir Starmer"
       - title: "Cabinet Secretary"
-        name: "Chris Wormald"
+        name: "Dame Antonia Romeo"
 
   - owner: "Cabinet Office"
     key_people:
       - title: "Chancellor of the Duchy of Lancaster"
         name: "Darren Jones"
       - title: "Cabinet Secretary"
-        name: "Chris Wormald"
+        name: "Dame Antonia Romeo"
 
   - owner: "DBT"
     key_people:
       - title: "Secretary of State"
         name: "Peter Kyle"
-      - title: "Permanent Secretary"
-        name: "Gareth Davies"
+      - title: "Interim Permanent Secretary"
+        name: "Amanda Brooks CBE"
 
   - owner: "DEFRA"
     key_people:
@@ -157,10 +157,10 @@ owner_info:
     key_people:
       - title: "Secretary of State"
         name: "Ed Miliband"
-      - title: "Minister of State"
+      - title: "Minister of State for Science, Innovation, Research and Nuclear"
         name: "Lord Vallance of Balham"
-      - title: "Interim Permanent Secretary"
-        name: "Clive Maxwell"
+      - title: "Permanent Secretary"
+        name: "Jonathan Brearley"
 
   - owner: "DNSR"
     key_people: []
@@ -194,8 +194,8 @@ owner_info:
     key_people:
       - title: "Secretary of State"
         name: "Yvette Cooper"
-      - title: "Permanent Under-Secretary"
-        name: "Sir Olly Robbins"
+      - title: "Interim Permanent Under-Secretary"
+        name: "Nick Dyer"
 
   - owner: "HM Treasury"
     key_people:
@@ -222,7 +222,7 @@ owner_info:
   - owner: "MOD"
     key_people:
       - title: "Secretary of State"
-        name: "John Healey"
+        name: "Dan Jarvis"
       - title: "Permanent Secretary"
         name: "Jeremy Pocklington"
 
@@ -263,8 +263,8 @@ owner_info:
 
   - owner: "Planning Inspectorate"
     key_people:
-      - title: "Chief Executive"
-        name: "Paul Morrison"
+      - title: "Interim Chief Executive"
+        name: "Graham Stallwood"
 
   - owner: "Regulators"
     key_people: []
