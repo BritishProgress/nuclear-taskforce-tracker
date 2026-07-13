@@ -1,4 +1,4 @@
-last_updated: "2025-12-01"
+last_updated: "2026-07-13"
 
 status_scales:
   overall_status:
@@ -28,6 +28,21 @@ sources:
     url: "https://www.onr.org.uk/news/all-news/2026/03/positive-progress-made-on-nuclear-taskforce-recommendations-to-reduce-regulatory-complexity"
     type: "News"
     reference: "ONR, 31 March 2026"
+  dco_acceptance_guidance_2026:
+    title: "Planning Act 2008: Guidance on the acceptance stage of an application"
+    url: "https://www.gov.uk/guidance/planning-act-2008-guidance-on-the-acceptance-stage-of-an-application"
+    type: "Guidance"
+    reference: "MHCLG, 3 July 2026"
+  dco_examination_guidance_2026:
+    title: "Planning Act 2008: Guidance on the examination stage of an application"
+    url: "https://www.gov.uk/guidance/planning-act-2008-guidance-on-the-examination-stage-of-an-application"
+    type: "Guidance"
+    reference: "MHCLG, 3 July 2026"
+  dco_decision_guidance_2026:
+    title: "Planning Act 2008: Guidance on the decision-making stage of an application"
+    url: "https://www.gov.uk/guidance/planning-act-2008-guidance-on-the-decision-making-stage-of-an-application"
+    type: "Guidance"
+    reference: "MHCLG, 3 July 2026"
 
 
 chapters:
@@ -611,10 +626,10 @@ recommendations:
       depends_on: [1]
       enables: [7, 8]
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "off_track"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Accepted. Expert panel examining ToR framework, reporting by June 2026."
+      summary: "Expert panel report overdue; was expected by June 2026."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -732,10 +747,10 @@ recommendations:
       depends_on: [6]
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "off_track"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Accepted with variation. Using HSWA section 15 (not section 50); consultation Summer 2026."
+      summary: "Consultation overdue; was expected Summer 2026."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -1001,9 +1016,9 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2026-03-13"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Accepted. EORs for procedural proportionality by December 2027; interim improvements underway."
+      summary: "Accepted. EORs for procedural proportionality by December 2027; Rochdale Envelope affirmed in July 2026 DCO guidance."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -1015,6 +1030,16 @@ recommendations:
         impact_on_overall:
           changes_confidence_to: "high"
           notes: "EOR mechanism accepted with December 2027 timeline; interim improvements already underway."
+      - date: "2026-07-03"
+        status: "progress"
+        tags: ["guidance_published"]
+        title: "DCO acceptance guidance affirms Rochdale Envelope approach"
+        description: |
+          New MHCLG guidance on the acceptance stage of DCO applications (published 3 July 2026) affirms that applications may still be accepted where limited further targeted or confirmatory environmental information is anticipated, based on desk-top studies, professional judgement and reasonable worst-case assumptions. This reflects the Rochdale Envelope principle in Recommendation 13 and provides a practical interim advance while the full Environmental Outcome Reports reform is delivered by December 2027.
+        source_key: "dco_acceptance_guidance_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Rochdale Envelope affirmed in DCO guidance; EOR reform remains on track for December 2027."
     notes: |
       Addresses growth in length and complexity of EIAs.
 
@@ -1423,10 +1448,10 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "off_track"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Government will bring forward targeted indemnification proposals by Summer 2026."
+      summary: "Indemnification proposals overdue; were expected by Summer 2026."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -1643,10 +1668,10 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "nearly"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "New National Infrastructure Planning Guidance by Summer 2026."
+      summary: "Guidance published July 2026 delivers the core DCO streamlining elements; outstanding items on costs and the acceptance test remain."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -1658,6 +1683,16 @@ recommendations:
         impact_on_overall:
           changes_confidence_to: "high"
           notes: "Comprehensive DCO guidance update committed by Summer 2026."
+      - date: "2026-07-03"
+        status: "completed"
+        tags: ["guidance_published"]
+        title: "DCO guidance published, delivering the key elements of the recommendation"
+        description: |
+          MHCLG published new National Infrastructure Planning Guidance on 3 July 2026, covering the pre-application, acceptance and pre-examination stages of the DCO process. The guidance streamlines the acceptance process, removes consultation from acceptance considerations, and establishes a four-month expectation for the pre-examination period. This broadly delivers the Taskforce's DCO streamlining recommendations through guidance rather than legislation.
+        source_key: "dco_acceptance_guidance_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Guidance published as committed. Status updated to completed."
     notes: |
       Addresses delays in DCO process caused by burdensome requirements.
 
@@ -1691,9 +1726,9 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2026-03-13"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Delivering through strengthened IAPI process under PIA reforms."
+      summary: "Delivering through strengthened IAPI process; examination guidance published July 2026 confirms approach."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -1705,6 +1740,16 @@ recommendations:
         impact_on_overall:
           changes_confidence_to: "high"
           notes: "IAPI reforms deliver functional equivalent of interim recommendation reports."
+      - date: "2026-07-03"
+        status: "progress"
+        tags: ["guidance_published"]
+        title: "Examination guidance confirms strengthened IAPI as interim report equivalent"
+        description: |
+          New MHCLG examination guidance published 3 July 2026 confirms the IAPI will identify a concise set of around 6 to 8 key issues, explain why other matters require little further evidence, and thereby shape the subsequent examination, recommendation and decision stages. This confirms the Government is delivering the functional equivalent of the Taskforce's Interim Recommendation Report through the IAPI mechanism as committed in March 2026.
+        source_key: "dco_examination_guidance_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Examination guidance confirms IAPI delivery mechanism on track."
     notes: |
       Provides early clarity on ExA views to streamline examination.
 
@@ -1739,10 +1784,10 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "nearly"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "New guidance encouraging 'minded to' letters by Summer 2026."
+      summary: "Decision-making guidance published July 2026 encourages 'minded to' letters, but falls short of the legislation the Taskforce recommended."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -1754,6 +1799,16 @@ recommendations:
         impact_on_overall:
           changes_confidence_to: "high"
           notes: "Guidance approach rather than legislation, but commitment to Summer 2026 delivery is clear."
+      - date: "2026-07-03"
+        status: "progress"
+        tags: ["guidance_published"]
+        title: "Decision-making guidance published encouraging 'minded to' letters"
+        description: |
+          MHCLG published new guidance on the decision-making stage on 3 July 2026, encouraging the use of 'minded to' letters where the Secretary of State requires additional time before reaching a final decision. The guidance delivers the Government's March 2026 commitment, but through non-statutory guidance rather than the legislation the Taskforce recommended, meaning compliance remains discretionary.
+        source_key: "dco_decision_guidance_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Guidance published as committed; status updated to nearly as legislation was not pursued."
     notes: |
       Addresses delays in post-examination decision-making.
 
@@ -1796,9 +1851,9 @@ recommendations:
       enables: []
     overall_status:
       status: "on_track"
-      last_updated: "2026-03-13"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Updated guidance on Model Provisions by end of Summer 2027."
+      summary: "Summer 2027 timeline confirmed at NIPA conference; updated DCO content guidance published July 2026."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -1810,6 +1865,16 @@ recommendations:
         impact_on_overall:
           changes_confidence_to: "high"
           notes: "Guidance approach preferred over legislation; delivery by Summer 2027."
+      - date: "2026-07-03"
+        status: "progress"
+        tags: ["guidance_published"]
+        title: "Summer 2027 timeline confirmed; interim DCO content guidance published"
+        description: |
+          At the NIPA conference in July 2026, MHCLG confirmed that updated Model Provisions guidance will be published by Summer 2027, consistent with the March 2026 commitment. New DCO content guidance published 3 July 2026 provides some interim clarity on compulsory acquisition provisions and protective provisions for statutory undertakers while the full Model Provisions update is prepared.
+        source_key: "dco_examination_guidance_2026"
+        impact_on_overall:
+          changes_confidence_to: "high"
+          notes: "Summer 2027 timeline reconfirmed; on track."
     notes: |
       Addresses treatment of every project as novel.
 
@@ -1892,10 +1957,10 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "nearly"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "New unit within Infrastructure Planning Delivery team for post-consent discharge."
+      summary: "DCO requirements discharge unit established within DESNZ; substantively delivered."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -1945,10 +2010,10 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "off_track"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "SDO route available; PIA direction power added; automatic consent after 8 weeks rejected."
+      summary: "SDO route available; PIA direction power added; automatic consent after 8 weeks rejected. Deadline passed June 2026."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -2600,10 +2665,10 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "off_track"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Accepted. Five-year licences as standard; ten-year under consideration; ECJU dedicated contacts; 20-day target."
+      summary: "Five-year licences as standard; ten-year under consideration; ECJU dedicated contacts; 20-day target. Deadline passed June 2026."
     updates:
       - date: "2026-02-02"
         status: "info"
@@ -2775,10 +2840,10 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "off_track"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Accepted. Credible projects get clarity; NDA/GBE-N 28-day notification; Advanced Nuclear Framework Pipeline."
+      summary: "Credible projects get clarity; NDA/GBE-N 28-day notification; Advanced Nuclear Framework Pipeline. Deadline passed June 2026."
     updates:
       - date: "2026-03-13"
         status: "on_track"
@@ -2823,10 +2888,10 @@ recommendations:
       depends_on: []
       enables: []
     overall_status:
-      status: "on_track"
-      last_updated: "2026-03-13"
+      status: "nearly"
+      last_updated: "2026-07-13"
       confidence: "high"
-      summary: "Accepted. NRIP established; expert council chaired by DESNZ; first meeting June 2026; reports to PM's office."
+      summary: "NRIP established and operational; members appointed; substantively delivered."
     updates:
       - date: "2025-12-04"
         status: "info"
