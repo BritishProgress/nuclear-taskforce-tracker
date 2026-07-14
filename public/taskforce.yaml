@@ -1,4 +1,4 @@
-last_updated: "2026-07-13"
+last_updated: "2026-07-14"
 
 status_scales:
   overall_status:
@@ -43,6 +43,11 @@ sources:
     url: "https://www.gov.uk/guidance/planning-act-2008-guidance-on-the-decision-making-stage-of-an-application"
     type: "Guidance"
     reference: "MHCLG, 3 July 2026"
+  nrip_inaugural_meeting_2026:
+    title: "Experts attend inaugural nuclear regulatory reform oversight panel"
+    url: "https://www.onr.org.uk/news/all-news/2026/07/experts-attend-inaugural-nuclear-regulatory-reform-oversight-panel"
+    type: "News"
+    reference: "ONR, 1 July 2026"
 
 
 chapters:
@@ -2913,4 +2918,15 @@ recommendations:
         source_key: "govt_response_2026"
         impact_on_overall:
           changes_confidence_to: "high"
-          notes: "NRIP formally established; first meeting June 2026; reports to PM's office."
+      - date: "2026-06-30"
+        status: "progress"
+        tags: ["implementation"]
+        title: "Inaugural NRIP meeting held"
+        description: |
+          The Nuclear Regulatory Implementation Panel held its inaugural meeting on 30 June 2026, chaired by Lord Vallance (Minister of State for Science, Innovation, Research and Nuclear). ONR Chief Executive and Chief Nuclear Inspector Mike Finnerty attended as a core member, alongside senior figures from government, regulators, industry, and the original Taskforce. The meeting met the June 2026 target set in the government's March 2026 response, confirming the NRIP is now operational.
+        links:
+          - title: "Experts attend inaugural nuclear regulatory reform oversight panel"
+            url: "https://www.onr.org.uk/news/all-news/2026/07/experts-attend-inaugural-nuclear-regulatory-reform-oversight-panel"
+        source_key: "nrip_inaugural_meeting_2026"
+        impact_on_overall:
+          notes: "Inaugural meeting confirms NRIP is operational; June 2026 target met."
